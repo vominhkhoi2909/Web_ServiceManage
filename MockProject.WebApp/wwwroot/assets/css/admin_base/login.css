@@ -1,0 +1,476 @@
+﻿/*------------------------------------------------------------------
+[Main Stylesheet]
+
+Project:    ODDO
+Version:    1.1.0
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Table of contents]
+    *. Login Layout 1 / .login-1
+    *. Login Layout 2 / .login-2
+    *. Login Layout 3 / .login-3
+    *. Login Layout 4 / .login-4
+    *. Login Layout 5 / .login-28
+    *. Login Layout 6 / .login-6
+    *. Login Layout 7 / .login-26
+    *. Login Layout 8 / .login-30
+    *. Login Layout 9 / .login-9
+    *. Login Layout 10 / .login-10
+    *. Login Layout 11 / .login-11
+    *. Login Layout 12 / .login-12
+    *. Login Layout 13 / .login-43
+    *. Login Layout 14 / .login-14
+    *. Login Layout 15 / .login-15
+    *. Login Layout 16 / .login-16
+    *. Login Layout 17 / .login-17
+    *. Login Layout 18 / .login-18
+    *. Login Layout 19 / .login-19
+    *. Login Layout 20 / .login-33
+    *. Login Layout 21 / .login-21
+    *. Login Layout 22 / .login-22
+    *. Login Layout 23 / .login-32
+    *. Login Layout 24 / .login-24
+    *. Login Layout 25 / .login-25
+    *. Login Layout 26 / .login-31
+    *. Login Layout 27 / .login-27
+    *. Login Layout 28 / .login-35
+    *. Login Layout 29 / .login-29
+    *. Login Layout 30 / .login-23
+    *. Login Layout 31 / .login-5
+    *. Login Layout 32 / .login-7
+    *. Login Layout 33 / .login-20
+    *. Login Layout 34 / .login-34
+    *. Login Layout 35 / .login-8
+
+    *. Login inner form / .login-inner-form
+    *. Login inner form details / .details
+-------------------------------------------------------------------*/
+/** GLOBAL CLASSES **/
+
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #535353;
+}
+
+.img-fluid {
+    max-width: 100% !important;
+    height: auto;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.login-box .alert {
+    padding: 15.5px 20px;
+    font-size: 13px;
+    border: none !important;
+    border-radius: 3px;
+    margin-bottom: 25px;
+}
+
+.login-box .alert-dismissible .btn-close {
+    padding: 18.5px 19px;
+    background-size: 8px;
+}
+
+    .login-box .alert-dismissible .btn-close:focus,
+    .login-box .alert-dismissible .btn-close:active {
+        box-shadow: none;
+    }
+
+.login-box .password-indicator {
+    position: absolute;
+    right: 15px;
+    top: 17px;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 500ms;
+    font-size: 17px;
+    color: #999;
+}
+
+.login-box .password-wrapper:hover .password-indicator {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 500ms;
+    font-size: 17px;
+    color: #555;
+}
+
+.login-box .login-popover {
+    font-size: 14px;
+    color: #777;
+    cursor: help;
+}
+
+.login-box .login-popover-abs {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.popover {
+    border: 1px solid #ebeef5 !important;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+}
+
+.popover-header {
+    box-shadow: none;
+    border: 0px;
+    background: #fff;
+    color: #555;
+    font-size: 15px;
+    font-family: "Jost", sans-serif;
+    padding-bottom: 5px;
+}
+
+.popover-body {
+    padding: 5px 10px 10px 16px;
+    color: #777;
+    font-size: 13px;
+}
+
+.login-box .form-group label.error {
+    font-size: 13px;
+    text-align: left;
+    color: #535353;
+    width: 100%;
+}
+
+/** Login 27 start **/
+.login-27 {
+    top: 0;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    opacity: 1;
+    z-index: 999;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+    .login-27 a {
+        text-decoration: none;
+    }
+
+    .login-27 h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+        font-family: "Jost", sans-serif;
+    }
+
+    .login-27 .form-section {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+        .login-27 .form-section .details {
+            padding: 60px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background: #f5f5f5;
+        }
+
+    .login-27 .form-check-input:checked {
+        display: none;
+    }
+
+    .login-27 .form-section p {
+        color: #535353;
+        margin-bottom: 0;
+        font-size: 16px;
+    }
+
+        .login-27 .form-section p a {
+            color: #535353;
+        }
+
+    .login-27 .form-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px;
+    }
+
+    .login-27 .form-section .social-list li {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .login-27 .logo-2 img {
+        margin-bottom: 20px;
+        height: 30px;
+    }
+
+    .login-27 .form-section .thembo {
+        margin-left: 4px;
+    }
+
+    .login-27 .form-section h3 {
+        margin: 0 0 40px;
+        font-size: 25px;
+        font-weight: 400;
+        font-family: "Jost", sans-serif;
+        color: #040404;
+    }
+
+    .login-27 .form-section .form-group {
+        margin-bottom: 30px;
+    }
+
+    .login-27 .form-section .form-box {
+        float: left;
+        width: 100%;
+        position: relative;
+        text-align: left;
+    }
+
+    .login-27 .form-section .form-control {
+        font-size: 16px;
+        background: transparent !important;
+        color: #535353;
+        border-radius: 5px;
+        padding-left: 0;
+        padding-right: 0;
+        padding: 10px;
+    }
+
+    .login-27 .form-section .btn-md {
+        cursor: pointer;
+        padding: 12px 50px 11px 50px;
+        font-size: 15px;
+        font-weight: 400;
+        font-family: "Jost", sans-serif;
+        border-radius: 3px;
+        height: 45px;
+    }
+
+    .login-27 .form-section button:focus {
+        outline: none;
+        outline: 0 auto -webkit-focus-ring-color;
+    }
+
+    .login-27 .form-section .btn-theme.focus,
+    .btn-theme:focus {
+        box-shadow: none;
+    }
+
+    .login-27 .form-section .terms {
+        margin-left: 3px;
+    }
+
+    .login-27 .form-section input[type="checkbox"],
+    input[type="radio"] {
+        margin-top: 4px;
+    }
+
+    .login-27 .form-section .checkbox a {
+        float: right;
+    }
+
+    .login-27 .form-section .checkbox {
+        margin-bottom: 25px;
+        font-size: 15px;
+    }
+
+    .login-27 .form-section .form-check {
+        float: left;
+        margin-bottom: 0;
+        padding-left: 0;
+    }
+
+        .login-27 .form-section .form-check a {
+            color: #535353;
+            float: right;
+        }
+
+    .login-27 .form-section .form-check-input {
+        position: absolute;
+        margin-left: 0;
+    }
+
+    .login-27 .form-section .form-check label::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        top: 2px;
+        margin-left: -25px;
+        border-radius: 0px;
+        background: #f5f5f5;
+        border: solid 2px #bdbdbd;
+    }
+
+    .login-27 .form-section .form-check-label {
+        padding-left: 25px;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: #535353;
+    }
+
+    .login-27 .form-section input[type="checkbox"]:checked + label:before {
+        font-weight: 600;
+        color: #fff;
+        line-height: 15px;
+        font-size: 12px;
+        content: "\2713";
+        padding-left: 3px;
+    }
+
+    .login-27
+    .form-section
+    .checkbox-theme
+    input[type="checkbox"]:checked + label::before {
+        color: #fff;
+        background: #8686ff;
+        border: solid 2px #8686ff;
+    }
+
+    .login-27 .form-section .btn-theme {
+        background: #8686ff;
+        border: none;
+        color: #fff;
+    }
+
+        .login-27 .form-section .btn-theme:hover {
+            background: #7878f3;
+        }
+
+    .login-27 .form-section a.forgot-password {
+        font-size: 16px;
+        color: #535353;
+    }
+
+    .login-27 .social-list {
+        float: left;
+    }
+
+        .login-27 .social-list span {
+            margin-right: 5px;
+            font-weight: 500;
+            font-size: 15px;
+            color: #535353;
+        }
+
+        .login-27 .social-list a {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            display: inline-block;
+            font-size: 15px;
+            color: rgb(255, 255, 255);
+            margin: 0 2px 2px 0;
+            border-radius: 5%;
+        }
+
+.login-27-bodycolor .ripple-background {
+    z-index: -999 !important;
+}
+
+    .login-27-bodycolor .ripple-background .circle {
+        position: absolute;
+        border-radius: 50%;
+        /* animation: ripple 15s infinite; */
+    }
+
+    .login-27-bodycolor .ripple-background .small {
+        width: 200px;
+        height: 200px;
+        left: -100px;
+        top: -100px;
+        z-index: -999;
+    }
+
+    .login-27-bodycolor .ripple-background .medium {
+        width: 400px;
+        height: 400px;
+        left: -200px;
+        bottom: -200px;
+        z-index: -999;
+    }
+
+    .login-27-bodycolor .ripple-background .large {
+        width: 600px;
+        height: 600px;
+        left: -300px;
+        top: -300px;
+        z-index: -999;
+    }
+
+    .login-27-bodycolor .ripple-background .xlarge {
+        width: 800px;
+        height: 800px;
+        left: -400px;
+        top: -400px;
+        z-index: -999;
+    }
+
+    .login-27-bodycolor .ripple-background .xxlarge {
+        width: 1000px;
+        height: 1000px;
+        left: -500px;
+        top: -500px;
+        z-index: -999;
+    }
+
+    .login-27-bodycolor .ripple-background .shade1 {
+        background: #0000ff26;
+    }
+
+    .login-27-bodycolor .ripple-background .shade2 {
+        background: #b9b9ff;
+    }
+
+    .login-27-bodycolor .ripple-background .shade3 {
+        background: #0000ff26;
+    }
+
+    .login-27-bodycolor .ripple-background .shade4 {
+        background: #0a58ca;
+    }
+
+    .login-27-bodycolor .ripple-background .shade5 {
+        background: #0000ff26;
+    }
+
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .login-27 .form-section .details {
+        padding: 50px 30px;
+    }
+
+    .login-27-bodycolor .ripple-background {
+        display: none;
+    }
+}
+/** Login 27 end **/

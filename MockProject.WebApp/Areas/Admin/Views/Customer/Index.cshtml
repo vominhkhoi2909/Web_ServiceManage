@@ -1,0 +1,525 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+        .white_box_tittle
+        {
+          justify-content: space-between;
+        }
+        @@media (max-width: 900px) {
+          .add_button
+          {
+            margin-top: 15px;
+          }
+        }
+        @@media (max-width: 575.98px) {
+          .white_box_tittle
+          {
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+          .add_button
+          {
+            width: 100%;
+            padding-right: 8px;
+          }
+          .add_button a
+          {
+            margin-bottom: 10px;
+            width: 100% !important;
+          }
+        }
+        /*Table border    */
+        .QA_section .QA_table .table thead th
+        {
+            border-radius: 5px 5px 0 0 !important;
+            font-size:15px;
+        }
+        .QA_section .QA_table .table tbody td
+        {
+            border:1px solid #e5ecff !important;
+            border-radius: 0;
+            color:black !important;
+            font-size:13px;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:first-child
+        {
+            border-radius: 0 0 0 5px;
+            border-left: 1px solid #e5ecff !important;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:last-child
+        {
+            border-radius: 0 0 5px 0;
+            border-left: 1px solid #e5ecff !important;
+        }
+    </style>
+}
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                            Customer Management
+                        </h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Customer management</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                            <span class="datetime"><!--render By JS--></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header d-flex">
+                                <h4>Customer List</h4>
+                                <div class="box_right d-flex flex-wrap align-items-center">
+                                    <div class="serach_field_2 me-2">
+                                        <div class="search_inner">
+                                            <div class="search_field">
+                                                <input type="text"
+                                                   placeholder="Search Customer..."
+                                                   id="search" />
+                                            </div>
+                                            <button type="submit">
+                                                <i class="ti-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="role-filter me-2">
+                                      <select
+                                        class="form-control"
+                                        style="height: 40px; width: 130px;"
+                                        id="role-filter"
+                                      >
+                                        <option selected="">Choose Role</option>
+                                        <option>Admin</option>
+                                        <option>Staff</option>
+                                        <option>Cleaner</option>
+                                      </select>
+                                    </div> -->
+                                    <div class="add_button">
+                                        <a href="#" id="btn-search"
+                                       class="btn btn-primary"
+                                       style="min-width: 100px;">search</a>
+                                        <a href="#" id="ImportExcel"
+                                       class="btn btn-outline-light"
+                                       style="min-width: 100px;">
+                                            <div class="spinner-border spinner-border-sm d-none" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            Import Excel
+                                        </a>
+                                        <a href="@Url.Action("Add","Customer")"
+                                       class="btn btn-primary"
+                                       style="min-width: 120px; background-color: #05d34e; border: none;"><i class="fas fa-plus"></i> Add new</a>
+                                        <input type="file" id="fileName" style="display:none" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="QA_table mb_30">
+                                <table class="table lms_table_active table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">Total Order</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*                                        <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    Abc@12456
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">Singapore</td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    Abc@12456
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">Singapore</td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    Abc@12456
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">Singapore</td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    Abc@12456
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">Singapore</td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    Abc@12456
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">Singapore</td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <img src="/assets/image/main/giphy.gif" id="arrow-down" style=" position: fixed;z-index: 999999999; bottom: 20px; transform: rotate(-90deg); width: 150px; left: 33px;display:none"/>
+    
+    <!--Lock Modal-->
+    <div class="modal fade"
+     id="lockUserModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="lockUserModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lockUserModal">Lock This Account?</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Do you want to lock this Account?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Lock Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a asp-action="DownloadError" asp-controller="Customer" id="DownloadError"></a>
+    <script src="~/assets/js/admin_base/read-excel-file.min.js"></script>
+    <script>
+        
+        $(document).ready(function() {
+            var getCustomer = async (search) => {
+                var searchEP = "";
+                if (search && search != "") {
+                    searchEP = `/?searchString=${search}`
+                }
+                getData(BASE_API + "api/Customer/getall" + searchEP).then(res => {
+                    var data = res.data;
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        columnDefs: [
+                            { type: "html-num", targets: 5 }
+                        ],
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                "render": function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'name',
+                                title: 'Name',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+
+                            },
+                            {
+                                data: 'phone', title: 'Phone', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            { data: 'email', title: 'Email' },
+                            {
+                                data: 'address', title: 'Address', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'totalPrice', title: 'Total Order', render: function(data) {
+                                    return (!data || data == 0) ? "$0" : `$${data}`;
+                                }
+                            },
+                            {
+                                data: 'status', title: 'Status', render: function(data) {
+                                    return (data != undefined && data == 1) ? "<a href='#' class='status_btn'>Active</a>" : "<a href='#' class='status_btn' style='color:#000;background:#888;'>Inactive</a>";
+                                },
+                                width:"50px"
+                            },
+                            {
+                                data: 'userId',
+                                title: 'Action',
+                                render: function(data, type, row) {
+                                    let status = (row.status != undefined && row.status == 1) ? 1 : 0;
+                                    let icon = (status == 1) ? "fa fa-lock" : "fa fa-unlock-alt";
+                                    return `<div class="action_btns d-flex"> <a href="@Url.Action("Edit","Customer")/${data}" class="action_btn mr_10"> <i class="far fa-edit"></i> </a> <a class="action_btn" data-bs-toggle="modal" data-id="${data}" data-status="${status}" data-bs-target="#lockUserModal"><i class="${icon}"></i> </a> </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+
+            };
+            getCustomer();
+
+
+            $('#lockUserModal').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var status = $(e.relatedTarget).data('status');
+                var userId = $(e.relatedTarget).data('id');
+                if (status == 1) {
+                    $('#lockUserModal .modal-title').text("Lock User Account?");
+                    $('#lockUserModal .modal-body p').text("Do you want to lock this Account?")
+                    $('#lockUserModal .btn-primary').text("Lock Account");
+                    $('#lockUserModal .btn-primary').off()
+                    $('#lockUserModal .btn-primary').click(function() {
+                        console.log(status, userId);
+                    })
+                    $('#lockUserModal .btn-primary').on("click", function() {
+                        postData(BASE_API + `api/Customer/changestatus?id=${userId}&isActive=${false}`).then(
+                            res => {
+                                $('#lockUserModal').modal("hide");
+                                getCustomer();
+                            }
+                        )
+                    })
+
+                }
+                else {
+                    $('#lockUserModal .modal-title').text("Unlock User Account?");
+                    $('#lockUserModal .modal-body p').text("Do you want to unlock this Account?")
+                    $('#lockUserModal .btn-primary').text("Unock Account");
+                    $('#lockUserModal .btn-primary').off()
+                    $('#lockUserModal .btn-primary').on("click", function() {
+                        postData(BASE_API + `api/Customer/changestatus?id=${userId}&isActive=${true}`).then(
+                            res => {
+                                console.log(res);
+                                $('#lockUserModal').modal("hide");
+                                getCustomer();
+                            }
+                        )
+                    })
+
+                }
+            });
+
+
+            //Search
+            $("#btn-search").on("click", function(e) {
+                e.preventDefault();
+                console.log($("#search").val())
+                getCustomer($("#search").val());
+            })
+
+            $("#ImportExcel").on("click", function() {
+                const fileName = document.getElementById("fileName");
+                fileName.click();
+            })
+            fileName.addEventListener("change", function() {
+                var file = fileName.value;
+                var typeFile = file.split(".")[file.split(".").length - 1];
+                if (typeFile != "xlsx") {
+                    alert("Invalid File. Please choose xlsx file!");
+                    fileName.value = "";
+                } else {
+                    //$("#ImportExcel").prop('disabled', true);
+                    readXlsxFile(fileName.files[0]).then(function(rows) {
+                        var listObj = [];
+                        for (let i = 1; i < rows.length; i++) {
+                            var obj = new Object();
+                            obj.name = rows[i][0];
+                            obj.email = rows[i][1];
+                            obj.phone = rows[i][2];
+                            obj.address = rows[i][3];
+                            listObj.push(obj);
+                        }
+                        $(".spinner-border").removeClass("d-none");
+                        //listObj = JSON.stringify({ 'list': listObj });
+                        console.log(listObj);
+                        $.ajax({
+                            url: "@Url.Action("ImportExcel","Customer")",
+                            method: "POST",
+                            data: JSON.stringify(listObj),
+                            dataType: "json",
+                            contentType: 'application/json; charset=utf-8',
+                        }).done(res => {
+                            console.log(res)
+                            $(".spinner-border").addClass("d-none");
+                            //$("#ImportExcel").prop('disabled', false);
+                            notify("success","Import Customer from Excel Successfully!")
+                            if(res?.length>0)
+                            {
+                                notify("error", "There are some error records! Please check Error excel");
+                                $("#arrow-down").show();
+                                setTimeout(()=>{
+                                    $("#arrow-down").hide();
+                                },4000)
+                            }
+                            let a = document.createElement("a");
+                            a.href = "@Url.Action("DownloadError","Customer")";
+                            a.click();
+                            getCustomer();
+                        })
+                    })
+                }
+            });
+        })
+
+
+    </script>
+}

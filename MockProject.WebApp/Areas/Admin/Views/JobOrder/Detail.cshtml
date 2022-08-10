@@ -1,0 +1,421 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+        .staff__card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .staff__image img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            border: 1px solid;
+            object-fit: contain;
+            object-position: center;
+            margin-bottom: 10px;
+        }
+
+        .staff__info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .total__price-right {
+            float: right;
+        }
+
+        .title-box {
+            display: flex;
+            justify-content: space-between;
+            align-item: center;
+        }
+
+        @@media only screen and (max-width: 760px) {
+            .total__price-right {
+                float: unset;
+            }
+        }
+
+        @@media only screen and (max-width: 580px) {
+            .title-box {
+                    display: unset;
+        }
+        }
+    </style>
+}
+    <div class="white_card card_height_100 mb_30 p-4">
+        <div class="row clearfix">
+            <!-- check  -->
+            <div class="map-column col-lg-12 col-md-12 col-sm-12">
+                <div class="title-box">
+                    <h3>Status:  <span id="JOState"></span></h3>
+                    <div id="btn__holder">
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Service</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price </th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="aircon__table">
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr />
+                <h4 class="total__price-right">Total price: <span id="total__price"></span> USD</h4>
+                <h4 class="">Total hour needed: <span id="total__hour"></span>H</h4>
+                <h4 class="mt-4">Time: <span id="JOTime"></span></h4>
+                <h4 class="mt-4" style="color:#777777;">Customer Email: <span id="JOEmail"></span></h4>
+                <h4 class="mt-4" style="color:#777777;">Address: <span id="JOAddress"></span></h4>
+                <h4 class="mt-4" style="color:#777777;">Description: <span id="JODes"></span></h4>
+
+            </div>
+        </div>
+
+    </div>
+    @section Scripts {
+    <!--Assign Modal-->
+    <div class="modal fade"
+     id="AssignModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">Assign Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="staff__card d-none">
+                        <div class="staff__image">
+                            <image src="/assets/image/profileImg/default.png"></image>
+                        </div>
+                        <div class="staff__info">
+                            <h4>Staff Name</h4>
+                            <span class="staff__role">Staff</span>
+                            <span class="staff__email">minh1122000@gmail.com</span>
+                            <span class="staff__phone">0986788699</span>
+                        </div>
+                    </div>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="selectStaff" class="col-form-label">Assign To:</label>
+                            <select class="form-select" name="selectStaff" required>
+                                <option selected value="">Assign to Staff</option>
+                                <option value="1">staff 1</option>
+                                <option value="2">staff 2</option>
+                                <option value="3">staff 3</option>
+                                <option value="1">staff 1</option>
+                                <option value="2">staff 2</option>
+                                <option value="3">staff 3</option>
+                                <option value="1">staff 1</option>
+                                <option value="2">staff 2</option>
+                                <option value="3">staff 3</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*cancel*@
+    <div class="modal fade"
+     id="CancelJOFormModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">Cancel Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="CancelJOForm">
+                    <div class="modal-body">
+
+                        <p>Do you want to cancel this job order ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="CancelJOClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Cancel</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        // show an modal if user not login or token is expired
+        let JobOrderId = @ViewBag.JOId
+            let CustomerId = ""
+
+        // Create And Invoke HUB notification
+        var createNoti = function(title, type, description, createBy, sendTo, link) {
+            let data = {
+                title,
+                type,
+                description,
+                createBy,
+                sendTo,
+                image: "",
+                link
+            };
+            postData(BASE_API + "api/notification/add", data).then(res => {
+                console.log(res);
+                if (res?.success == true) {
+                    // Invoke SignalR method
+                    connection.invoke("SendAdminNotification", sendTo).catch(function(err) {
+                        console.log("HUB:error")
+                    });
+                }
+            })
+        }
+        // Client Notification
+        var createNotiCustomer = function(title, type, description, createBy, sendTo, link) {
+            let data = {
+                title,
+                type,
+                description,
+                createBy,
+                sendTo,
+                image: "",
+                link
+            };
+            postData(BASE_API + "api/notification/add", data).then(res => {
+                console.log(res);
+                if (res?.success == true) {
+                    // Invoke SignalR method
+                    clientconnection.invoke("SendNotification", sendTo).catch(function(err) {
+                        console.log("HUB:error")
+                    });
+                }
+            })
+
+
+        }
+        async function renderBookingDetail() {
+            var JobOrderData = await getData(`${BASE_API}api/JobOrder/Detail/${JobOrderId}`)
+            CustomerId = JobOrderData.data.customerId // Set customer id for notification
+            var JobOrderDetailData = await getData(`${BASE_API}api/JobOrderDetail/All?idJO=${JobOrderId}`)
+            let dataArrSort = JobOrderDetailData.data.sort((a, b) => a.option - b.option);
+            console.log(JobOrderData)
+
+            // loop through data to fetch single row and display into UI
+            const listOfPromises = Promise.all(dataArrSort.map(async function(element, index) {
+                let optionDetail = await getData(`${BASE_API}api/Option/Detail/${element.optionId}`)
+                let serviceDetail = await getData(`${BASE_API}api/Service/Detail/${element.serviceId}`)
+
+                // get total price and total duration of each service
+
+                return `
+                                                <tr>
+                                                    <th scope="row">${index + 1}</th>
+                                                    <td>${serviceDetail.data.name}</td>
+                                                    <td>${element.quantily}</td>
+                                                    <td>${element.price}</td>
+                                                    <td>${element.optionId != 10 ? optionDetail.data.title : ''}</td>
+                                                    <td>${element.price * element.quantily}</td>
+                                                </tr>
+                                                                                                                                         `
+            }))
+            const allResults = await listOfPromises
+            let JOStateHTML = ``
+            if (JobOrderData.data.state == 1) JOStateHTML = '<span class="status_btn p-1" style="background-color: #ffc107; transform: translateY(-5px);" >Waiting</span>'
+            if (JobOrderData.data.state == 2) JOStateHTML = '<span class="status_btn p-1" style="transform: translateY(-5px);">Confirm</span>'
+            if (JobOrderData.data.state == 3) JOStateHTML = '<span class="status_btn  p-1" style="background-color: #dc3545; transform: translateY(-5px);">Cancel</span>'
+            if (JobOrderData.data.state == 4) JOStateHTML = '<span class="status_btn p-1" style="background-color: #007bff;transform: translateY(-5px);">Done</span>'
+            if (JobOrderData.data.state == 5) JOStateHTML = '<span class="status_btn p-1" style="background-color: #007bff;transform: translateY(-5px);">Check in</span>'
+
+            let userLogin = await getDataWithToken(`${BASE_API}api/Admin/getinfo`, USERTOKEN)
+
+            let JOBtnHTML = ''
+            if (JobOrderData.data.state == 1 && JobOrderData.data.staffId == 0) {
+                JOBtnHTML = ` <button data-id=${JobOrderData.data.joId} class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#CancelJOFormModal" style="background-color: #dc3545"> Cancel </button>
+                                                                                                  <button data-id=${JobOrderData.data.joId} class="btn btn-primary acknowledge-btn" data-bs-toggle="modal" data-bs-target="#AssignModal"> Assign </button>`
+            }
+            else if (JobOrderData.data.state == 1 && JobOrderData.data.staffId != 0) {
+                JOBtnHTML = ` <button data-id=${JobOrderData.data.joId} class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#CancelJOFormModal" style="background-color: #dc3545"> Cancel </button>
+                                                                                                  <button data-id=${JobOrderData.data.joId} class="btn btn-primary acknowledge-btn" data-bs-toggle="modal" data-bs-target="#AssignModal"> Reassign </button>`
+            } else if (JobOrderData.data.state == 4 || JobOrderData.data.state == 3) {
+                JOBtnHTML = "";
+            }
+            else {
+                JOBtnHTML = ` <button data-id=${JobOrderData.data.joId} class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#CancelJOFormModal" style="background-color: #dc3545"> Cancel </button>`;
+            }
+
+
+            // show data in UI
+            $('#aircon__table').html(allResults)
+            $('#total__price').html(JobOrderData.data.totalPrice)
+            $('#total__hour').html(JobOrderData.data.duration)
+            $('#JODes').html(JobOrderData.data.description)
+            $('#JOAddress').html(JobOrderData.data.address)
+            $('#JOTime').html(moment(JobOrderData.data.startAt).format('llll'))
+            $('#JOState').html(JOStateHTML)
+            $('#JOEmail').html(JobOrderData.data.user_Email)
+            $('#btn__holder').html(JOBtnHTML)
+
+        }
+
+        renderBookingDetail()
+
+
+
+        async function handleJO(formName, url, btnClose, messageSuccess = 'your action is success', messageFail = 'Your action is fail') {
+            $(formName).submit(async function(event) {
+                event.preventDefault()
+                // fetch apit post add review
+                let JOId = $().val()
+                postData(`${BASE_API}${url}`)
+                    .then(response => {
+                        // case success: show totify and clear input text
+                        if (response.success == true) {
+                            notify('success', messageSuccess)
+                            // clear form text
+                            $(btnClose).click()
+                            renderBookingDetail()
+
+                            if (formName == "#CancelJOForm") {
+                                createNotiCustomer("Job Order Canceled", 2, `Your job order with ID: ${JobOrderId} has been canceled`, 2, CustomerId, `/User/JobOrderDetail/${JobOrderId}`)
+                            }
+                        }
+                        // case error by identity: show error
+                        else if (!response.ok && response.errors != null) {
+                            notify('error', messageFail)
+                        }
+                        // case error: show error
+                        else {
+                            notify('error', messageFail)
+                        }
+                    })
+            })
+        }
+        handleJO(formName = '#CancelJOForm',
+            url = `api/JobOrder/Cancel/${JobOrderId}`,
+            btnClose = '#CancelJOClose',
+            messageSuccess = 'cancel job order success',
+            messageFail = 'cancel job order fail')
+
+        // Assign Job Order
+        $('#AssignModal').on('show.bs.modal', function(e) {
+            var JOId = $(e.relatedTarget).data('id');
+            getDataWithToken(BASE_API + "api/admin/all/?role=2", USERTOKEN).then(res => {
+                $("select[name='selectStaff']").empty()
+                if (res?.success == true) {
+                    $("select[name='selectStaff']").append(`<option selected value="">Assign to Staff</option>`)
+                    res.data.map(item => {
+                        $("select[name='selectStaff']").append(`<option value="${item.userId}">${item.fullName}-Staff</option>`)
+                    })
+
+                }
+            })
+                .then(function() { // Get Staff is has assigned
+                    getData(`${BASE_API}api/JobOrder/Detail/${JobOrderId}`).then(res => {
+                        if (res.data.staffId != 0) {
+                            $("select[name='selectStaff']").val(res.data.staffId).trigger("change");
+                        }
+                    })
+                })
+            $('#AssignModal .btn-primary').off();
+            // Assign Modal
+            $('#AssignModal .btn-primary').on("click", function() {
+                if ($("select[name='selectStaff']").val() == "") {
+                    new Notyf({
+                        position: { x: 'right', y: 'top' },
+                        duration: 3000
+                    }).error("Please Choose Staff to Assign!")
+                }
+                else {
+                    postData(BASE_API + "api/joborder/assign/" + JOId, $("select[name='selectStaff']").val()).then(res => {
+                        if (res?.success == true) {
+                            new Notyf({
+                                position: { x: 'right', y: 'top' },
+                                duration: 3000
+                            }).success("Assign Job Order Successfully!")
+                            $('#AssignModal').modal("hide");
+                            renderBookingDetail();
+
+                            // Create Notification and invoke
+                            createNoti("You has been assigned Job Order!", 1, `Job Order Code: ${JOId}`, 10, +$("select[name='selectStaff']").val(), `/Admin/StaffJobOrder/JobOrderDetail/${JOId}`);
+                        }
+                        else {
+                            new Notyf({
+                                position: { x: 'right', y: 'top' },
+                                duration: 3000
+                            }).error("An Error has occurred!")
+                        }
+                    })
+                }
+            })
+
+            // Select Change
+            $("select[name='selectStaff']").on("change", function() {
+                if ($(this).val() == undefined || $(this).val() == "") {
+                    $(".staff__card").addClass("d-none");
+                    return;
+                }
+                else {
+                    getDataWithToken(BASE_API + `api/admin/detail/${$(this).val()}`, USERTOKEN).then(res => {
+                        if (res?.success == true) {
+                            $(".staff__image img").prop("src", `/assets/image/profileImg/${res.data.avatar}`);
+                            $(".staff__info h4").text(res.data.fullName);
+                            $(".staff__email").text(res.data.email);
+                            $(".staff__role").text(res.data.role_Name);
+                            $(".staff__phone").text(res.data.phone);
+                            $(".staff__card").removeClass("d-none");
+                        }
+                        console.log(res)
+                    })
+                }
+            })
+        })
+    </script>
+}
+

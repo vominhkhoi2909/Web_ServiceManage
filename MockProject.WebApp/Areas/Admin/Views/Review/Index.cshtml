@@ -1,0 +1,333 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+        .white_box_tittle {
+            justify-content: space-between;
+        }
+
+        @@media (max-width: 575.98px) {
+            .white_box_tittle {
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+            .rating-filter {
+                width: 100%;
+            }
+            #rating-filter {
+                width: 100% !important;
+                margin-top: 15px;
+            }
+            .add_button {
+                width: 100%;
+                padding-right: 8px;
+            }
+
+                .add_button a {
+                    margin-top: 10px;
+                    width: 100% !important;
+                }
+        }
+        /*Table border    */
+        .QA_section .QA_table .table thead th {
+            border-radius: 5px 5px 0 0 !important;
+            font-size: 15px;
+        }
+
+        .QA_section .QA_table .table tbody td {
+            border: 1px solid #e5ecff !important;
+            border-radius: 0;
+            color: black !important;
+            font-size: 13px;
+        }
+
+        .QA_section .QA_table .table tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 5px;
+            border-left: 1px solid #e5ecff !important;
+        }
+
+        .QA_section .QA_table .table tbody tr:last-child td:last-child {
+            border-radius: 0 0 5px 0;
+            border-left: 1px solid #e5ecff !important;
+        }
+
+    </style>
+}
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                                Review Management
+                            </h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Review management</li>
+                            </ol>
+                        </div>
+                        <div class="page_title_right">
+                            <div class="page_date_button d-flex align-items-center">
+                                 <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                                <span class="datetime"><!--render By JS--></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30 pt-4">
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header d-flex">
+                                    <h4>Config List</h4>
+                                    <div class="box_right d-flex flex-wrap align-items-center">
+                                        <div class="serach_field_2 me-2">
+                                            <div class="search_inner">
+                                                <div class="search_field">
+                                                    <input type="text"
+                                                       placeholder="Search..."
+                                                       id="search" />
+                                                </div>
+                                                <button type="submit">
+                                                    <i class="ti-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="rating-filter me-2">
+                                            <select class="form-control"
+                                                style="height: 40px; width: 150px;"
+                                                id="rating-filter">
+                                                <option selected value="">All Rating Score</option>
+                                                <option value="5">5 Star</option>
+                                                <option value="4">4 Star</option>
+                                                <option value="3">3 Star</option>
+                                                <option value="2">2 Star</option>
+                                                <option value="1">1 Star</option>
+                                            </select>
+                                        </div>
+                                        <div class="add_button">
+                                            <a id="btn-search"
+                                           class="btn btn-primary"
+                                           style="min-width: 100px">search</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="QA_table mb_30">
+                                    <table class="table lms_table_active table-hover" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">email</th>
+                                                <th scope="col">Comment</th>
+                                                <th scope="col">Rating</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @*<tr>
+                                        <th scope="row">
+                                        <a href="#" class="question_content"> 1 </a>
+                                        </th>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        My Config
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        0986788699
+                                        </td>
+                                        <td>
+                                        <div class="action_btns d-flex">
+                                        <a class="action_btn mr_10"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#Edit">
+                                        <i class="far fa-edit"></i>
+                                        </a>
+                                        <a class="action_btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteUserModal">
+                                        <i class="fas fa-trash"></i>
+                                        </a>
+                                        </div>
+                                        </td>
+                                        </tr>*@
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <!--Delete Modal-->
+    <div class="modal fade"
+     id="deleteModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModal">
+                        Delete this Review?
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you wanna delete this Review?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete Modal-->
+    <script>
+        // Load Ready
+        $(document).ready(function() {
+            //Load Datatable
+            var getReview = async (search,rating) => {
+                search = (!search)?"":search;
+                rating = (!rating)?"":rating;
+                getData(BASE_API + `api/review/all/?searchString=${search}&rating=${rating}`).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        "autoWidth": false,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                width: "10px",
+                                render: function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'fullName',
+                                title: 'Customer',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'email',
+                                title: 'Email',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'comment',
+                                title: 'Comment',
+                                width: "300px",
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'ratingScore',
+                                title: 'Rating',
+                                width: "10px",
+                                render: function(data) {
+                                    if (data <= 3)
+                                        return (data) ? `<h4 class="text-danger font-weight-bold">${data}</h4>` : "No Infomation"
+                                    else
+                                        return (data) ? `<h4 class="text-success font-weight-bold">${data}</h4>` : "No Infomation"
+
+                                }
+                            },
+                            {
+                                data: 'reviewId',
+                                title: 'Action',
+                                width: "10px",
+                                render: function(data, type, row) {
+                                    return `<div class="action_btns d-flex">
+                                                                        <a class="action_btn mr_10"
+                                                                        data-id="${data}"
+                                                                        href="mailto:${row.email}?subject=[Ihome-Service] Thank you for your feedback!"
+                                                                        >
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </a>
+                                                                        <a class="action_btn mr_10"
+                                                                        data-id="${data}"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#deleteModal">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </a>
+                                                                    </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getReview();
+
+
+
+            // Delete
+            $('#deleteModal').on('show.bs.modal', function(e) {
+                var reviewId = $(e.relatedTarget).data('id');
+                $('#deleteModal .btn-primary').off()
+                $('#deleteModal .btn-primary').click(function() {
+                    deleteData(BASE_API + "api/review/delete/" + reviewId).then(res => {
+                        if (res.success == true) {
+                            notify("success", "Deleted Review Successfully!");
+                            $('#deleteModal').modal("hide");
+                            getReview();
+                        }
+                        else {
+                            notify("error", "There was an error!");
+                        }
+                    })
+                })
+            })
+            //Search Value
+            $("#btn-search").on("click", function() {
+                getReview($("#search").val(), $("#rating-filter").val())
+
+            })
+        })
+    </script>
+}
+
+
+
+

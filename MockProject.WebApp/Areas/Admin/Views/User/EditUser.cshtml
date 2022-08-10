@@ -1,0 +1,332 @@
+﻿@{
+    ViewData["Title"] = "EditUser";
+
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+        .progress {
+            transform: translateY(4px);
+            width: 100%;
+        }
+
+        /* #E87E04 #EFBF17 #42A72A*/
+        .progress-bar-success {
+            background-color: #42A72A;
+        }
+
+        .progress-bar-info {
+            background-color: #EFBF17;
+        }
+
+        .progress-bar-warning {
+            background-color: #E87E04;
+        }
+
+        .progress-bar-danger {
+            background-color: #EC644B;
+        }
+
+        .login-23 .login-inner-form .form-box i {
+            top: 0;
+        }
+
+        .password-score {
+            margin-top: 8px;
+        }
+
+        #password-recommendation-heading {
+            text-align: unset !important;
+        }
+
+        #password-recommendation {
+            display: none;
+        }
+    </style>
+}
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">Edit User</h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Analytic</li>
+                            </ol>
+                        </div>
+                        <div class="page_title_right">
+                            <div class="page_date_button d-flex align-items-center">
+                                <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="" />
+                                <span class="datetime">August 1, 2020 - August 31, 2020</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="box_header m-0">
+                                <div class="main-title w-100 d-inline-flex justify-content-between align-items-center">
+                                    <h3 class="m-0">Edit User</h3>
+                                    <a href="@Url.Action("Index","User")" class="border-0">
+                                        <i class="fas fa-arrow-circle-left"></i> Back to
+                                        list
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body">
+                            <form id="EditUser" method="post">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div style="width: 200px; margin: 0 auto"
+                                         class="text-center">
+                                            <input type="file"
+                                               class="input-image filepond"
+                                               name="filepond"
+                                               accept="image/png, image/jpeg"
+                                               data-max-file-size="3MB"
+                                               style="height: 100px; width: 100px" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="common_input mb_15">
+                                                    <label for="fullname" class="mb-3">Full Name(*)</label>
+                                                    <input tabindex="0" type="text" name="fullname" required placeholder="Full Name" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="common_input mb_15">
+                                                    <label for="password" class="mb-3">Password</label>
+                                                    <input type="password" name="password" id="password" placeholder="Password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="common_input mb_15">
+                                                    <label for="email" class="mb-3">Email Address(*)</label>
+                                                    <input type="email" name="email" required placeholder="Email Address" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="common_input mb_15">
+                                                    <label for="confirmpassword" class="mb-3">Confirm Password</label>
+                                                    <input type="password" name="confirmpassword" placeholder="Confirm Password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="common_input mb_15">
+                                                    <label for="phone" class="mb-3">Phone(*)</label>
+                                                    <input type="text" name="phone" required placeholder="Phone" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="common_input mb_15">
+                                                    <label for="username" class="mb-3">Username(*)</label>
+                                                    <input type="text" name="username" required placeholder="Username" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 d-none">
+                                                <select name="roleId" required class="form-select" aria-label="Default select example"
+                                                    style="border:1px solid #e5ecff; border-radius:10px;padding:10px 25px;color: #81879f;font-size:14px;">
+                                                    <option value="">Choose Role</option>
+                                                    <option value="1">Admin</option>
+                                                    <option value="2" selected>Staff</option>
+                                                    <option value="3">Cleaner</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <label for="address" class="mb-3">Address</label>
+                                                <textarea class="w-100 bg-transparent"
+                                                      maxlength="250"
+                                                      rows="3"
+                                                      name="address"
+                                                      placeholder="Address"
+                                                      style="
+                                    height: 100px;
+                                    border-radius: 10px;
+                                    padding: 10px 25px;
+                                    color: #81879f;
+                                    font-weight: 400;
+                                    margin-top: 15px;
+                                    font-size: 14px;
+                                    border: 1px solid #e5ecff;
+                            "></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="create_report_btn mt_30 d-flex justify-content-end">
+                                                <button type="submit" href="#" class="btn_1 radius_btn d-block text-center w-50">Save Change</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <!--Password strength-->
+    <script src="/assets/js/client_base/password-strength.js"></script>
+    <script>
+        $('#password').passwordStrength();
+
+        // Select the file input and use create() to turn it into a pond
+        // in this example we pass properties along with the create method
+        // we could have also put these on the file input element itself
+        var filePond = FilePond.create(document.querySelector(".input-image"), {
+            labelIdle: `Update Profile Image<br>(Drag and drop)`,
+            imagePreviewHeight: 170,
+            imageCropAspectRatio: "1:1",
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            stylePanelLayout: "compact circle",
+            styleLoadIndicatorPosition: "center bottom",
+            styleButtonRemoveItemPosition: "center bottom",
+        });
+        filePond.setOptions({
+            server: {
+                process: '@Url.Action("Process","User")',
+                fetch: null,
+                revert: (uniqueFileId, load, error) => {
+                    $.ajax({
+                        url: '@Url.Action("Revert","User")',
+                        dataType: 'json',
+                        timeout: 3000,
+                        method: "POST",
+                        data: { fileName: uniqueFileId },
+                    }).done((data) => {
+                        console.log(data);
+                    })
+                },
+                load: {
+                    url: "@Url.Action("Load","User")?load=",
+                    method: 'GET',
+                }
+            },
+        })
+            ;
+
+        //Get data
+        getDataWithToken(BASE_API + "api/Admin/Detail/" + "@ViewBag.userId", USERTOKEN)
+            .then(res => {
+                console.log(res)
+                //#region Field
+                var name = $("input[name='fullname']");
+                var phone = $("input[name='phone']");
+                var email = $("input[name='email']");
+                var username = $("input[name='username']");
+                var address = $("textarea[name='address']");
+                var role = $("select[name='roleId']");
+
+                let n = (res.data.fullName) ? res.data.fullName : "";
+                let p = (res.data.phone) ? res.data.phone : "";
+                let e = (res.data.email) ? res.data.email : "";
+                let u = (res.data.username) ? res.data.username : "";
+                let a = (res.data.address) ? res.data.address : "";
+
+                role.val(`${res.data.roleId}`)
+
+                name.val(n);
+                phone.val(p);
+                email.val(e);
+                username.val(u);
+                address.val(a);
+                //#endregion Field
+                let image = (res.data.avatar == "" || res.data.avatar == undefined) ? "default.png" : res.data.avatar;
+                filePond.files = [{
+                    source: image,
+                    options: {
+                        type: 'local',
+                        //file:{
+                        //    name:data.avatar
+                        //},
+                    }
+                }];
+
+
+            })
+
+        // Phone handler
+        $(function() {
+            $("input[name='phone']").on("input", function(e) {
+                if ($(this).length >= 12) e.preventDefault();
+                $(this).val(
+                    $(this)
+                        .val()
+                        .replace(/[^0-9]/g, "")
+                );
+            });
+        });
+        // form submit
+        $("#EditUser").on("submit", function(event) {
+            let password = $("input[name='password']").val();
+            let repassword = $("input[name='confirmpassword']").val();
+
+            //get form data
+            event.preventDefault();
+            const data = new FormData(event.target);
+            const formDataObject = Object.fromEntries(data.entries());
+            var file = formDataObject.filepond;
+            delete formDataObject.filepond;
+
+            //Validation
+            let errorCount = 0;
+            const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@@$%^&*-]).{8,}$"); // Password Regex
+            if (password != "" && !regex.test(password)) {
+                errorCount++;
+                notify("error", "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.")
+            }
+            if (password !== repassword) {
+                errorCount++;
+                notify("error", "Password Does not match!.")
+            }
+
+            if (errorCount == 0) {
+                if ($("input[name='filepond']").val() != "") {
+                    formDataObject.avatar = $("input[name='filepond']").val();
+                }
+                delete formDataObject.confirmpassword;
+                console.log(formDataObject);
+
+                //Post Data
+                putDataWithToken(BASE_API + "api/Admin/Update/" + "@ViewBag.userId", USERTOKEN, formDataObject)
+                    .then(res => {
+                        console.log(res);
+                        if (res?.success == true) {
+                            notify("success", "Update User Successfully!");
+                        }
+                        else {
+                            if (res?.message != null) {
+                                notify("error", res?.message);
+                            }
+                            else 
+                            {
+                                notify("error", Object.values(res.errors)[0]);
+                            }
+                        }
+                    })
+            }
+
+
+
+        })
+    </script>
+    <!--End FilePond Section-->
+}
+
+

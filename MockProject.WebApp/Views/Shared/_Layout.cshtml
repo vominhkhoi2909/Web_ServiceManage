@@ -1,0 +1,659 @@
+﻿<!DOCTYPE html>
+@*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MockProject.WebApp</a> @RenderBody()*@
+<html lang="en">
+<link rel="shortcut icon" href="https://ihome-solution.com.sg/wp-content/uploads/2017/05/ihome-favicon.png"
+      type="image/x-icon">
+<link rel="icon" href="https://ihome-solution.com.sg/wp-content/uploads/2017/05/ihome-favicon.png" type="image/x-icon">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MockProject.WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MockProject.WebApp.styles.css" asp-append-version="true" />
+
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>IHOME SOLUTION</title>
+    <meta name='robots' content='max-image-preview:large' />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel='stylesheet'
+          href='https://fonts.googleapis.com/css?family=Barlow%3Awght%40100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%26display%3Dswap%7COpen+Sans%3Awght%40300%2C400%2C600%2C700%2C800%26display%3Dswap&amp;subset=latin%2Clatin-ext' />
+
+    <!-- custom css-->
+    <link rel="stylesheet" href="/assets/css/client_base/mycss.css">
+    <link rel="stylesheet" href="/assets/css/client_base/animation.css">
+    <link rel='stylesheet' href='/assets/css/client_base/myflaticon.css' />
+    <link rel="stylesheet" href="/assets/css/client_base/acrepair-main-style.css">
+    <link rel="stylesheet" href="/assets/css/client_base/acrepair-custom.css">
+    <link rel="stylesheet" href="/assets/css/client_base/acrepair-reponsive.css">
+    <link rel="stylesheet" href="/assets/css/client_base/last-custom.css">
+    <!-- custom css-->
+    <!--Notification Toast-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <!--End Notification Toast-->
+    @await RenderSectionAsync("css", required: false)
+</head>
+
+<body class="home page-template page-template-tpl-default-elementor page-template-tpl-default-elementor-php page page-id-10 theme-acrepair woocommerce-no-js menu-layer elementor-default elementor-kit-9 elementor-page elementor-page-10">
+    <div class="page-wrapper ">
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <!-- Main Header-->
+        <header class="main-header header-style-one">
+            <!--Header-Upper-->
+            <div class="header-upper">
+                <div class="auto-container">
+                    <div class="inner-container clearfix">
+                        <div class="pull-left logo-box">
+                            <div class="logo">
+
+                                <a href="@Url.Action("","Home")" title="Acrepair">
+
+                                    <img src="/assets/image/main/ihome-logo.png" alt="logo"
+                                         style="height:55px;" />
+
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="pull-right upper-right">
+                            <div class="info-outer clearfix">
+                                <!--Info Box-->
+                                <div class="upper-column info-box">
+                                    <div class="icon-box"><span class="flaticon-call"></span></div>
+                                    <ul>
+                                        <li><a href="tel:613-257-3396">613-257-3396</a></li>
+                                    </ul>
+                                </div>
+                                <!--Info Box-->
+                                <div class="upper-column info-box">
+                                    <div class="icon-box"><span class="flaticon-map"></span></div>
+                                    <ul>
+                                        <li>341 Wilson Street, Almonte, Ont K0A 1A0</li>
+                                    </ul>
+                                </div>
+                                <div class="upper-column info-box Ihome__user_box" style="padding-left: unset">
+                                    <ul>
+                                        <li>
+
+                                            <a href="@Url.Action("Register","User")">Register</a>
+                                            /
+                                            <a href="@Url.Action("Login","User")">Login</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Header Upper-->
+            <!--Header Lower-->
+            <div class="header-lower">
+                <div class="auto-container">
+                    <div class="nav-outer clearfix">
+                        <!-- Mobile Navigation Toggler -->
+                        <div class="mobile-nav-toggler"><span class="icon flaticon-menu-3"></span></div>
+                        <!-- Main Menu -->
+                        <nav class="main-menu navbar-expand-md">
+                            <div class="navbar-header">
+                                <!-- Toggle Button -->
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li id="menu-item-38"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39">
+
+                                        <a title="Home" href="@Url.Action("Index","Home")#" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Home</a>
+
+                                    </li>
+                                    <li id="menu-item-39"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39">
+
+                                        <a title="About Us" href="@Url.Action("Index","Home")#services" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Service</a>
+
+                                    </li>
+                                    <li id="menu-item-55"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39">
+
+                                        <a title="About Us" href="@Url.Action("Index","Home")#about" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">About Us</a>
+
+                                    </li>
+
+                                    <li id="menu-item-56"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39">
+
+                                        <a title="About Us" href="@Url.Action("Index","Home")#review" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Review</a>
+
+                                    </li>
+                                    <li id="menu-item-58"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39">
+
+                                        <a title="About Us" href="@Url.Action("Index","Home")#contact" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Contact Us</a>
+
+                                    </li>
+
+                                    @if (Context.Request.Cookies["UserLogin"] != null)
+                                    {
+                                        <li id="menu-item-login" style="display: none;"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39 show-on-tablet-mobile">
+                                            <a title="Login" href="@Url.Action("Profile","User")" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Account Infomation</a>
+                                        </li>
+                                        <li id="menu-item-logout" style="display: none;"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39 show-on-tablet-mobile">
+
+                                            <a title="Register" href="@Url.Action("Logout","User")" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">LogOut</a>
+
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li id="menu-item-logout" style="display: none;"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39 show-on-tablet-mobile">
+                                            <a title="Register" href="@Url.Action("Register","User")" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Register</a>
+
+                                        </li>
+                                        <li id="menu-item-login" style="display: none;"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39 show-on-tablet-mobile">
+                                            <a title="Login" href="@Url.Action("Login","User")" class="hvr-underline-from-left1"
+                                           data-scroll data-options="easing: easeOutQuart">Login</a>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- Main Menu End-->
+                        <div class="outer-box clearfix">
+
+
+                            <div class="button-box">
+                                <a href="@Url.Action("Index","Booking")" class="theme-btn btn-style-one">
+                                    <span class="txt">Book Now</span>
+                                </a>
+                            </div>
+
+                            <!-- notification -->
+                            <div class="button-box ml-3">
+                                <div class="notifications">
+                                    <div class="icon_wrap">
+                                        <i class="far fa-bell" style="font-size: 25px;"></i>
+                                        <span class="badge badge-light">0</span>
+                                    </div>
+                                    <div class="notification_dd">
+                                        <ul class="notification_ul">
+                                            <li class="starbucks text-center">
+                                                <div class="p-2 w-100">
+                                                    You have no notification!
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Lower -->
+            <!-- Mobile Menu  -->
+            <div class="mobile-menu">
+                <div class="menu-backdrop"></div>
+                <div class="close-btn"><span class="icon fa fa-window-close"></span></div>
+                <nav class="menu-box">
+                    <div class="nav-logo">
+
+                        <a href="index.html" title="Acrepair">
+
+                            <img src="/assets/image/main/ihome-logo.png" alt="logo" style="" />
+
+                        </a>
+
+                    </div>
+                    <div class="menu-outer">
+                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                    </div>
+                </nav>
+            </div>
+            <!-- End Mobile Menu -->
+
+        </header>
+        <!--End Main Header -->
+        @RenderBody()
+
+        <div class="clearfix"></div>
+        <button type="button" hidden id="showModalLogin" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginRequestModal">
+            Launch demo modal
+        </button>
+        @*Modal*@
+        <div class="modal fade" id="loginRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Please Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        You have to login to do this action!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a style="color:#000; background: #fecd1a;border-color: #fecd1a;" href="@Url.Action("Login","User")" class="btn btn-primary">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <div class="auto-container">
+                <!-- Widgets Section -->
+                <div class="widgets-section">
+                    <div class="row clearfix">
+
+                        <!-- Big Column -->
+                        <div class="big-column col-lg-12 col-md-12 col-sm-12">
+                            <div class="row clearfix">
+                                <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                                    <div id="acrepair_about_company-2"
+                                         class="footer-widget widget_acrepair_about_company">
+                                        <div class="logo-widget">
+                                            <div class="logo">
+                                                <a href="index.html">
+
+                                                    <img src="/assets/image/base/uploads/2022/06/light-logo.png"
+                                                         alt="Awesome Image" />
+
+                                                </a>
+                                            </div>
+
+                                            <!-- Social Nav -->
+
+                                            <ul class="social-nav">
+                                                <li>
+
+                                                    <a target="_blank" href="https://www.facebook.com/">
+
+                                                        <span class="fab fa-facebook"></span>
+
+                                                    </a>
+
+                                                </li>
+                                                <li>
+
+                                                    <a target="_blank" href="https://www.linkedin.com/">
+
+                                                        <span class="fab fa-linkedin"></span>
+
+                                                    </a>
+
+                                                </li>
+                                                <li>
+
+                                                    <a target="_blank" href="https://www.skype.com/">
+
+                                                        <span class="fab fa-skype"></span>
+
+                                                    </a>
+
+                                                </li>
+                                                <li>
+
+                                                    <a target="_blank" href="https://www.twitter.com/">
+
+                                                        <span class="fab fa-twitter"></span>
+
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+
+                                            <div class="text">
+
+                                                Pellentesque accumsan bibendum bibendum diam et. this is
+                                                the consectetur adipiscing.
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                                    <div id="acrepair_contact_us-2" class="footer-widget widget_acrepair_contact_us">
+                                        <!-- Footer Column -->
+                                        <div class="office-widget">
+                                            <ul class="office-list">
+                                                <li>
+                                                    <strong>OFFICE -</strong>
+                                                    Billing address: 20 Pembina Rd #240, Sherwood Park, AB T8H <br> 0M2
+                                                </li>
+                                                <li>
+                                                    <strong>CALL US -</strong>
+                                                    Cell: 780-918-5736<br>
+                                                    Office: 780-449-1421
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                                    <div id="nav_menu-2" class="footer-widget widget_nav_menu">
+                                        <h5>Quick Links</h5>
+                                        <div class="menu-footer-quick-links-container">
+                                            <ul id="menu-footer-quick-links" class="menu">
+                                                <li id="menu-item-457"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-457">
+                                                    <a href="about-us/index.html">About Us</a>
+                                                </li>
+                                                <li id="menu-item-456"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-456">
+                                                    <a href="blog-classic/index.html">Blog Classic</a>
+                                                </li>
+                                                <li id="menu-item-459"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                                    <a href="projects/index.html">Projects</a>
+                                                </li>
+                                                <li id="menu-item-460"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-460">
+                                                    <a href="services/index.html">Services</a>
+                                                </li>
+                                                <li id="menu-item-458"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-458">
+                                                    <a href="contact-us-01/index.html">Contact Us</a>
+                                                </li>
+                                                <li id="menu-item-669"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-669">
+                                                    <a href="projects-detail/index.html">Projects Detail</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                                    <div id="nav_menu-4" class="footer-widget widget_nav_menu">
+                                        <h5>Our Services</h5>
+                                        <div class="menu-services-menu-container">
+                                            <ul id="menu-services-menu" class="menu">
+                                                <li id="menu-item-602"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-602">
+                                                    <a href="hvac-maintenance-and-repair/index.html">
+
+                                                        HVAC Maintenance
+                                                        And Repair
+
+                                                    </a>
+                                                </li>
+                                                <li id="menu-item-604"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-604">
+                                                    <a href="installation-project-management/index.html">
+
+                                                        Installation
+                                                        &#038; Project Management
+
+                                                    </a>
+                                                </li>
+                                                <li id="menu-item-603"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-603">
+                                                    <a href="indoor-air-quality-testing/index.html">
+
+                                                        Indoor Air Quality
+                                                        Testing
+
+                                                    </a>
+                                                </li>
+                                                <li id="menu-item-601"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-601">
+                                                    <a href="hvac-design-facilities/index.html">
+
+                                                        HVAC Design &#038;
+                                                        Facilities
+
+                                                    </a>
+                                                </li>
+                                                <li id="menu-item-605"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-605">
+                                                    <a href="powerfull-energy-efficiency/index.html">
+
+                                                        Powerfull Energy
+                                                        &#038; Efficiency
+
+                                                    </a>
+                                                </li>
+                                                <li id="menu-item-600"
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-600">
+                                                    <a href="hvac-cleaning-optimization/index.html">
+
+                                                        HVAC Cleaning &#038;
+                                                        Optimization
+
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <div class="copyright">
+
+                                Copyright © 2022, AC Repair Refrigeration Inc. All rights reserved.
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <ul class="footer-bottom-nav">
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms Of Use</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+        <!-- End Main Footer -->
+        <!--Scroll to top-->
+        <div class="scroll-to-top scroll-to-target" data-target="html"><span href="#" class="fa fa-arrow-up"></span></div>
+
+    </div>
+    <script>
+          // CONFIGURATION
+         @{
+            @using Microsoft.Extensions.Configuration
+            @inject IConfiguration Configuration
+        }
+        const BASE_API = '@Configuration["BASE_API_HOST"]';
+
+        //const BASE_API = "https://localhost:7235/";
+        //const BASE_CLIENT = 'https://localhost:7233/'
+
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- script -->
+    <!--Notification Toast-->
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="/assets/js/client_base/NotificationJS.js"></script>
+    <!--End Notification Toast-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/assets/js/client_base/wow.js"></script> <!-- custom place -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+    <script src="/assets/js/client_base/customJS.js"></script> <!-- custom place -->
+    <script src="/assets/js/client_base/fetchData-lib.js"></script> <!-- custom place -->
+    <script src="/assets/js/client_base/shareJS.js"></script> <!-- custom place -->
+    <!--End Page Wrapper-->
+    <!-- show user info after login -->
+    @{
+        string cookieUserLogin = Context.Request.Cookies["UserLogin"];
+    }
+    <script>
+        let USERTOKEN = '@cookieUserLogin'
+        // parse token by JS
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        };
+
+        // render layout when login succes
+        if (USERTOKEN) {
+            // case token expire
+            if (parseJwt(USERTOKEN).exp < new Date() / 1000) {
+                //alert('token hết hạn, mời đăng nhập lại')
+            }
+            //case success
+            else {
+                getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN)
+                    .then(response => {
+                        let IhomeUserBoxHTML = `
+                                                        <ul>
+                                                            <li>
+                                                                <a href="@Url.Action("Profile","User")">${response.data.name || response.data.email}</a>
+                                                                /
+                                                                <a href="@Url.Action("Logout","User")">Logout</a>
+                                                            </li>
+                                                        </ul>`
+                        $('.Ihome__user_box').html(IhomeUserBoxHTML)
+
+                        $('#menu-item-logout').html(`
+                                            <a title="Register" href="@Url.Action("Logout","User")" class="hvr-underline-from-left1"
+                                                            data-scroll data-options="easing: easeOutQuart">Logout</a>
+                                        `)
+                        $('#menu-item-login').html(`
+                                        <a title="Login" href="@Url.Action("Profile","User")" class="hvr-underline-from-left1"
+                                                            data-scroll data-options="easing: easeOutQuart">${response.data.name || response.data.email}</a>
+                                        `)
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
+
+    </script>
+
+    <!-- TEST NOTIFICATION -->
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        // Default hide notification counter badge
+        $(".icon_wrap .badge").hide();
+        // Init connection
+        var connection = new signalR.HubConnectionBuilder().withUrl("/adminNotifyHub").build();
+        var clientconnection = new signalR.HubConnectionBuilder().withUrl("/notifyHub").build();
+        // Start connection
+        connection.start().then(() => console.log("SignalR started"));
+        clientconnection.start().then(() => {
+            console.log("Client SignalR Started");
+            clientconnection.invoke("GetNotification").catch(function(err) { });
+        });
+
+
+
+        // Recieve data from admin
+        clientconnection.on("YourNotification", function(message) {
+            $(".notification_ul").html("");
+            var count = message.filter(x => x.status == 1).length;
+            if (count > 0) {
+                $(".icon_wrap .badge").show();
+                $(".icon_wrap .badge").html(count);
+            }
+            else {
+                $(".icon_wrap .badge").hide();
+            }
+            var mess = message.map(item => {
+                var type,icon,status;
+                if(item.type == 1)
+                {
+                    type = 'success';
+                    icon = 'fa-solid fa-circle-check';
+                }
+                if(item.type == 2)
+                {
+                     type = 'fail';
+                     icon = 'fa-solid fa-circle-xmark';
+                }
+                if(item.status == 1){
+                    status = '<i class="fa fa-circle mr-1" style="color:#007bff;font-size:10px;"></i>'
+                }
+                else {
+                    status = ""
+                }
+                return `<li class="notify_item" data-id="${item.notifId}">
+                            <div class="notify_data">
+                                <div class="title">
+                                    ${item.title}
+                                </div>
+                                <div class="sub_title">
+                                    ${item.description}
+                                </div>
+                                <div style="font-size:13px;margin-top:5px;">
+                                    ${status}
+                                    ${moment(item.createAt).fromNow()}
+                                </div>
+                            </div>
+                            <div class="notify_status ${type}">
+                                <i class="${icon}"></i>
+                            </div>
+                            <a href="${item.link}" class="notify_link"></a>
+                        </li>`
+            }).join("")
+            $(".notification_ul").html(mess);
+            console.log(message);
+        });
+    </script>
+    <script>
+        // Notification click action
+        $(document).on("click",".notify_item",function(){
+            var notifId = $(this).data("id"); // Notification ID
+            var notifLink = $(this).find('a').attr('href'); // Notification Link
+            // Change status if notification is unread
+            postData(BASE_API + "api/notification/readnotif/" + notifId)
+            // Redirect to link contain inside notification
+            window.location.href = notifLink;
+        })
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

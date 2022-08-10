@@ -1,0 +1,763 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .hide_form {
+        display: none;
+    }
+
+    .field {
+    }
+
+        .field:first-child {
+            border-top: none;
+        }
+
+    input[name="check_choose_service"] {
+        display: none;
+    }
+
+    .field {
+        display: relative;
+    }
+
+        .field label {
+            position: relative;
+            line-height: 32px;
+            display: block;
+        }
+
+            .field label:before,
+            .field label:after,
+            .field label span:before,
+            .field label span:after {
+                content: '';
+                display: block;
+                position: absolute;
+            }
+
+            .field label span {
+                position: relative;
+                cursor: pointer;
+                display: block;
+                float: right;
+            }
+
+    .check-round label span {
+        border-radius: 16px;
+        height: 32px;
+        width: 64px;
+    }
+
+        .check-round label span:before {
+            border-radius: 50%;
+            height: 28px;
+            width: 28px;
+            left: 2px;
+            top: 2px;
+        }
+
+    .check-round input:checked + label span:before {
+        left: 34px;
+    }
+
+    .check-round.slide label span {
+        background: #777777; /*e74c3c;*/
+        transition: background 0.4s ease-in;
+    }
+
+        .check-round.slide label span:before {
+            background: #ECF0F1;
+            transition: left 0.4s ease-in;
+        }
+
+    .check-round.slide input:checked + label span {
+        background: #2ecc71;
+    }
+
+    .check-round.slide-inverse label span {
+        background: #ECF0F1;
+        border: 1px solid #bdc3c7;
+    }
+
+        .check-round.slide-inverse label span:before {
+            background: #777777; /*e74c3c;*/
+            transition: left 0.4s ease-in, background 0.4s ease-in;
+        }
+
+    .check-round.slide-inverse input:checked + label span:before {
+        background: #2ecc71;
+    }
+
+    .icon__add_service {
+        cursor: pointer;
+    }
+
+    .icon__delete_service {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .error-list {
+        padding-left: 26px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .error-item {
+        list-style-type: circle !important;
+        padding: 2px 12px 2px 0px !important;
+    }
+
+        .error-item:first-child {
+            padding-top: 8px;
+        }
+
+        .error-item:last-child {
+            padding-bottom: 8px;
+        }
+
+</style>
+<div data-elementor-type="wp-page" data-elementor-id="10" class="elementor elementor-10">
+    <section class="elementor-section elementor-top-section elementor-element elementor-element-c30a554 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+             data-id="c30a554" data-element_type="section">
+        <div class="elementor-container elementor-column-gap-default">
+            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ee8193c"
+                 data-id="ee8193c" data-element_type="column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-50ec34f elementor-widget elementor-widget-acrepair_get_in_touch"
+                         data-id="50ec34f" data-element_type="widget"
+                         data-widget_type="acrepair_get_in_touch.default">
+                        <div class="elementor-widget-container">
+
+                            <!-- Contact Section -->
+                            <section id="contact" class="contact-section " style="padding-top: 200px;">
+                                <div class="auto-container">
+                                    <!-- Sec Title / Centered -->
+                                    <div class="sec-title centered">
+                                        <h2>Book Service</h2>
+                                        <div class="separator"></div>
+                                    </div>
+                                    <div class="inner-container">
+                                        <div class="pattern-layer"
+                                             style="background-image:url(/assets/image/base/uploads/2022/05/pattern-2.png);">
+                                        </div>
+                                        <div class="row clearfix my__row-reverse">
+                                            <!-- Form Column -->
+                                            <div class="form-column col-lg-7 col-md-12 col-sm-12">
+                                                <div class="inner-column">
+                                                    <!-- Contact Form -->
+                                                    <div class="contact-form">
+                                                        <div role="form" class="wpcf7" id="wpcf7-f216-p10-o1"
+                                                             lang="en-US" dir="ltr">
+                                                            <form action="" method="get" id="send-booking-service-form">
+                                                                <!--service parent hold-->
+                                                                <div class="service__holder hide_form" id="service__holder-aircon">
+                                                                    <div class="row__holder" data-type="aircon">
+                                                                        <div class="title-box" style="display:flex; justify-content: space-between;align-items: center;">
+                                                                            <div class="text" style="margin-top: unset;">Air Conditioner</div>
+                                                                            <div class="icon__add_service" style="font-size: 28px; color: green;"><i class="fa-solid fa-circle-plus"></i></div>
+                                                                        </div>
+                                                                        <!--row value-->
+                                                                        <div class="row clearfix">
+                                                                            <div class="form-group col-lg-8 col-md-12 col-sm-12">
+                                                                                <span class="wpcf7-form-control-wrap menu-329">
+                                                                                    <select name="optionId" id="parentServiceId" required
+                                                                                            class="">
+                                                                                        <option value="">
+                                                                                            Brand
+                                                                                        </option>
+                                                                                        @foreach (var item in ViewBag.optionList)
+                                                                                        {
+                                                                                            //Aircon brand have type equal 4
+                                                                                            if (item.Type == 4)
+                                                                                            {
+                                                                                                <option value="@item.OptionId">
+                                                                                                    @item.Title
+                                                                                                </option>
+                                                                                            }
+                                                                                        }
+                                                                                    </select>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="col-lg-3 col-md-11 col-sm-11 col-11 form-group">
+                                                                                <span class="wpcf7-form-control-wrap text-118">
+                                                                                    <input type="number" name="quantity" required
+                                                                                           value="" size="40" min="1" max="10"
+                                                                                           placeholder="Quantity" />
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end row value-->
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        @foreach (var item in ViewBag.serviceList)
+                                                                        {
+                                                                            // service of aircon have type equal 1
+                                                                            if (item.Type == 1)
+                                                                            {
+                                                                                <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                                                                    <span class="">
+                                                                                        <input name="airconServiceId" type="checkbox" id="@item.ServiceId" value="@item.ServiceId" />
+                                                                                        <label for="#@item.ServiceId" style="font-size: 16px; margin-left: 8px;">
+                                                                                            @item.Name (<span>@item.Duration</span>h - <span>@item.Price</span>$)
+                                                                                        </label>
+                                                                                    </span>
+                                                                                </div>
+                                                                            }
+                                                                        }
+                                                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-4">
+                                                                            <span class="">
+                                                                                @*<span style="font-size: 16px;">We have some promotion now!</span>*@
+                                                                                <ul style="padding-left: 2rem;">
+                                                                                    @* @foreach(var item in ViewBag.promotionList)
+                                                                                    {
+                                                                                    // promotion for aircon have parent service equal 1
+                                                                                    if(item.ParentServiceId == 1){
+                                                                                    <li style="font-size: 16px; list-style-type: square; padding-top: 7px;">@item.Title</li>
+                                                                                    }
+                                                                                    }*@
+                                                                                </ul>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr />
+                                                                </div>
+                                                                <!--end service parent hold-->
+                                                                <!--/-----------------------/-->
+                                                                <!--service parent hold-->
+                                                                <div class="service__holder hide_form" id="service__holder-mattress">
+                                                                    <div class="row__holder" data-type="mattress">
+                                                                        <div class="title-box" style="display:flex; justify-content: space-between;align-items: center;">
+                                                                            <div class="text" style="margin-top: unset;">Mattress</div>
+                                                                            <div class="icon__add_service" style="font-size: 28px; color: green;"><i class="fa-solid fa-circle-plus"></i></div>
+                                                                        </div>
+                                                                        <!--row value-->
+                                                                        <div class="row clearfix">
+                                                                            <div class="form-group col-lg-8 col-md-12 col-sm-12">
+                                                                                <span class="wpcf7-form-control-wrap menu-329">
+                                                                                    <select name="optionId" id="parentServiceId"
+                                                                                            class="">
+                                                                                        <option value="">
+                                                                                            Size
+                                                                                        </option>
+                                                                                        @foreach (var item in ViewBag.optionList)
+                                                                                        {
+                                                                                            //Mattress size have type equal 5
+                                                                                            if (item.Type == 5)
+                                                                                            {
+                                                                                                <option value="@item.OptionId">
+                                                                                                    @item.Title Size
+                                                                                                </option>
+                                                                                            }
+                                                                                        }
+                                                                                    </select>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="col-lg-3 col-md-11 col-sm-11 col-11 form-group">
+                                                                                <span class="wpcf7-form-control-wrap text-118">
+                                                                                    <input type="number" name="quantity"
+                                                                                           value="" size="40" min="1" max="10"
+                                                                                           placeholder="Quantity" />
+                                                                                </span>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <!--end row value-->
+
+
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        @foreach (var item in ViewBag.serviceList)
+                                                                        {
+                                                                            // service of mattress have type equal 2
+                                                                            if (item.Type == 2)
+                                                                            {
+                                                                                <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                                                                    <span class="">
+                                                                                        <input name="mattressServiceId" type="checkbox" id="@item.ServiceId" value="@item.ServiceId" />
+                                                                                        <label for="#@item.ServiceId" style="font-size: 16px; margin-left: 8px;">
+                                                                                            @item.Name (<span>@item.Duration</span>h - <span>@item.Price</span>$)
+                                                                                        </label>
+                                                                                    </span>
+                                                                                </div>
+                                                                            }
+                                                                        }
+                                                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-4">
+                                                                            <span class="">
+                                                                                @*<span style="font-size: 16px;">We have some promotion now!</span>*@
+                                                                                <ul style="padding-left: 2rem;">
+                                                                                    @*            @foreach(var item in ViewBag.promotionList)
+                                                                                    {
+                                                                                    // promotion for mattress have parent service equal 2
+                                                                                    if(item.ParentServiceId == 2){
+                                                                                    <li style="font-size: 16px; list-style-type: square; padding-top: 7px;">@item.Title</li>
+                                                                                    }
+                                                                                    }*@
+                                                                                </ul>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr />
+                                                                </div>
+                                                                <!--end service parent hold-->
+                                                                <!--/-----------------------/-->
+                                                                <!--service parent hold-->
+                                                                <div class="service__holder hide_form" id="service__holder-misc">
+                                                                    <div class="row__holder" data-type="misc">
+                                                                        <div class="title-box" style="display:flex; justify-content: space-between;align-items: center;">
+                                                                            <div class="text" style="margin-top: unset;">Miscellaneos</div>
+                                                                            <div class="icon__add_service" style="font-size: 28px; color: green;"><i class="fa-solid fa-circle-plus"></i></div>
+                                                                        </div>
+                                                                        <!--row value-->
+                                                                        <div class="row clearfix">
+                                                                            <div class="form-group col-lg-8 col-md-12 col-sm-12">
+                                                                                <span class="wpcf7-form-control-wrap menu-329">
+                                                                                    <select name="optionId" id="parentServiceId"
+                                                                                            class="">
+                                                                                        <option value="">
+                                                                                            Please Select
+                                                                                        </option>
+                                                                                        @foreach (var item in ViewBag.serviceList)
+                                                                                        {
+                                                                                            // service of mattress have type equal 2
+                                                                                            if (item.Type == 3)
+                                                                                            {
+                                                                                                <option value="@item.ServiceId">
+                                                                                                    @item.Name (<span>@item.Duration</span>h - <span>@item.Price</span>$)
+                                                                                                </option>
+                                                                                            }
+                                                                                        }
+                                                                                    </select>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="col-lg-3 col-md-11 col-sm-11 col-11 form-group">
+                                                                                <span class="wpcf7-form-control-wrap text-118">
+                                                                                    <input type="number" name="quantity"
+                                                                                           value="" size="40" min="1" max="10"
+                                                                                           placeholder="Quantity" />
+                                                                                </span>
+                                                                            </div>
+                                                                            @* <div onclick="myFunc(event)" class="icon__delete_service form-group col-lg-1 col-md-1 col-sm-1 col-1">
+                                                                            <i style="font-size: 22px; color: red;"class="fa-solid fa-square-minus"></i>
+                                                                            </div>*@
+                                                                        </div>
+                                                                        <!--end row value-->
+
+
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-4">
+                                                                            <span class="">
+                                                                                @*<span style="font-size: 16px;">We have some promotion now!</span>*@
+                                                                                <ul style="padding-left: 2rem;">
+                                                                                    @*           @foreach(var item in ViewBag.promotionList)
+                                                                                    {
+                                                                                    // promotion for mattress have parent service equal 2
+                                                                                    if(item.ParentServiceId == 2){
+                                                                                    <li style="font-size: 16px; list-style-type: square; padding-top: 7px;">@item.Title</li>
+                                                                                    }
+                                                                                    }*@
+                                                                                </ul>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr />
+                                                                </div>
+                                                                <!--end service parent hold-->
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="error-list">
+                                                                        <!--render by js-->
+                                                                    </ul>
+                                                                    <h3 id="message-none-form"></h3>
+                                                                    <button class="theme-btn btn-style-one"
+                                                                            type="submit" id="btn-submit-booking">
+                                                                        <span class="txt">
+                                                                            Submit Now
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- check  -->
+                                            <div class="map-column col-lg-5 col-md-12 col-sm-12">
+                                                <div class="inner-column">
+                                                    <div class="title-box">
+                                                        <h3>Choose Service</h3>
+                                                    </div>
+                                                    <ul class="addres-list">
+                                                        <li>
+                                                            <span class="icon icon flaticon-location-1"></span>Check your service you want to book
+                                                        </li>
+                                                        <div class="field check-round slide-inverse">
+                                                            <input type="checkbox" name="check_choose_service" id="check-slide-1" />
+                                                            <label for="check-slide-1">Air Conditioner<span></span></label>
+                                                        </div>
+                                                        <div class="field check-round slide-inverse">
+                                                            <input type="checkbox" name="check_choose_service" id="check-slide-2" />
+                                                            <label for="check-slide-2">Mattress <span></span></label>
+                                                        </div>
+                                                        <div class="field check-round slide-inverse">
+                                                            <input type="checkbox" name="check_choose_service" id="check-slide-3" />
+                                                            <label for="check-slide-3">Miscellaneos<span></span></label>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- End Contact Section -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        // show an modal if user not login or token is expired
+        requestLogin()
+
+        // hande first time show form
+        // defaut: show aircon service form
+        function handleShowFormFirstTime() {
+            $('#check-slide-1').prop('checked', true);
+            const checked = $('#check-slide-1').is(':checked');
+            if (checked == true) {
+                // show
+                $(`#service__holder-aircon`).removeClass('hide_form')
+            } else {
+                // hide
+                $(`#service__holder-aircon`).addClass('hide_form')
+            }
+        }
+
+        // handle show and hide form when checked input checkbox
+        // case checked: show form
+        // case unchecked: hide form
+        function handleShowForm(checkboxId, formId) {
+            $(`#${checkboxId}`).click(function(event) {
+                const checked = $(this).is(':checked');
+                // clear old err list if exist
+                clearErr()
+                if (checked == true) {
+                    // case show: add required for input
+                    $(`#${formId}`).removeClass('hide_form')
+                    $(`#${formId} select[name='optionId']`).prop('required', true);
+                    $(`#${formId} input[name='quantity']`).prop('required', true);
+                    checkNoForm()
+
+                } else {
+                    // case hide: remove required for input and reset the value in input
+                    $(`#${formId}`).addClass('hide_form')
+                    $(`#${formId} select[name='optionId']`).prop('required', false);
+                    $(`#${formId} select[name='optionId']`).val('')
+
+                    $(`#${formId} input[name='quantity']`).prop('required', false);
+                    $(`#${formId} input[name='quantity']`).val('')
+                    checkNoForm()
+                }
+            })
+        }
+
+        function checkNoForm() {
+            let checkAircon = $(`#service__holder-aircon`).hasClass('hide_form')
+            let checkMattress = $(`#service__holder-mattress`).hasClass('hide_form')
+            let checkMisct = $(`#service__holder-misc`).hasClass('hide_form')
+            if (checkAircon && checkMattress && checkMisct) {
+                $('#btn-submit-booking').hide()
+                $('#message-none-form').html('You have to choose at least one service')
+            }
+            else {
+                $('#btn-submit-booking').show()
+                $('#message-none-form').html('')
+            }
+        }
+        // call func show service form
+        handleShowFormFirstTime()
+        handleShowForm('check-slide-1', 'service__holder-aircon')
+        handleShowForm('check-slide-2', 'service__holder-mattress')
+        handleShowForm('check-slide-3', 'service__holder-misc')
+
+        // add input row when click
+        $('.icon__add_service').click(function() {
+            // get hoder of an input
+            const rowHolder = this.closest('.row__holder')
+            let selectInputHtml
+            // custom select option in three service
+            switch (rowHolder.getAttribute("data-type")) {
+                case "aircon":
+                    selectInputHtml = `
+                                        <option value="">
+                                            Brand
+                                        </option>
+        @foreach (var item in ViewBag.optionList)
+        {
+            if (item.Type == 4)
+            {
+                                                        <option value="@item.OptionId">
+                    @item.Title
+                                                        </option>
+            }
+        }
+                                                    `
+                    break;
+                case "mattress":
+                    selectInputHtml = `
+                                        <option value="">
+                                            Size
+                                        </option>
+        @foreach (var item in ViewBag.optionList)
+        {
+            if (item.Type == 5)
+            {
+                                                        <option value="@item.OptionId">
+                    @item.Title Size
+                                                        </option>
+            }
+        }
+                                                    `
+                    break;
+                case "misc":
+                    selectInputHtml = `
+                                   <option value="">
+                                        Please Select
+                                    </option>
+        @foreach (var item in ViewBag.serviceList)
+        {
+            if (item.Type == 3)
+            {
+                                                        <option value="@item.ServiceId">
+                    @item.Name (<span>@item.Duration</span>h - <span>@item.Price</span>$)
+                                                        </option>
+            }
+        }
+                                        `
+                    break;
+            }
+            // create a row of input
+            const row = document.createElement('div');
+            row.innerHTML = `
+                                    <div class="row clearfix">
+                                        <div class="form-group col-lg-8 col-md-12 col-sm-12">
+                                            <span class="wpcf7-form-control-wrap menu-329">
+                                                <select name="optionId" id="parentServiceId" required
+                                                        class="" >
+                                                    ${selectInputHtml}
+
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 col-md-11 col-sm-11 col-11 form-group">
+                                            <span class="wpcf7-form-control-wrap text-118">
+                                                <input type="number" name="quantity"
+                                                        value="" size="40" min="1" max="10"
+                                                        placeholder="Quantity" required/>
+                                            </span>
+                                        </div>
+                                            <div onclick="deleteRow(event)" class="icon__delete_service form-group col-lg-1 col-md-1 col-sm-1 col-1">
+                                            <i style="font-size: 22px; color: red;"class="fa-solid fa-square-minus"></i>
+                                        </div>
+                                    </div>
+                                    `
+            // add row
+            rowHolder.appendChild(row)
+        })
+
+        // get all value in input with same name
+        function getAllValueInputByName(type, name) {
+            let valueArr = [];
+            let element = `input[name="${name}"]`
+            if (type == 'select') {
+                element = `select[name="${name}"]`
+            }
+
+            $(element).each(function() {
+                valueArr.push($(this).val());
+            });
+            return valueArr
+        }
+
+        // get all data of checkbox input in same name
+        function getAllValuInputByNameTypeCheckbox(name) {
+            let valueArr = [];
+            $(`input[name="${name}"]`).each(function() {
+                if ($(this).is(':checked')) {
+                    valueArr.push($(this).val());
+                }
+            });
+            return valueArr
+        }
+
+        // delete a row input when click minus btn
+        function deleteRow(event) {
+            const rowHolder = event.target.closest('.row.clearfix')
+            rowHolder.classList.add('hide_form')
+            rowHolder.innerHTML = ''
+        }
+
+        async function getOptionById(id) {
+            try {
+                const data = await getData(`${BASE_API}api/Option/Detail/${id}`)
+                return data;
+            } catch {
+                notify('error', 'There was an error get option data!')
+            }
+        }
+        // render error list by array
+        function renderError(error) {
+            let html = error.map(item => {
+                return `
+                                            <li class="error-item">${item}</li>
+                                        `
+            }).join('')
+            $('.error-list').html(html);
+        }
+
+        function clearErr() {
+            $('.error-list').html('');
+        }
+
+        $('#send-booking-service-form').submit(async function(event) {
+            event.preventDefault()
+            // get input value
+            let optionArr = getAllValueInputByName(type = 'select', name = 'optionId').filter(Boolean)
+            let quantityArr = getAllValueInputByName(type = 'input', name = 'quantity').filter(Boolean)
+            let airconArr = getAllValuInputByNameTypeCheckbox(name = 'airconServiceId')
+            let mattressArr = getAllValuInputByNameTypeCheckbox(name = 'mattressServiceId')
+
+            console.log('option:', optionArr)
+            console.log('quantity:', quantityArr)
+            console.log('aicon service:', airconArr)
+            console.log('mattress service:', mattressArr)
+            console.log('-----------------------------------------')
+
+            if ($(`#service__holder-aircon`).hasClass('hide_form') == false) {
+                checked = $("input[name=airconServiceId]:checked").length;
+                if (!checked) {
+                    notify('error', 'You need choose at least one aircon service!')
+                    renderError(['You need choose at least one aircon service!'])
+                    return;
+                }
+            }
+            if ($(`#service__holder-mattress`).hasClass('hide_form') == false) {
+                checked = $("input[name=mattressServiceId]:checked").length;
+                if (!checked) {
+                    notify('error', 'You need choose at least one mattress service!')
+                    renderError(['You need choose at least one mattress service!'])
+                    return;
+                }
+            }
+
+            let dataArr = []
+
+            let promiseData = Promise.all(optionArr.map(async function(option, optionIndex) {
+                let optionDetail = await getOptionById(option);
+                console.log('optionDetail', optionDetail)
+                // check if option is brand of aircon
+                if (optionDetail.data.type == 4)
+                    airconArr.forEach(service => {
+                        dataArr.push({
+                            OptionId: option,
+                            Quantity: quantityArr[optionIndex],
+                            ServiceId: service,
+                        })
+                    })
+                // check if option is size of mattress
+                else if (optionDetail.data.type == 5)
+                    mattressArr.forEach(service => {
+                        dataArr.push({
+                            OptionId: option,
+                            Quantity: quantityArr[optionIndex],
+                            ServiceId: service,
+                        })
+                    })
+                // check if option is other
+                else
+                    dataArr.push({
+                        OptionId: '10',
+                        Quantity: quantityArr[optionIndex],
+                        ServiceId: option,
+                    })
+                return dataArr
+            }))
+
+            let finalData = await promiseData
+            console.log('dataArr:', finalData)
+
+            $.ajax({
+                url: "@Url.Action("PreSubmitBookingForm","Booking")",
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(finalData[0]),
+                success: function() {
+                    window.location = '@Url.Action("BookingForm","Booking")';
+                },
+                error: function(errMsg) {
+                    notify('error', 'There was an error when booking service!')
+
+                }
+            })
+
+            //optionArr.forEach(async (option, optionIndex) => {
+            //    let optionDetail = await getOptionById(option);
+            //    console.log('optionDetail',optionDetail)
+            //    // check if option is brand of aircon
+            //    if(optionDetail.data.type == 4)
+            //        airconArr.forEach(service => {
+            //            dataArr.push({
+            //            OptionId: option,
+            //            Quantity: quantityArr[optionIndex],
+            //            ServiceId: service,
+            //        })
+            //    })
+            //    // check if option is size of mattress
+            //    else if(optionDetail.data.type == 5)
+            //        mattressArr.forEach(service => {
+            //            dataArr.push({
+            //            OptionId: option,
+            //            Quantity: quantityArr[optionIndex],
+            //            ServiceId: service,
+            //        })
+            //    })
+            //     // check if option is other
+            //    else
+            //        dataArr.push({
+            //            OptionId: '10',
+            //            Quantity: quantityArr[optionIndex],
+            //            ServiceId: option,
+            //        })
+            //})
+
+            //console.log('data', dataArr)
+            //setTimeout(function() {
+            //    //  send data to final booking form controller
+            //    $.ajax({
+            //        url: "@Url.Action("PreSubmitBookingForm","Booking")",
+            //        type: 'post',
+            //        contentType: 'application/json',
+            //        data: JSON.stringify(dataArr),
+            //        success: function () {
+            //           window.location = '@Url.Action("BookingForm","Booking")';
+            //        },
+            //        error: function (errMsg) {
+            //             notify('error', 'There was an error when booking service!')
+
+            //        }
+            //    })
+
+            //}, 1000);
+
+        })
+    </script>
+}

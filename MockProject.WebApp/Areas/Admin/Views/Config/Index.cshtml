@@ -1,0 +1,446 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+        .white_box_tittle {
+            justify-content: space-between;
+        }
+
+        @@media (max-width: 900px) {
+        }
+
+        @@media (max-width: 575.98px) {
+            .white_box_tittle {
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            .add_button {
+                width: 100%;
+                padding-right: 8px;
+            }
+
+            .add_button a {
+                margin-top: 10px;
+                width: 100% !important;
+            }
+        }
+        /*Table border    */
+        .QA_section .QA_table .table thead th
+        {
+            border-radius: 5px 5px 0 0 !important;
+            font-size:15px;
+        }
+        .QA_section .QA_table .table tbody td
+        {
+            border:1px solid #e5ecff !important;
+            border-radius: 0;
+            color:black !important;
+            font-size:13px;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:first-child
+        {
+            border-radius: 0 0 0 5px;
+            border-left: 1px solid #e5ecff !important;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:last-child
+        {
+            border-radius: 0 0 5px 0;
+            border-left: 1px solid #e5ecff !important;
+        }
+
+    </style>
+}
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                                Configs Management
+                            </h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Configs management</li>
+                            </ol>
+                        </div>
+                        <div class="page_title_right">
+                            <div class="page_date_button d-flex align-items-center">
+                                 <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                                <span class="datetime"><!--render By JS--></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30 pt-4">
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header d-flex">
+                                    <h4>Config List</h4>
+                                    <div class="box_right d-flex flex-wrap align-items-center">
+                                        <div class="serach_field_2 me-2">
+                                            <div class="search_inner">
+                                                <div class="search_field">
+                                                    <input type="text"
+                                                       placeholder="Search..."
+                                                       id="search" />
+                                                </div>
+                                                <button type="submit">
+                                                    <i class="ti-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="add_button">
+                                            <a href="#" id="btn-search"
+                                           class="btn btn-primary"
+                                           style="min-width: 100px">search</a>
+                                            <a href=""
+                                           class="btn btn-primary"
+                                           style="
+                              min-width: 120px;
+                              background-color: #05d34e;
+                              border: none;
+                            "
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#Add"><i class="fas fa-plus"></i> Add new Config</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="QA_table mb_30">
+                                    <table class="table lms_table_active table-hover" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order</th>
+                                                <th scope="col">Key</th>
+                                                <th scope="col">Value</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <a href="#" class="question_content"> 1 </a>
+                                                </th>
+                                                <td class="text-truncate" style="max-width: 100px">
+                                                    My Config
+                                                </td>
+                                                <td class="text-truncate" style="max-width: 100px">
+                                                    0986788699
+                                                </td>
+                                                <td>
+                                                    <div class="action_btns d-flex">
+                                                        <a class="action_btn mr_10"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#Edit">
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        <a class="action_btn"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#deleteUserModal">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <!--Delete Modal-->
+    <div class="modal fade"
+     id="deleteUserModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModal">
+                        Delete this config?
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you wanna delete this config?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete Modal-->
+    <!-- Add modal-->
+    <div class="modal fade"
+     id="Add"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="Add"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Add">New Config</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="Key" class="col-form-label">Key</label>
+                            <input type="text" class="form-control" name="key" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Value" class="col-form-label">Value</label>
+                            <input type="text" class="form-control" name="value" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Add modal-->
+    <!-- Edit modal-->
+    <div class="modal fade"
+     id="Edit"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="Edit"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Edit">Edit Config</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="Key" class="col-form-label">Key</label>
+                            <input type="text" class="form-control" name="key" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Value" class="col-form-label">Value</label>
+                            <input type="text" class="form-control" name="value" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Save Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Add modal-->
+    <script>
+
+        $(document).ready(function() {
+            var getConfig = async (search) => {
+                search = (search)?search:"";
+                getData(BASE_API + "api/config/all/?searchString="+search).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                width:"10px",
+                                "render": function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'key',
+                                title: 'Key',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'value', title: 'Value', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'configId',
+                                title: 'Action',
+                                width:"50px",
+                                render: function(data, type, row) {
+                                    return `<div class="action_btns d-flex">
+                                                        <a class="action_btn mr_10"
+                                                        data-id="${data}"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#Edit">
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        <a class="action_btn"
+                                                        data-id="${data}"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteUserModal">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getConfig();
+            // Edit
+            $('#Edit').on('show.bs.modal', function(e) {
+                var configId = $(e.relatedTarget).data('id');
+                var key = $("#Edit input[name='key']");
+                var value = $("#Edit input[name='value']");
+                getData(BASE_API + "api/config/Detail/" + configId).then(res => {
+                    console.log(res);
+                    key.val(res.data.key);
+                    value.val(res.data.value);
+                    if (res.success == false) {
+                        notify("error", "There was an error!");
+                    }
+                })
+                $('#Edit .btn-primary').off()
+                $('#Edit .btn-primary').click(function() {
+                    var key = $("#Edit input[name='key']");
+                    var value = $("#Edit input[name='value']");
+                    var data =
+                    {
+                        key: key.val(),
+                        value: value.val(),
+                    }
+                    if (key.val() == "" || value.val() == "") {
+                        notify("error", "All field are required!");
+                    }
+                    else {
+                        putData(BASE_API + "api/config/Update/" + configId, data).then(res => {
+                            if (res.success == false) {
+                                notify("error", "There was an error!");
+                            }
+                            else {
+                                notify("success", "Update Slider Successfully!");
+                                $("#Edit").modal("hide");
+                                getConfig();
+                            }
+                        })
+                    }
+                })
+            })
+            //Add
+            $('#Add').on('show.bs.modal', function(e) {
+                $('#Add .btn-primary').off()
+                $('#Add .btn-primary').click(function() {
+                    var key = $("#Add input[name='key']");
+                    var value = $("#Add input[name='value']");
+                    var data =
+                    {
+                        key: key.val(),
+                        value: value.val(),
+                    }
+                    if (key.val() == "" || value.val() == "") {
+                        notify("error", "All field are required!");
+                    }
+                    else {
+                        postData(BASE_API + "api/config/add/", data).then(res => {
+                            console.log(res);
+                            if (res.success == false) {
+                                notify("error", "There was an error!");
+                            }
+                            else {
+                                notify("success", "Added Slider Successfully!");
+                                $("#Add form")[0].reset();
+                                $("#Add").modal("hide");
+                                getConfig();
+                            }
+                        })
+                    }
+                })
+            })
+            // Delete
+            $('#deleteUserModal').on('show.bs.modal', function(e) {
+                var configId = $(e.relatedTarget).data('id');
+                $('#deleteUserModal .btn-primary').off()
+                $('#deleteUserModal .btn-primary').click(function() {
+                    deleteData(BASE_API + "api/config/delete/" + configId).then(res => {
+                        if (res.success == true) {
+                            notify("success", "Deleted Slider Successfully!");
+                            $('#deleteUserModal').modal("hide");
+                            getConfig();
+                        }
+                        else {
+                            notify("error", "There was an error!");
+                        }
+                    })
+                })
+            })
+            //Search Value
+            $("#btn-search").on("click",function(){
+                getConfig($("#search").val());
+            })
+        })
+    </script>
+}

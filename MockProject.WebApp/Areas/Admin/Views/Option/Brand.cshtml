@@ -1,0 +1,489 @@
+﻿@{
+    ViewData["Title"] = "Brand";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .white_box_tittle {
+        justify-content: space-between;
+    }
+
+    @@media (max-width: 575.98px) {
+        .white_box_tittle {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .rating-filter {
+            width: 100%;
+        }
+
+        #rating-filter {
+            width: 100% !important;
+            margin-top: 15px;
+        }
+
+        .add_button {
+            width: 100%;
+            padding-right: 8px;
+        }
+
+            .add_button a {
+                margin-top: 10px;
+                width: 100% !important;
+            }
+    }
+
+
+    .error-list {
+        padding-left: 26px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .error-item {
+        list-style-type: circle !important;
+        padding: 2px 12px 2px 0px !important;
+    }
+
+        .error-item:first-child {
+            padding-top: 8px;
+        }
+
+        .error-item:last-child {
+            padding-bottom: 8px;
+        }
+    /*Table border    */
+    .QA_section .QA_table .table thead th {
+        border-radius: 5px 5px 0 0 !important;
+        font-size: 15px;
+    }
+
+    .QA_section .QA_table .table tbody td {
+        border: 1px solid #e5ecff !important;
+        border-radius: 0;
+        color: black !important;
+        font-size: 13px;
+    }
+
+    .QA_section .QA_table .table tbody tr:last-child td:first-child {
+        border-radius: 0 0 0 5px;
+        border-left: 1px solid #e5ecff !important;
+    }
+
+    .QA_section .QA_table .table tbody tr:last-child td:last-child {
+        border-radius: 0 0 5px 0;
+        border-left: 1px solid #e5ecff !important;
+    }
+
+</style>
+<div class="main_content_iner overly_inner">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                            Brand Management
+                        </h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Brand management</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                              <span class="datetime"><!--render By JS--></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header d-flex">
+                                <h4>Brand List</h4>
+                                <div class="box_right d-flex flex-wrap align-items-center">
+                                    <div class="serach_field_2 me-2">
+                             @*           <div class="search_inner">
+                                            <div class="search_field">
+                                                <input type="text"
+                                                       placeholder="Search..."
+                                                       id="search" />
+                                            </div>
+                                            <button type="submit">
+                                                <i class="ti-search"></i>
+                                            </button>
+                                        </div>*@
+                                    </div>
+
+                                    <div class="add_button">
+                                      @*  <a id="btn-search"
+                                           class="btn btn-primary"
+                                           style="min-width: 100px">search</a>*@
+
+                                        <a href="" class="btn btn-primary" style="
+                                              min-width: 120px;
+                                              background-color: #05d34e;
+                                              border: none;" data-bs-toggle="modal" data-bs-target="#addModal" data-id=2>
+                                            <i class="fas fa-plus"></i> Add new Brand
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="QA_table mb_30">
+                                <table class="table lms_table_active table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <!--Delete Modal-->
+    <div class="modal fade serviceModal"
+     id="deleteModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModal">
+                        Delete this Brand?
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you wanna delete this Brand?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete Modal-->
+    <!--Add Modal-->
+    <div class="modal fade serviceModal"
+     id="addModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModal">
+                        Add Brand
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Brand Name</label>
+                            <input type="text" class="form-control" name="title" required>
+                        </div>
+
+                    </div>
+                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="error-list">
+                        <!--render by js-->
+                    </ul>
+                </form>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Add Modal-->
+    <!--Edit Modal-->
+    <div class="modal fade serviceModal"
+     id="editModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModal">
+                        Edit Brand
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="editForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Brand Name</label>
+                            <input type="text" class="form-control" name="title" required>
+                        </div>
+
+                    </div>
+                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="error-list">
+                        <!--render by js-->
+                    </ul>
+                </form>
+
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Edit Modal-->
+    <script>
+        // Load Ready
+        $(document).ready(function() {
+            //Load Datatable
+            var getBrand = async (search = "", type = "") => {
+                getData(BASE_API + `api/option/type/4`).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        "autoWidth": false,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                width: "10px",
+                                render: function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'title',
+                                title: 'Name',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'optionId',
+                                title: 'Action',
+                                render: function(data, type, row) {
+                                    return `<div class="action_btns d-flex">
+                                                                                                                        <a class="action_btn mr_10"
+                                                                                                                        data-id="${data}"
+                                                                                                                        data-bs-toggle="modal"
+                                                                                                                        data-bs-target="#editModal">
+                                                                                                                            <i class="far fa-edit"></i>
+                                                                                                                        </a>
+                                                                                                                        <a class="action_btn mr_10"
+                                                                                                                        data-id="${data}"
+                                                                                                                        data-bs-toggle="modal"
+                                                                                                                        data-bs-target="#deleteModal">
+                                                                                                                            <i class="fa fa-trash"></i>
+                                                                                                                        </a>
+                                                                                                                    </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getBrand();
+
+            // render error list by array
+            function renderError(error) {
+                let html = error.map(item => {
+                    return `
+                                            <li class="error-item">${item}</li>
+                                        `
+                }).join('')
+                $('.error-list').html(html);
+            }
+
+            // Add
+            $('#addModal').on('show.bs.modal', function(e) {
+                $('#addModal .btn-primary').off()
+                $('#addModal .btn-primary').click(function(event) {
+                    if ($("#addModal input[name='title']").val().trim() == '') {
+                        notify('error', 'add brand fail')
+                        renderError(Object.values(["brand name cannot be null"]))
+                        return
+                    }
+                    // fetch apit post add service
+                    postData(`${BASE_API}api/Option/Add`, {
+                        title: $("#addModal input[name='title']").val(),
+                        type: 4,
+                        image: "",
+                        description: ""
+                    })
+                        .then(response => {
+                            // case success: show totify and clear input text
+                            if (response.success == true) {
+                                notify('success', 'add brand success')
+                                getBrand()
+                                // clear form text
+                                $('#addForm')[0].reset();
+                                // clear err if have
+                                $('#addModal').modal("hide");
+                                $('.error-list').html('');
+                            }
+                            // case error by identity: show error
+                            else if (!response.ok && response.errors != null) {
+                                renderError(Object.values(response.errors))
+                                notify('error', 'add brand fail')
+                            }
+                            // case error: show error
+                            else {
+                                renderError(Object.values([response.message]))
+                                notify('error', 'add brand fail')
+                            }
+                        })
+                })
+            })
+
+            // Edit
+            $('#editModal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('id');
+                getData(BASE_API + "api/Option/Detail/" + id).then(res => {
+                    console.log(res);
+                    $("#editModal input[name='title']").val(res.data.title)
+                    if (res.success == false) {
+                        notify("error", "There was an error!");
+                    }
+                })
+                $('#editModal .btn-primary').off()
+                $('#editModal .btn-primary').click(function() {
+                    if ($("#editModal input[name='title']").val().trim() == '') {
+                        notify('error', 'edit brand fail')
+                        renderError(Object.values(["brand name cannot be null"]))
+                        return
+                    }
+                    // fetch apit post add service
+                    putData(`${BASE_API}api/Option/Update/${id}`, {
+                        title: $("#editModal input[name='title']").val(),
+                        type: 4,
+                        image: "",
+                        description: ""
+                    })
+                        .then(response => {
+                            // case success: show totify and clear input text
+                            if (response.success == true) {
+                                notify('success', 'update brand success')
+                                getBrand()
+                                // clear form text
+                                $('#editForm')[0].reset();
+                                // clear err if have
+                                $('#editModal').modal("hide");
+                                $('.error-list').html('');
+                            }
+                            // case error by identity: show error
+                            else if (!response.ok && response.errors != null) {
+                                renderError(Object.values(response.errors))
+                                notify('error', 'update brand fail')
+                            }
+                            // case error: show error
+                            else {
+                                renderError(Object.values([response.message]))
+                                notify('error', 'update brand fail')
+                            }
+                        })
+                })
+
+            })
+
+            // Delete
+            $('#deleteModal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('id');
+                $('#deleteModal .btn-primary').off()
+                $('#deleteModal .btn-primary').click(function() {
+                    deleteData(BASE_API + "api/option/Delete/" + id).then(res => {
+                        if (res.success == true) {
+                            notify("success", "Deleted Brand Successfully!");
+                            $('#deleteModal').modal("hide");
+                            getBrand();
+                        }
+                        else {
+                            notify("error", "There was an error!");
+                        }
+                    })
+                })
+            })
+
+            // handle Hide modal
+            $('.serviceModal').on('hidden.bs.modal', function(e) {
+                $('.error-list').html('');
+                $('#addForm')[0].reset();
+                $('#editForm')[0].reset();
+            })
+
+            //Search Value
+            $("#btn-search").on("click", function() {
+                console.log($("#search").val())
+                console.log($("#type-filter").val())
+
+                getBrand($("#search").val(), $("#type-filter").val())
+
+            })
+        })
+    </script>
+}
+

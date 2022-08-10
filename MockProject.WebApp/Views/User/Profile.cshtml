@@ -1,0 +1,743 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    
+    <!--Filepond css-->
+    <link rel="stylesheet" href="~/assets/css/client_base/filepond-plugin-image-preview.min.css" />
+    <link rel="stylesheet" href="~/assets/css/client_base/filepond-plugin-image-edit.css" />
+    <link rel="stylesheet" href="~/assets/css/client_base/filepond.min.css" />
+    <!--End Filepond css-->
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="/assets/css/client_base/profile.css">
+                @*<style>
+        .container.light-style {
+            padding-top: 220px;
+            padding-bottom: 100px;
+        }
+    </style>*@
+    <style>
+        .postponeJO__error-list {
+        padding-left: 26px;
+        margin-bottom: 8px;
+        }
+
+        .postponeJO__error-item {
+            list-style-type: circle;
+            padding: 2px 12px 2px 0px;
+        }
+
+        .postponeJO__error-item:first-child {
+            padding-top: 8px;
+        }
+
+        .postponeJO__error-item:last-child {
+            padding-bottom: 8px;
+        }
+
+        .myflex{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @@media only screen and (max-width: 760px){
+	            .myflex{
+                display: unset;
+                justify-content: space-between;
+            }
+
+            .hide-on-mobile{
+                display: none;
+            }
+        }
+    </style>
+
+}
+    <div class="container light-style flex-grow-1 container-p-y profile__container">
+        <h4 class="font-weight-bold py-3 mb-4">Account Setttings</h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general"><i class="fa-solid fa-user-pen mr-2"></i>Personal Information</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password"><i class="fa-solid fa-lock mr-2"></i>Change Password</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">
+                            <i class="fa-solid fa-cash-register mr-2"></i> Job Orders History
+                            <i class="fa fa-circle ml-1 text-primary" style="font-size: 10px"></i>
+                        </a>
+                        @*<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications"><i class="fa-solid fa-bell mr-2"></i>Notification Settings</a>*@
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections"><i class="fa-solid fa-gear mr-2"></i>Advanced Settings</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <form id="update-infor">
+                                <div class="card-body">
+                                    <div class="filepond--root filepond filepond--hopper" data-style-panel-layout="compact circle" data-style-button-remove-item-position="left bottom" data-style-button-process-item-position="right bottom" data-style-load-indicator-position="center bottom" data-style-progress-indicator-position="right bottom" data-style-button-remove-item-align="false" data-style-image-edit-button-edit-item-position="bottom center" style="height: 170px;"><input class="filepond--browser" type="file" id="filepond--browser-lgcswnefb" name="filepond" aria-controls="filepond--assistant-lgcswnefb" aria-labelledby="filepond--drop-label-lgcswnefb" accept="image/png,image/jpeg"><a class="filepond--credits" aria-hidden="true" href="https://pqina.nl/" target="_blank" rel="noopener noreferrer" style="transform: translateY(170px);">Powered by PQINA</a><div class="filepond--drop-label" style="transform: translate3d(0px, 0px, 0px); opacity: 1;"><label for="filepond--browser-lgcswnefb" id="filepond--drop-label-lgcswnefb" aria-hidden="true">Drag &amp; Drop your picture or <span class="filepond--label-action" tabindex="0">Browse</span></label></div><div class="filepond--list-scroller" style="transform: translate3d(0px, 0px, 0px);"><ul class="filepond--list" role="list"></ul></div><div class="filepond--panel filepond--panel-root" data-scalable="false"><div class="filepond--panel-top filepond--panel-root"></div><div class="filepond--panel-center filepond--panel-root" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1.7, 1);"></div><div class="filepond--panel-bottom filepond--panel-root" style="transform: translate3d(0px, 170px, 0px);"></div></div><span class="filepond--assistant" id="filepond--assistant-lgcswnefb" role="status" aria-live="polite" aria-relevant="additions"></span><div class="filepond--drip"></div><fieldset class="filepond--data"></fieldset></div>
+                                    <div class="media-body">
+                                        <div class="text-light small mt-1">
+                                            Allowed JPG, GIF or PNG. Max size of 3MB.
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="border-light m-0">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="form-label">E-mail (*)</label>
+                                        <input type="email" class="form-control mb-1" name="email" required="" disabled="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Phone (*)</label>
+                                        <input type="text" class="form-control" name="phone" maxlength="15" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Fullname (*)</label>
+                                        <input type="text" required class="form-control" name="fullname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Address</label>
+                                        <textarea name="address" class="form-control mb-1" style="min-height: 150px"></textarea>
+                                    </div>
+                                    <div class="text-right mt-4 mb-3">
+                                        <button type="submit" class="btn" style="background-color: #fecd1a">
+                                            Save Change
+                                        </button>&nbsp;
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="account-change-password">
+                            <div class="card-body pb-2">
+                                <form id="change-password">
+                                    <div class="form-group">
+                                        <label class="form-label">Current password (*)</label>
+                                        <input type="password" name="oldpass" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">New password (*)</label>
+                                        <input type="password" name="newpass" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Repeat new password (*)</label>
+                                        <input type="password" name="repass" class="form-control" required>
+                                    </div>
+                                    <div class="text-right mt-4 mb-3">
+                                        <button type="submit" class="btn" style="background-color: #fecd1a">
+                                            Change Password
+                                        </button>&nbsp;
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-2">
+                                <style>
+                                    .JOSort{
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-end;
+                                    }
+
+                                    .JOSort p{
+                                        margin: unset;
+                                    }
+
+                                    .JOSort select{
+                                        padding: 0 2px;
+                                    }
+
+                                    .JOSort select option{
+                                       border: unset;
+                                    }
+                                </style>
+                                <div class="JOSort" style="margin-left: auto;">
+                                    <p>Sort By:</p>
+                                     <select id="JOSort__Select">
+                                        <option value="0">All Status</option>
+                                        <option value="1">Waiting</option>
+                                        <option value="2">Confirm</option>
+                                        <option value="3">Cancel</option>
+                                        <option value="5">Checkin</option>
+                                        <option value="4">Done</option>
+                                    </select>
+                                </div>
+                           
+                                <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                    @*js here*@
+                                    <h4>You don't have any Job Order, Booking for get one</h4>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                        </div>
+                        <div class="tab-pane fade" id="account-social-links">
+                            <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Twitter</label>
+                                    <input type="text" class="form-control" value="https://twitter.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Facebook</label>
+                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Google+</label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">LinkedIn</label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Instagram</label>
+                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-connections">
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <h5 class="mb-2">
+                                    <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Active</a>
+                                    <i class="ion ion-logo-google text-google"></i>
+                                    You are connected to Google:
+                                </h5>
+                                <p id="emailSetting">nmaxwell@mail.com</p>
+                            </div>
+                            <hr class="border-light m-0">
+                            @*   <div class="card-body">
+                        <button type="button" class="btn btn-facebook">
+                        Connect to <strong>Facebook</strong>
+                        </button>
+                        </div>
+                        <div class="card-body">
+                        <button type="button" class="btn btn-instagram">
+                        Connect to <strong>Instagram</strong>
+                        </button>
+                        </div>*@
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fa-solid fa-ban mr-2"></i><strong>Deactive Account</strong>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-notifications">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Activity</h6>
+
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" id="receiveMail" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone confirm my job orders</span>
+                                    </label>
+                                </div>
+                                @*                                <div class="form-group">
+                            <label class="switcher">
+                            <input type="checkbox" class="switcher-input" checked="">
+                            <span class="switcher-indicator">
+                            <span class="switcher-yes"></span>
+                            <span class="switcher-no"></span>
+                            </span>
+                            <span class="switcher-label">Email me when Ihome has news</span>
+                            </label>
+                            </div>*@
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Application</h6>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" id="receiveNotification" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Recieve News, announcements, Product updates</span>
+                                    </label>
+                                </div>
+                                @*                                <div class="form-group">
+                            <label class="switcher">
+                            <input type="checkbox" class="switcher-input">
+                            <span class="switcher-indicator">
+                            <span class="switcher-yes"></span>
+                            <span class="switcher-no"></span>
+                            </span>
+                            <span class="switcher-label">Weekly product updates</span>
+                            </label>
+                            </div>
+                            <div class="form-group">
+                            <label class="switcher">
+                            <input type="checkbox" class="switcher-input" checked="">
+                            <span class="switcher-indicator">
+                            <span class="switcher-indicator">
+                            <span class="switcher-indicator">
+                            <span class="switcher-yes"></span>
+                            <span class="switcher-no"></span>
+                            </span>
+                            <span class="switcher-label">Weekly blog digest</span>
+                            </label>
+                            </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade"
+     id="exampleModalCenter"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        Deactive Account?
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to deactive you account permanently?
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" id="deactiveAcc" class="btn btn-danger">
+                        Deactive Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal cancel JO-->
+    <div class="modal fade" id="cancelJO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confim Cancel Job Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to cancel this Job Order?
+                    <input type="text" id="input__JOId" hidden>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelJOClose">Close</button>
+                    <button type="button" id="btnCanCelJO" class="btn btn-danger">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal postpone JO-->
+    <div class="modal fade" id="postponeJO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confim Postpone Job Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="postponeJOForm">
+                    <div class="modal-body">
+                        <input type="text" id="input__postpone-JOId" hidden>
+                        <p>Choose new date:</p>
+                        <input type="datetime-local" id="input__JODate" required>
+
+                    </div>
+                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="postponeJO__error-list">
+                        <!--render by js-->
+                    </ul>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="postponeJOClose">Close</button>
+                        <button type="submit" id="btnPostponeJO" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    @section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" ></script>
+    
+     <!--Filepond JS-->
+    <script src="~/assets/js/client_base/filepond-plugin-file-validate-type.min.js"></script>
+    <script src="~/assets/js/client_base/filepond-plugin-file-encode.min.js"></script>
+    <script src="~/assets/js/client_base/filepond-plugin-image-preview.min.js"></script>
+    <script src="~/assets/js/client_base/filepond.min.js"></script>
+    <!--End Filepond JS-->
+
+    <script>
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginImagePreview,
+        );
+
+        // Select the file input and use create() to turn it into a pond
+        // in this example we pass properties along with the create method
+        // we could have also put these on the file input element itself
+        var filePond = FilePond.create(
+            document.querySelector('.filepond'),
+            {
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                imagePreviewHeight: 170,
+                imageCropAspectRatio: '1:1',
+                imageResizeTargetWidth: 200,
+                imageResizeTargetHeight: 200,
+                stylePanelLayout: 'compact circle',
+            }
+        );
+        filePond.setOptions({
+            server: {
+                process: '@Url.Action("Process","User")',
+                fetch: null,
+                revert: (uniqueFileId, load, error) => {
+                    $.ajax({
+                        url: '@Url.Action("Revert","User")',
+                        dataType: 'json',
+                        timeout: 3000,
+                        method: "POST",
+                        data: { fileName: uniqueFileId },
+                    }).done((data) => {
+                        console.log(data);
+                    })
+                },
+                load: {
+                    url: "@Url.Action("Load","User")?load=",
+                    method: 'GET',
+                }
+            },
+        });
+
+        $(function() {
+            $("input[name='phone']").on("input", function(e) {
+                if ($(this).length >= 12) e.preventDefault();
+                $(this).val(
+                    $(this)
+                        .val()
+                        .replace(/[^0-9]/g, "")
+                );
+            });
+        });
+    </script>
+    <!--End FilePond Section-->
+    <script>
+        const email = $("input[name='email']");
+        const name = $("input[name='fullname']");
+        const phone = $("input[name='phone']");
+        const address = $("textarea[name='address']");
+        getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN)
+            .then(response => {
+                let data = response.data;
+                email.val(data.email);
+                $("#emailSetting").empty().text(data.email);
+                //phone
+                if (data.phone != null) {
+                    phone.val(data.phone);
+                }
+                else {
+                    phone.prop("placeholder", "No Information");
+                }
+                //name
+                if (data.name != null) {
+                    name.val(data.name);
+                }
+                else {
+                    name.prop("placeholder", "No Information");
+                }
+                //Address
+                if (data.address != null) {
+                    address.val(data.address);
+                }
+                else {
+                    address.prop("placeholder", "No Information");
+                }
+                filePond.files = [{
+                    source: data.avatar,
+                    options: {
+                        type: 'local',
+                        //file:{
+                        //    name:data.avatar
+                        //},
+                    }
+                }];
+                console.log(filePond.files)
+                console.log(data);
+            })
+        // Update info
+        $("#update-infor").on("submit", function(e) {
+            e.preventDefault();
+            console.log(name.val(), phone.val(), address.val());
+            postDataWithToken(`${BASE_API}api/Account/updateinfo`, USERTOKEN, {
+                name: name.val(),
+                phone: phone.val(),
+                address: address.val(),
+            }).then(res => {
+                if (res.success == true) {
+                    notify("success", res.message);
+                }
+            }).catch(
+
+            )
+        })
+        document.addEventListener('FilePond:processfile', (e) => {
+            notify("success", "Update Image Profile Successfully!");
+        });
+        // Update Password
+        var oldpass = $("input[name='oldpass']");
+        var newpass = $("input[name='newpass']");
+        var repass = $("input[name='repass']");
+        $("#change-password").on("submit", function(e) {
+            e.preventDefault();
+            console.log(oldpass.val(), newpass.val(), repass.val());
+            postDataWithToken(BASE_API + "api/account/changepassword", USERTOKEN, {
+                "oldPassword": oldpass.val(),
+                "newPassword": newpass.val(),
+                "confirmPassword": repass.val()
+            }).then(res => {
+                console.log(res)
+                if (res.success == true) {
+                    notify("success", res.message);
+                    $("#change-password").trigger("reset");
+                }
+                else {
+                    if (res?.errors != null) {
+                        notify("error", res?.errors.NewPassword);
+                    }
+                    else {
+                        notify("error", res.message);
+                    }
+                }
+            })
+        })
+        // Notification Update
+        $("#receiveMail").on("change", function(e) {
+            console.log(e.currentTarget.checked)
+        })
+        $("#receiveNotification").on("change", function(e) {
+            console.log(e.currentTarget.checked)
+        })
+        // Deactive User
+        $("#deactiveAcc").on("click", (e) => {
+            postDataWithToken(BASE_API + "api/account/changestatus", USERTOKEN)
+                .then(res => {
+                    console.log(res);
+                    if (res.success) {
+                        //$(".modal-content .close").click();
+                        notify("success", res.message);
+                        setTimeout(function() {
+                            window.location = "@Url.Action("Logout","User")";
+                        }, 3000)
+
+                    }
+                })
+        })
+
+    </script>
+
+    @*fetch data job order*@
+    <script>
+        // render error list by array
+        function renderError(error) {
+            let html = error.map(item => {
+                return `
+                            <li class="postponeJO__error-item">${item}</li>
+                        `
+            }).join('')
+
+            $('.postponeJO__error-list').html(html);
+        }
+
+        // render job order history with arr
+        function renderJobOrder(arr) {
+            let html = arr.map((element, index) => {
+                let statusHtml = ''
+                let btnHtml = ''
+                if (element.state == 1) {
+                    statusHtml = ` <span class="text-warning"> waiting</span>`
+                    btnHtml = `    <div class="btn-section">
+                                            <button class="btn btn-sm btn-outline-danger btn-help cancel-btn" data-toggle="modal" data-target="#cancelJO" data-id="${element.joId}">
+                                                <i class="fa-solid fa-circle-question"></i>
+                                                CANCEL
+                                            </button>
+                                            <button class="btn btn-sm btn-primary postpone-btn" data-toggle="modal" data-target="#postponeJO" data-id="${element.joId}">
+                                                <i class="fa-solid fa-arrow-rotate-right"></i>
+                                                POSTPONE
+                                            </button>
+                                        </div>`
+                }
+                if (element.state == 2) statusHtml = ` <span class="text-success"> confirm</span>`
+                if (element.state == 3) statusHtml = ` <span class="text-danger"> cancel</span>`
+                if (element.state == 4) statusHtml = ` <span class="text-primary"> Done</span>`
+
+
+                return `
+                            <div class="bg-white card mb-4 order-list shadow-sm">
+                                <div class="gold-members p-4">
+                                    <a href="#"> </a>
+                                    <div class="media">
+                                        <a href="#" class="hide-on-mobile">
+                                            <img class="mr-4" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_of_air_conditioner_for_brownout.png" alt="Generic placeholder image">
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="/User/JobOrderDetail/${element.joId}">
+                                                <span class="float-right text-info">
+                                                   ${statusHtml}
+                                                    <i class="icofont-check-circled text-success"></i>
+                                                </span>
+                                            </a>
+                                            <h6 class="mb-2">
+                                                <a href="/User/JobOrderDetail/${element.joId}"></a>
+                                                <a href="/User/JobOrderDetail/${element.joId}" class="text-black">ORDER ID: ${element.joId}</a>
+                                            </h6>
+                                            <p class="text-gray mb-1">
+                                                <i class="icofont-location-arrow"></i> Address: ${element.address}
+                                            </p>
+                                            <p class="text-gray mb-3">
+                                                Date: ${moment(element.startAt).format('llll')}
+                                            </p>
+                                            <p class="text-dark">
+                                                Description: ${element.description}
+                                            </p>
+                                            <hr>
+                                            <div class="media-footer myflex">
+                                                <p class="mb-0 text-black text-primary pt-2">
+                                                    <span class="text-black font-weight-bold">
+                                                        Total Paid:
+                                                    </span>
+                                                    $${element.totalPrice}
+                                                </p>
+                                                    ${btnHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                `
+            }).join('')
+
+            $('#orders').html(html)
+        }
+
+        // fetch job order history and display
+        async function fetchJobOrder(stateId = 0) {
+            let userLoginNow = await getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN)
+            console.log(userLoginNow)
+            if (userLoginNow.data.userId) {
+                getData(`${BASE_API}api/JobOrder/Customer/${userLoginNow.data.userId}`)
+                    .then(response => {
+                        console.log(response)
+                        if (response.data) {
+                            if (stateId == 0) {
+                                renderJobOrder(response.data)
+                            } else {
+                                renderJobOrder(response.data.filter(ele => {
+                                    return ele.state == stateId;
+                                }))
+                            }
+
+                        }
+                    })
+            }
+        }
+        fetchJobOrder()
+
+        $(document).on("click", ".cancel-btn", function() {
+            var myId = $(this).data('id')
+            $("#input__JOId").val(myId)
+        })
+
+        $('#btnCanCelJO').click(function() {
+            // fetch apit post add review
+            let JOId = $("#input__JOId").val()
+            postData(`${BASE_API}api/JobOrder/Cancel/${JOId}`)
+                .then(response => {
+                    // case success: show totify and clear input text
+                    if (response.success == true) {
+                        notify('success', 'cancel job order success')
+                        // clear form text
+                        $("#input__JOId").val('')
+                        $('#cancelJOClose').click()
+                        fetchJobOrder($("#JOSort__Select option:selected").val())
+                    }
+                    // case error by identity: show error
+                    else if (!response.ok && response.errors != null) {
+                        notify('error', 'cancel job order fail')
+                    }
+                    // case error: show error
+                    else {
+                        notify('error', 'cancel job order fail')
+                    }
+                })
+        })
+
+        $(document).on("click", ".postpone-btn", function() {
+            var myId = $(this).data('id')
+            $("#input__postpone-JOId").val(myId)
+        })
+
+        $('#postponeJOForm').submit(function(event) {
+            event.preventDefault()
+            // fetch apit post add review
+            let JOId = $("#input__postpone-JOId").val()
+            let newDate = $("#input__JODate").val()
+            postData(`${BASE_API}api/JobOrder/Postpone/${JOId}`, newDate)
+                .then(response => {
+                    // case success: show totify and clear input text
+                    if (response.success == true) {
+                        notify('success', 'postpone job order success')
+                        // clear form text
+                        $("#input__postpone-JOId").val('')
+                        $('#postponeJOClose').click()
+                        fetchJobOrder($("#JOSort__Select option:selected").val())
+                        console.log($("#JOSort__Select option:selected").val())
+                    }
+                    // case error by identity: show error
+                    else if (!response.ok && response.errors != null) {
+                        notify('error', 'postpone job order fail')
+                    }
+                    // case error: show error
+                    else {
+                        notify('error', 'postpone job order fail')
+                         renderError(Object.values([response.message]))
+                    }
+                })
+        })
+
+        $('#JOSort__Select').on('change', function() {
+          fetchJobOrder(this.value);
+        });
+
+    </script>
+}
+

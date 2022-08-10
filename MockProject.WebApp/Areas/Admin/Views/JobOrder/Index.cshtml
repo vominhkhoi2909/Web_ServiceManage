@@ -1,0 +1,474 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <style>
+        .white_box_tittle {
+            justify-content: space-between;
+        }
+
+        @@media (max-width: 580px) {
+            .add_button {
+                margin-top: 15px;
+            }
+        }
+
+        @@media (max-width: 575.98px) {
+            .white_box_tittle {
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            .role-filter {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .add_button {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+            }
+
+                .add_button a,
+                .role-filter select {
+                    margin-right: 8px;
+                    width: 100% !important;
+                }
+        }
+        /*Table border    */
+        .QA_section .QA_table .table thead th {
+            border-radius: 5px 5px 0 0 !important;
+            font-size: 15px;
+        }
+
+        .QA_section .QA_table .table tbody td {
+            border: 1px solid #e5ecff !important;
+            border-radius: 0;
+            color: black !important;
+            font-size: 13px;
+        }
+
+        .QA_section .QA_table .table tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 5px;
+            border-left: 1px solid #e5ecff !important;
+        }
+
+        .QA_section .QA_table .table tbody tr:last-child td:last-child {
+            border-radius: 0 0 5px 0;
+            border-left: 1px solid #e5ecff !important;
+        }
+    </style>
+}
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                                Job Order Assign
+                            </h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Job Order Assign</li>
+                            </ol>
+                        </div>
+                        <div class="page_title_right">
+                            <div class="page_date_button d-flex align-items-center">
+                                <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                                <span class="datetime"><!--render By JS--></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30 pt-4">
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header d-flex">
+                                    <h4>List Job Order</h4>
+                                    <div class="box_right d-flex flex-wrap align-items-center">
+                                        <div class="role-filter me-2">
+                                            <select class="form-control"
+                                                style="height: 40px; width: 150px"
+                                                id="state-filter">
+                                                <option selected value="">All Status</option>
+                                                <option value="1">Waiting</option>
+                                                <option value="2">Confirm</option>
+                                                <option value="3">Cancel</option>
+                                                <option value="4">Done</option>
+                                            </select>
+                                        </div>
+                                        <div class="add_button">
+                                            <a class="btn btn-primary"
+                                           id="btn-search"
+                                           style="min-width: 100px">search</a>
+                                            <!-- <a href="add_new_admin.html"
+                                            class="btn btn-primary"
+                                            style="min-width: 120px; background-color: #05d34e; border: none;"
+                                            ><i class="fas fa-plus"></i> Add new</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="QA_table mb_30">
+                                    <table class="table lms_table_active table-hover" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Assign</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Detail</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @*                                            <tr>
+                                        <th scope="row">
+                                        <a href="#" class="question_content"> 1 </a>
+                                        </th>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        John Cena
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        28/07/2022
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        Thủ đức
+                                        </td>
+                                        <td><a href="#" class="status_btn">Done</a></td>
+                                        <td>
+                                        <div class="action_btns d-flex">
+                                        <a href="" class="action_btn mr_10">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        </div>
+                                        </td>
+
+                                        <td>
+                                        <button class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#AssignModal">
+                                        Assign
+                                        </button>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">
+                                        <a href="#" class="question_content"> 1 </a>
+                                        </th>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        John Cena
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        28/07/2022
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        Thủ đức
+                                        </td>
+                                        <td>
+                                        <a href="#"
+                                        class="status_btn"
+                                        style="background-color: #ffc107">Waring</a>
+                                        </td>
+                                        <td>
+                                        <div class="action_btns d-flex">
+                                        <a href="edit_admin.html"
+                                        class="action_btn mr_10">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <button class="btn btn-primary">Assign</button>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">
+                                        <a href="#" class="question_content"> 1 </a>
+                                        </th>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        John Cena
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        28/07/2022
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        Thủ đức
+                                        </td>
+                                        <td>
+                                        <a href="#"
+                                        class="status_btn"
+                                        style="background-color: #dc3545">Cancel</a>
+                                        </td>
+                                        <td>
+                                        <div class="action_btns d-flex">
+                                        <a href="edit_admin.html"
+                                        class="action_btn mr_10">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <button class="btn btn-primary">Assign</button>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <th scope="row">
+                                        <a href="#" class="question_content"> 1 </a>
+                                        </th>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        John Cena
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        28/07/2022
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        Thủ đức
+                                        </td>
+                                        <td>
+                                        <a href="#"
+                                        class="status_btn"
+                                        style="background-color: #007bff">Confirm</a>
+                                        </td>
+                                        <td>
+                                        <div class="action_btns d-flex">
+                                        <a href="edit_admin.html"
+                                        class="action_btn mr_10">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        </div>
+                                        </td>
+                                        <td>
+                                        <button class="btn btn-primary">Assign</button>
+                                        </td>
+                                        </tr>*@
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <!--Assign Modal-->
+    <div class="modal fade"
+     id="AssignModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">Assign Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="selectStaff" class="col-form-label">Assign To:</label>
+                            <select class="form-select" name="selectStaff" required>
+                                <option selected value="">Assign to Staff</option>
+                                <option value="1">staff 1</option>
+                                <option value="2">staff 2</option>
+                                <option value="3">staff 3</option>
+                                <option value="1">staff 1</option>
+                                <option value="2">staff 2</option>
+                                <option value="3">staff 3</option>
+                                <option value="1">staff 1</option>
+                                <option value="2">staff 2</option>
+                                <option value="3">staff 3</option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
+                          <label for="name" class="col-form-label"
+                            >Staff Name</label
+                          >
+                          <input class="form-control" name="name"></input>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="col-form-label"
+                            >Staff Name</label
+                          >
+                          <input class="form-control" name="name"></input>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <!--End Assign Modal-->
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var getJO = async (state) => {
+                state = (state) ? state : "";
+                getData(BASE_API + "api/JobOrder/All/?status=" + state).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                width: "10px",
+                                "render": function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'user_Name', title: 'Customer', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'startAt', title: 'Date', render: function(data) {
+                                    return (data) ? moment(data).format('llll') : "No Infomation";
+                                }
+                            },
+                            {
+                                width: "150px",
+                                data: 'address', title: 'Address', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'joId',
+                                title: 'Assign',
+                                render: function(data, type, row) {
+                                    if (row.state == 1 && row.staffId == 0) {
+                                        return `Not Yet Assigned`;
+                                    }
+                                    else {
+                                        return row.admin_Name;
+                                    }
+                                }
+                            },
+                            {
+                                data: 'state',
+                                width: "50px",
+                                title: 'Status',
+                                render: function(data, type, row) {
+                                    switch (data) {
+                                        case 1:
+                                            return `<a href="#" class="status_btn" style="background-color: #ffc107" >Waiting</a >`;
+                                            break;
+                                        case 2:
+                                            return `<a href="#" class="status_btn">Confirm</a>`;
+                                            break;
+                                        case 3:
+                                            return `<a href="#" class="status_btn" style="background-color: #dc3545">Cancel</a>`;
+                                            break;
+                                        case 4:
+                                            return `<a href="#" class="status_btn" style="background-color: #007bff">Done</a>`;
+                                            break;
+                                        case 5:
+                                            return `<a href="#" class="status_btn" style="background-color: #007bff">Check In</a>`;
+                                            break;
+                                    }
+                                }
+                            },
+
+                            {
+                                data: 'joId',
+                                title: 'Detail',
+                                width: "10px",
+                                render: function(data) {
+                                    return `<div class="action_btns d-flex"> <a href="JobOrder/Detail/${data}" class="action_btn mr_10"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </div>`;
+                                }
+                            },
+
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getJO();
+            //Search Job Order
+            $("#btn-search").on("click", function() {
+                console.log($("#state-filter").val())
+                getJO($("#state-filter").val());
+            })
+            $('#AssignModal').on('show.bs.modal', function(e) {
+                var JOId = $(e.relatedTarget).data('id');
+                getDataWithToken(BASE_API + "api/admin/all/?role=2", USERTOKEN).then(res => {
+                    $("select[name='selectStaff']").empty()
+                    if (res?.success == true) {
+                        $("select[name='selectStaff']").append(`<option selected value="">Assign to Staff</option>`)
+                        res.data.map(item => {
+                            $("select[name='selectStaff']").append(`<option value="${item.userId}">${item.fullName}-Staff</option>`)
+                        })
+                    }
+                })
+                $('#AssignModal .btn-primary').off();
+
+                $('#AssignModal .btn-primary').on("click", function() {
+                    if ($("select[name='selectStaff']").val() == "") {
+                        new Notyf({
+                            position: { x: 'right', y: 'top' },
+                            duration: 3000
+                        }).error("Please Choose Staff to Assign!")
+                    }
+                    else {
+                        postData(BASE_API + "api/joborder/assign/" + JOId, $("select[name='selectStaff']").val()).then(res => {
+                            if (res?.success == true) {
+                                new Notyf({
+                                    position: { x: 'right', y: 'top' },
+                                    duration: 3000
+                                }).success("Assign Job Order Successfully!")
+                                $('#AssignModal').modal("hide");
+                                getJO();
+                            }
+                            else {
+                                new Notyf({
+                                    position: { x: 'right', y: 'top' },
+                                    duration: 3000
+                                }).error("An Error has occurred!")
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
+}

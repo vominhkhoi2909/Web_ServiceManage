@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "JobOrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .total__price-right{
+        float: right;
+    }
+
+    @@media only screen and (max-width: 760px){
+        .total__price-right{
+                float: unset;
+        }
+    }
+</style>
+<div data-elementor-type="wp-page" data-elementor-id="10" class="elementor elementor-10">
+    <section class="elementor-section elementor-top-section elementor-element elementor-element-c30a554 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+             data-id="c30a554" data-element_type="section">
+        <div class="elementor-container elementor-column-gap-default">
+            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ee8193c"
+                 data-id="ee8193c" data-element_type="column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-50ec34f elementor-widget elementor-widget-acrepair_get_in_touch"
+                         data-id="50ec34f" data-element_type="widget"
+                         data-widget_type="acrepair_get_in_touch.default">
+                        <div class="elementor-widget-container">
+
+                            <!-- Contact Section -->
+                            <section id="contact" class="contact-section " style="padding-top: 200px;">
+                                <div class="auto-container">
+                                    <!-- Sec Title / Centered -->
+                                    <div class="sec-title centered">
+                                        <h2>Job Order Detail</h2>
+                                        <div class="separator"></div>
+                                    </div>
+                                    <div class="inner-container">
+                                        <div class="pattern-layer"
+                                             style="background-image:url(/assets/image/base/uploads/2022/05/pattern-2.png);">
+                                        </div>
+                                        <div class="row clearfix">
+                                            <!-- check  -->
+                                            <div class="map-column col-lg-12 col-md-12 col-sm-12">
+                                                <div class="title-box">
+                                                    <h3><span id="JOState"></span></h3>
+
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Service</th>
+                                                                <th scope="col">Type</th>
+                                                                <th scope="col" style="white-space: nowrap;">Duration (H) </th>
+                                                                <th scope="col" style="white-space: nowrap;">Price ($) </th>
+                                                                <th scope="col">Quantity</th>
+                                                                <th scope="col">Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="aircon__table">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <hr />
+                                                <h4 class="total__price-right">Total price: <span id="total__price"></span> USD</h4>
+                                                <h4 class="">Total hour needed: <span id="total__hour"></span>H</h4>
+                                                <h4 class="mt-4">Time: <span id="JOTime"></span></h4>
+                                                <h4 class="mt-4" style="color:#777777;">Address: <span id="JOAddress"></span></h4>
+                                                <h4 class="mt-4" style="color:#777777;">Description: <span id="JODes"></span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- End Contact Section -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        // show an modal if user not login or token is expired
+        requestLogin()
+        let JobOrderId = @Model
+
+            async function renderBookingDetail() {
+                var JobOrderData = await getData(`${BASE_API}api/JobOrder/Detail/${JobOrderId}`)
+                var JobOrderDetailData = await getData(`${BASE_API}api/JobOrderDetail/All?idJO=${JobOrderId}`)
+                let dataArrSort = JobOrderDetailData.data.sort((a, b) => a.option - b.option);
+                console.log(JobOrderData)
+
+                // loop through data to fetch single row and display into UI
+                const listOfPromises = Promise.all(dataArrSort.map(async function(element, index) {
+                    let optionDetail = await getData(`${BASE_API}api/Option/Detail/${element.optionId}`)
+                    let serviceDetail = await getData(`${BASE_API}api/Service/Detail/${element.serviceId}`)
+                    // get total price and total duration of each service
+
+                    return `
+                                <tr>
+                                    <th scope="row">${index + 1}</th>
+                                    <td>${serviceDetail.data.name}</td>
+                                    <td>${element.optionId != 10 ? optionDetail.data.title : ''}</td>
+                                    <td>${serviceDetail.data.duration}</td>
+                                    <td>${element.price}</td>
+                                    <td>${element.quantily}</td>
+                                    <td>${element.price * element.quantily}</td>
+                                </tr>
+                                 `
+                }))
+                const allResults = await listOfPromises
+                let JOStateHTML = ``
+                if (JobOrderData.data.state == 1) JOStateHTML = `ID: ${JobOrderId} - Status: <span class="text-warning">Waiting</span>`
+                if (JobOrderData.data.state == 2) JOStateHTML = `ID: ${JobOrderId} - Status: <span class="text-success">Confirm</span>`
+                if (JobOrderData.data.state == 3) JOStateHTML = `ID: ${JobOrderId} - Status: <span class="text-danger">Cancel</span>`
+                if (JobOrderData.data.state == 4) JOStateHTML = `ID: ${JobOrderId} - Status: <span class="text-primary">Done</span>`
+
+
+                // show data in UI
+                $('#aircon__table').html(allResults)
+                $('#total__price').html(JobOrderData.data.totalPrice)
+                $('#total__hour').html(JobOrderData.data.duration)
+                $('#JODes').html(JobOrderData.data.description)
+                $('#JOAddress').html(JobOrderData.data.address)
+                $('#JOTime').html(moment(JobOrderData.data.startAt).format('llll'))
+                $('#JOState').html(JOStateHTML)
+            }
+
+        renderBookingDetail()
+
+    </script>
+}

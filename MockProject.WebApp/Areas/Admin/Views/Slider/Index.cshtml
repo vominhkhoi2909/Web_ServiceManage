@@ -1,0 +1,578 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <style>
+
+        @@media (max-width: 575.98px) {
+            .white_box_tittle
+            {
+                flex-direction: column;
+            }
+        }
+        /*Table border    */
+        .QA_section .QA_table .table thead th
+        {
+            border-radius: 5px 5px 0 0 !important;
+            font-size:15px;
+        }
+        .QA_section .QA_table .table tbody td
+        {
+            border:1px solid #e5ecff !important;
+            border-radius: 0;
+            color:black !important;
+            font-size:13px;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:first-child
+        {
+            border-radius: 0 0 0 5px;
+            border-left: 1px solid #e5ecff !important;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:last-child
+        {
+            border-radius: 0 0 5px 0;
+            border-left: 1px solid #e5ecff !important;
+        }
+    </style>
+}
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                                Slider Management
+                            </h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:void(0);">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Slider management</li>
+                            </ol>
+                        </div>
+                        <div class="page_title_right">
+                            <div class="page_date_button d-flex align-items-center">
+                                <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                                <span class="datetime"><!--render By JS--></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30 pt-4">
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header d-flex">
+                                    <h4>Sliders Management</h4>
+                                    <div class="box_right d-flex flex-wrap align-items-center">
+                                        <div class="add_button">
+                                            <a href="#"
+                                           class="btn btn-primary"
+                                           style="min-width: 100px"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#ImagePreview">
+                                                <i class="fa fa-expand" aria-hidden="true"></i>
+                                                Preview
+                                            </a>
+                                            <a class="btn btn-primary"
+                                           style="
+                              min-width: 120px;
+                              background-color: #05d34e;
+                              border: none;
+                            "
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#AddSlider"><i class="fas fa-plus"></i> Add new</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="QA_table mb_30">
+                                    <table class="table lms_table_active table-hover" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @*             <tr>
+                                        <th scope="row">
+                                        <a href="#" class="question_content"> 1 </a>
+                                        </th>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        John Cena
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        sdlfkmsdlkfm kdsafmlsdakfm aksdmflkasdm
+                                        </td>
+                                        <td class="text-truncate" style="max-width: 100px">
+                                        abc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.com
+                                        </td>
+                                        <td>
+                                        <div class="action_btns d-flex">
+                                        <a class="action_btn mr_10"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#EditSlider">
+                                        <i class="far fa-edit"></i>
+                                        </a>
+                                        <a class="action_btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#DeleteUserModal">
+                                        <i class="fas fa-trash"></i>
+                                        </a>
+                                        </div>
+                                        </td>
+                                        </tr>*@
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+                                                                                            </div>
+    <!------------------------------------------------------------>
+    <!-- Delete Modal -->
+    <div class="modal fade"
+     id="DeleteUserModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DeleteUserModal">
+                        Delete Slider?
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you wanna delete this Image Slider?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete Modal -->
+    <!-- Image Preview -->
+    <div class="modal fade"
+     id="ImagePreview"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="min-width:90%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ImagePreview">Preview Slider</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="carouselExampleInterval"
+                     class="carousel slide"
+                     data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-interval="2000">
+                                <img src="~/assets/image/main/slider-1.jpg"
+                                 class="d-block w-100"
+                                 alt="..." />
+                            </div>
+                            <div class="carousel-item" data-interval="2000">
+                                <img src="~/assets/image/main/slider-1.jpg"
+                                 class="d-block w-100"
+                                 alt="..." />
+                            </div>
+                            <div class="carousel-item" data-interval="2000">
+                                <img src="~/assets/image/main/slider-1.jpg"
+                                 class="d-block w-100"
+                                 alt="..." />
+                            </div>
+                            <div class="carousel-item" data-interval="2000">
+                                <img src="~/assets/image/main/slider-1.jpg"
+                                 class="d-block w-100"
+                                 alt="..." />
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev"
+                       data-bs-target="#carouselExampleInterval"
+                       role="button"
+                       data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"
+                              aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next"
+                       data-bs-target="#carouselExampleInterval"
+                       role="button"
+                       data-bs-slide="next">
+                            <span class="carousel-control-next-icon"
+                              aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+                                                                                            </div>
+    <!-- End Image Preview -->
+    <!-- Edit Image Preview-->
+    <div class="modal fade"
+     id="EditSlider"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="EditSlider"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-darl" id="EditSlider">Edit Slider</h4>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" name="title" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-form-label">Description</label>
+                            <textarea class="form-control" required name="description" style="min-height:150px;" id="desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Image</label>
+                            <input type="file" required
+                               class="filepond"
+                               name="filepond"
+                               id="edit-filepond"
+                               multiple
+                               data-allow-reorder="true"
+                               data-max-file-size="3MB"
+                               data-max-files="1" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">Save change</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Image Preview-->
+    <!-- Add Image Preview-->
+    <div class="modal fade"
+     id="AddSlider"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="EditSlider"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-dark" id="AddSlider">Create Slider</h4>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" name="title" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-form-label">Description</label>
+                            <textarea class="form-control" required name="description" id="desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Image</label>
+                            <input type="file" required
+                               class="filepond"
+                               name="filepond"
+                               id="add-filepond"
+                               multiple
+                               data-allow-reorder="true"
+                               data-max-file-size="3MB"
+                               data-max-files="1" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Image Preview-->
+    <!------------------------------------------------------------>
+    <script>
+        FilePond.registerPlugin(
+            FilePondPluginImagePreview,
+            //FilePondPluginFileValidateSize
+        );
+        FilePond.setOptions({
+            server: {
+                process: '@Url.Action("Process","Slider")',
+                fetch: null,
+                revert: (uniqueFileId, load, error) => {
+                    $.ajax({
+                        url: '@Url.Action("Revert","Slider")',
+                        dataType: 'json',
+                        timeout: 3000,
+                        method: "POST",
+                        data: { fileName: uniqueFileId },
+                    }).done((data) => {
+                        console.log(data);
+                    })
+                },
+                load: {
+                    url: "@Url.Action("Load","Slider")?load=",
+                    method: 'GET',
+                }
+            },
+        });
+
+        // Select the file input and use
+        // create() to turn it into a pond
+        var EditfilePond = FilePond.create(
+            document.querySelector("#edit-filepond")
+        );
+
+        var AddfilePond = FilePond.create(
+            document.querySelector("#add-filepond")
+        );
+
+        $(".filepond--credits").hide();
+
+        $(document).ready(function() {
+            var getSlider = async () => {
+                getData(BASE_API + "api/Slider/all").then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                "render": function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'title',
+                                title: 'Title',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'description', title: 'Description', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'sliderId',
+                                title: 'Action',
+                                render: function(data, type, row) {
+                                    return `<div class="action_btns d-flex"> <a class="action_btn mr_10" data-id="${data}" data-bs-toggle="modal" data-bs-target="#EditSlider"> <i class="far fa-edit"></i> </a> <a class="action_btn" data-id="${data}" data-bs-toggle="modal" data-bs-target="#DeleteUserModal"> <i class="fas fa-trash"></i> </a> </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getSlider();
+            // Edit
+            $('#EditSlider').on('show.bs.modal', function(e) {
+                var sliderId = $(e.relatedTarget).data('id');
+                var title = $("#EditSlider input[name='title']");
+                var description = $("#EditSlider textarea[name='description']");
+                getData(BASE_API + "api/Slider/Detail/" + sliderId).then(res => {
+                    console.log(res);
+                    title.val(res.data.title);
+                    description.val(res.data.description);
+                    EditfilePond.files = [{
+                        source: res.data.image,
+                        options: {
+                            type: 'local',
+                        }
+                    }];
+                    if (res.success == false) {
+                        notify("error", "There was an error!");
+                    }
+                })
+                $('#EditSlider .btn-primary').off()
+                $('#EditSlider .btn-primary').click(function() {
+                    var title = $("#EditSlider input[name='title']");
+                    var description = $("#EditSlider textarea[name='description']");
+                    var file = $("#EditSlider input[name='filepond']");
+                    var data =
+                    {
+                        title: title.val(),
+                        description: description.val(),
+                        alt: file.val(),
+                        image: file.val(),
+                        link: "slider Link"
+                    }
+                    if (title.val() == "" || description.val() == "" || file.val() == "") {
+                        notify("error", "All field are required!");
+                    }
+                    else {
+                        putData(BASE_API + "api/Slider/Update/" + sliderId, data).then(res => {
+                            if (res.success == false) {
+                                notify("error", "There was an error!");
+                            }
+                            else {
+                                notify("success", "Update Slider Successfully!");
+                                $("#EditSlider").modal("hide");
+                                getSlider();
+                            }
+                        })
+                    }
+                })
+            })
+            // Add
+            $('#AddSlider').on('show.bs.modal', function(e) {
+
+                $('#AddSlider .btn-primary').click(function() {
+                    var title = $("#AddSlider input[name='title']");
+                    var description = $("#AddSlider textarea[name='description']");
+                    var file = $("#AddSlider input[name='filepond']");
+                    var data =
+                    {
+                        title: title.val(),
+                        description: description.val(),
+                        alt: file.val(),
+                        image: file.val(),
+                        link: "slider Link"
+                    }
+                    if (title.val() == "" || description.val() == "" || file.val() == "") {
+                        notify("error", "All field are required!");
+                    }
+                    else {
+                        postData(BASE_API + "api/Slider/add/", data).then(res => {
+                            console.log(res);
+                            if (res.success == false) {
+                                notify("error", "There was an error!");
+                            }
+                            else {
+                                notify("success", "Added Slider Successfully!");
+                                AddfilePond.removeFile(AddfilePond.getFiles()[0].id)
+                                $("#AddSlider form")[0].reset();
+                                $("#AddSlider").modal("hide");
+                                getSlider();
+                            }
+                        })
+                    }
+                })
+            })
+            // Delete
+            $('#DeleteUserModal').on('show.bs.modal', function(e) {
+                var sliderId = $(e.relatedTarget).data('id');
+                $('#DeleteUserModal .btn-primary').off()
+                $('#DeleteUserModal .btn-primary').click(function() {
+                    console.log(sliderId)
+                    deleteData(BASE_API + "api/Slider/delete/" + sliderId).then(res => {
+                        console.log(res);
+                        if (res.success == true) {
+                            notify("success", "Deleted Slider Successfully!");
+                            $('#DeleteUserModal').modal("hide");
+                            getSlider();
+                        }
+                        else {
+                            notify("error", "There was an error!");
+                        }
+                    })
+                })
+            })
+            // Preview
+            $('#ImagePreview').on('show.bs.modal', function(e) {
+                getData(BASE_API + "api/Slider/all").then(res => {
+                    $(".carousel-inner").html("");
+                    let caroItem = res.data.map((item, index) => {
+                        if (index == 0) {
+                            return `<div class="carousel-item active" data-interval="2000"> <img src="/assets/image/main/${item.image}" class="d-block w-100" alt="..." /><div class="carousel-caption d-none d-md-block"> <h4>${item.title}</h4> <h5>${item.description}</h5> </div> </div>`
+                        }
+                        return `<div class="carousel-item" data-interval="2000"> <img src="/assets/image/main/${item.image}" class="d-block w-100" alt="..." /> <div class="carousel-caption d-none d-md-block"> <h4>${item.title}</h4> <h5>${item.description}</h5> </div> </div>`;
+                    }).join("");
+                    $(".carousel-inner").html(caroItem);
+
+                    var owl = $(".owl-carousel").owlCarousel();
+                    owl.owlCarousel({
+                        items: 1,
+                        loop: true,
+                        margin: 50,
+                        autoplay: true,
+                        autoplayHoverPause: true,
+                    });
+                })
+            })
+        })
+
+
+    </script>
+}
+
+

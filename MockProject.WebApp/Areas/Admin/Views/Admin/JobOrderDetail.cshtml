@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "JobOrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div data-elementor-type="wp-page" data-elementor-id="10" class="elementor elementor-10">
+    <section class="elementor-section elementor-top-section elementor-element elementor-element-c30a554 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+             data-id="c30a554" data-element_type="section">
+        <div class="elementor-container elementor-column-gap-default">
+            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ee8193c"
+                 data-id="ee8193c" data-element_type="column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-50ec34f elementor-widget elementor-widget-acrepair_get_in_touch"
+                         data-id="50ec34f" data-element_type="widget"
+                         data-widget_type="acrepair_get_in_touch.default">
+                        <div class="elementor-widget-container">
+
+                            <!-- Contact Section -->
+                            <section id="contact" class="contact-section " style="padding-top: 200px;">
+                                <div class="auto-container">
+                                    <!-- Sec Title / Centered -->
+                                    <div class="sec-title centered">
+                                        <h2>Job Order Detail</h2>
+                                        <div class="separator"></div>
+                                    </div>
+                                    <div class="inner-container">
+                                        <div class="pattern-layer"
+                                             style="background-image:url(/assets/image/base/uploads/2022/05/pattern-2.png);">
+                                        </div>
+                                        <div class="row clearfix">
+                                            <!-- check  -->
+                                            <div class="map-column col-lg-12 col-md-12 col-sm-12">
+                                                <div class="title-box">
+                                                    <h3>Status:  <span id="JOState"></span></h3>
+
+                                                </div>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Service</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Price </th>
+                                                            <th scope="col">Type</th>
+                                                            <th scope="col">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="aircon__table">
+                                                    </tbody>
+                                                </table>
+                                                <hr />
+                                                <h4 class="float-right">Total price: <span id="total__price"></span> USD</h4>
+                                                <h4 class="">Total hour needed: <span id="total__hour"></span>H</h4>
+                                                <h4 class="mt-4">Time: <span id="JOTime"></span></h4>
+                                                <h4 class="mt-4" style="color:#777777;">Address: <span id="JOAddress"></span></h4>
+                                                <h4 class="mt-4" style="color:#777777;">Description: <span id="JODes"></span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- End Contact Section -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        // show an modal if user not login or token is expired
+        requestLogin()
+        let JobOrderId = @Model
+
+
+            async function renderBookingDetail() {
+                var JobOrderData = await getData(`${BASE_API}api/JobOrder/Detail/${JobOrderId}`)
+                var JobOrderDetailData = await getData(`${BASE_API}api/JobOrderDetail/All?idJO=${JobOrderId}`)
+                let dataArrSort = JobOrderDetailData.data.sort((a, b) => a.option - b.option);
+                console.log(JobOrderData)
+
+                // loop through data to fetch single row and display into UI
+                const listOfPromises = Promise.all(dataArrSort.map(async function(element, index) {
+                    let optionDetail = await getData(`${BASE_API}api/Option/Detail/${element.optionId}`)
+                    let serviceDetail = await getData(`${BASE_API}api/Service/Detail/${element.serviceId}`)
+                    // get total price and total duration of each service
+
+                    return `
+                                <tr>
+                                    <th scope="row">${index + 1}</th>
+                                    <td>${serviceDetail.data.name}</td>
+                                    <td>${element.quantily}</td>
+                                    <td>${serviceDetail.data.price}</td>
+                                    <td>${element.optionId != 10 ? optionDetail.data.title : ''}</td>
+                                    <td>${serviceDetail.data.price * element.quantily}</td>
+                                </tr>
+                                 `
+                }))
+                const allResults = await listOfPromises
+                let JOStateHTML = ``
+                if (JobOrderData.data.state == 1) JOStateHTML = '<span class="text-warning">Waiting</span>'
+                if (JobOrderData.data.state == 2) JOStateHTML = '<span class="text-success">Confirm</span>'
+                if (JobOrderData.data.state == 3) JOStateHTML = '<span class="text-danger">Cancel</span>'
+                if (JobOrderData.data.state == 4) JOStateHTML = '<span class="text-primary">Done</span>'
+
+
+                // show data in UI
+                $('#aircon__table').html(allResults)
+                $('#total__price').html(JobOrderData.data.totalPrice)
+                $('#total__hour').html(JobOrderData.data.duration)
+                $('#JODes').html(JobOrderData.data.description)
+                $('#JOAddress').html(JobOrderData.data.address)
+                $('#JOTime').html(moment(JobOrderData.data.startAt).format('llll'))
+                $('#JOState').html(JOStateHTML)
+            }
+
+        renderBookingDetail()
+
+        $('#add-joborder-form').submit(async function(event) {
+            event.preventDefault()
+            const data = new FormData(event.target);
+            const formDataObject = Object.fromEntries(data.entries());
+            let objectData = {
+                ...formDataObject,
+                duration: $('#total__hour').html(),
+                state: 0,
+            }
+            // fetch apit post Job Order
+            let userLoginNow = await getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN)
+            let createBy = userLoginNow.data.userId
+            postData(`${BASE_API}api/JobOrder/Add?customerId=${createBy}`, objectData)
+                .then(response => {
+                    // case success: show totify and clear input text
+                    console.log(response)
+                    if (response.success == true) {
+                        notify('success', 'booking success, we will confirm soon')
+                        // clear form text
+                        $("#add-joborder-form")[0].reset();
+                        let jobOrderDetailDataArr = dataArrSort.map(element => {
+                            return {
+                                optionId: element.OptionId,
+                                quantily: element.Quantity,
+                                serviceId: element.ServiceId,
+                                image: " ",
+                                joId: response.data
+                            }
+                        })
+                        // Job Order Detail
+                        // fetch apit post Job Order Detail
+                        jobOrderDetailDataArr.forEach(element => {
+                            postData(`${BASE_API}api/JobOrderDetail/Add`, element)
+                                .then(response => {
+                                    // case success: show totify and clear input text
+                                    if (response.success == true) {
+                                    }
+                                    // case error by identity: show error
+                                    else if (!response.ok && response.errors != null) {
+                                        notify('error', 'send confim fail')
+                                    }
+                                    // case error: show error
+                                    else {
+                                        notify('error', 'send confim fail')
+                                    }
+                                })
+                        })
+                        // Job Order Detail
+                    }
+                    // case error by identity: show error
+                    else if (!response.ok && response.errors != null) {
+                        notify('error', 'send confim fail')
+                    }
+
+                    // case error: show error
+                    else {
+                        notify('error', response.message)
+                    }
+                })
+        })
+
+    </script>
+}
+

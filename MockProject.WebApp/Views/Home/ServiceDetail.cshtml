@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "ServiceDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--content-->
+<div data-elementor-type="wp-page" data-elementor-id="22" class="elementor elementor-22"
+     style="padding-top: 100px;">
+    <section class="elementor-section elementor-top-section elementor-element elementor-element-c07fd6f elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+             data-id="c07fd6f" data-element_type="section">
+        <div class="elementor-container elementor-column-gap-default">
+            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-cb1f18f"
+                 data-id="cb1f18f" data-element_type="column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-c75ecb9 elementor-widget elementor-widget-acrepair_service_detail"
+                         data-id="c75ecb9" data-element_type="widget"
+                         data-widget_type="acrepair_service_detail.default">
+                        <div class="elementor-widget-container">
+
+                            <!-- Sidebar Page Container -->
+                            <div class="sidebar-page-container">
+                                <div class="auto-container">
+                                    <div class="row clearfix">
+                                        <!-- Sidebar Side -->
+                                        <div class="sidebar-side left-sidebar col-lg-4 col-md-12 col-sm-12">
+                                            <aside class="sidebar sticky-top">
+                                                <div id="nav_menu-5"
+                                                     class="service-widget sidebar-widget widget_nav_menu">
+                                                    <h5>Our Services</h5>
+                                                    <div class="menu-services-menu-container">
+                                                        <ul id="menu-services-menu" class="menu">
+                                                            <li id="menu-item-602"
+                                                                class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-22 current_page_item menu-item-602">
+                                                                <a href="@Url.Action("ServiceDetail","Home" , new {type = 1})" aria-current="page">
+                                                                    Air
+                                                                    Conditioner
+                                                                </a>
+                                                            </li>
+                                                            <li id="menu-item-604"
+                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-604">
+                                                                <a href="@Url.Action("ServiceDetail","Home" , new {type = 2})">Mattress</a>
+                                                            </li>
+                                                            <li id="menu-item-603"
+                                                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-603">
+                                                                <a href="@Url.Action("ServiceDetail","Home" , new {type = 3})">Miscellaneous</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div id="acrepair_office_address-2"
+                                                     class="service-widget sidebar-widget widget_acrepair_office_address">
+                                                    <!-- Address Widget -->
+                                                    <div class="address-widget">
+                                                        <div class="widget-content">
+                                                            <h5>Our Office Address</h5>
+                                                            <ul class="addres-list">
+                                                                <li>
+                                                                    <span class="icon flaticon-location-1"></span>2239
+                                                                    Turnpike Drive, Birmingham, <br> Alabama,
+                                                                    35222. United States
+                                                                </li>
+                                                                <li>
+                                                                    <span class="icon flaticon-phone"></span>780-918-5736
+                                                                </li>
+                                                                <li>
+                                                                    <span class="icon flaticon-email"></span>info@info9000.ca
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div id="acrepair_download_profile-2"
+                                                     class="service-widget sidebar-widget widget_acrepair_download_profile">
+                                                    <!-- Download Widget -->
+                                                    <div class="download-widget">
+                                                        <div class="widget-content">
+                                                            <ul class="download-lists">
+                                                             @*   <li>
+                                                                    <a href="#">
+                                                                        Download Company Profile <span class="icon flaticon-down-arrow"></span>
+                                                                    </a>
+                                                                </li>*@
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </aside>
+                                        </div>
+                                        <!-- Content Side -->
+
+                                        <div class="content-side right-sidebar col-lg-8 col-md-12 col-sm-12 col-xs-12">
+
+                                            <div class="service-detail">
+                                                <div class="inner-box">
+                                                    <h2>@Model[0].Title</h2>
+                                                    @Html.Raw(Model[0].Description)
+                                                    <!-- Service Type -->
+                                                    <h3>Our Service Type</h3>
+                                                    <p>
+                                                        How do consumers see your brand relative to your
+                                                        competitors? How should a new product be positioned when
+                                                        it’s launched? Which customer segments are most
+                                                        interested in our current offerings?
+                                                    </p>
+
+                                                    <ul class="accordion-box" id="service__list">
+                                                        <!-- render by JS -->
+                                                    </ul>
+                                                    <!-- End Service Type -->
+                                                    <!-- Promotion Type -->
+                                                   @* <h3>Promotion Now</h3>
+                                                    <p>
+                                                        How do consumers see your brand relative to your
+                                                        competitors? How should a new product be positioned when
+                                                        it’s launched? Which customer segments are most
+                                                        interested in our current offerings?
+                                                    </p>*@
+
+                                                    <ul class="accordion-box" id="promotion__list">
+                                                        <!-- render by JS -->
+                                                    </ul>
+                                                    <!-- End Promotion Type -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Services Page Section -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+@{
+    int typeId = ViewBag.typeId;
+}
+@section Scripts{
+    <script>
+        // render service or promotion list by array
+        let typeId = @typeId
+            function renderDataList(arr, idName) {
+                let html = arr.map((item, index) => {
+                    // case service: show duration and price
+                    // case promotion: just show name and description
+                    let serviceHtmlDes = item.duration ? `(${item.duration}h - ${item.price}$)` : ''
+                    return `
+                    <li class="accordion block ">
+                        <div class="acc-btn  ">
+                            <div class="icon-outer">
+                                <span class="icon icon-plus flaticon-plus"></span>
+                                <span class="icon icon-minus fa fa-minus"></span>
+                            </div>${item.name || item.title} ${serviceHtmlDes}
+                        </div>
+                        <div class="acc-content ">
+                            <div class="content">
+                                <div class="accordian-text">
+                                   ${item.description || item.discription}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                            `
+                }).join('')
+
+                $(idName).html(html)
+            }
+
+        //fetch api get all review show all list
+        function renderService(url, idName) {
+            getData(url)
+                .then(response => {
+                     renderDataList(response.data,idName)
+                        })
+                .catch(error => {
+                    notify('error', 'get service have some problem!!')
+                })
+        }
+        renderService(`${BASE_API}api/Service/Type/${typeId}`,'#service__list')
+        //typeId = typeId == 3 ? 2 : typeId
+        //renderService(`${BASE_API}api/Promotion/Service/${typeId}`,'#promotion__list')
+
+    </script>
+}
+

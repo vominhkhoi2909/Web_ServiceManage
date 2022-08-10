@@ -1,0 +1,569 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css {
+    <style>
+        .white_box_tittle {
+            justify-content: space-between;
+        }
+
+        @@media (max-width: 650px) {
+            .add_button {
+                margin-top: 15px;
+            }
+        }
+
+        @@media (max-width: 575.98px) {
+            .white_box_tittle {
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            .role-filter {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .add_button {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+            }
+
+                .add_button a, .role-filter select {
+                    margin-right: 8px;
+                    width: 100% !important;
+                }
+        }
+        /*Table border    */
+        .QA_section .QA_table .table thead th
+        {
+            border-radius: 5px 5px 0 0 !important;
+            font-size:15px;
+        }
+        .QA_section .QA_table .table tbody td
+        {
+            border:1px solid #e5ecff !important;
+            border-radius: 0;
+            color:black !important;
+            font-size:13px;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:first-child
+        {
+            border-radius: 0 0 0 5px;
+            border-left: 1px solid #e5ecff !important;
+        }
+        .QA_section .QA_table .table tbody tr:last-child td:last-child
+        {
+            border-radius: 0 0 5px 0;
+            border-left: 1px solid #e5ecff !important;
+        }
+    </style>
+}
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                            Staff Management
+                        </h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Staff management</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                            <span class="datetime"><!--render By JS--></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header d-flex">
+                                <h4>Staff List</h4>
+                                <div class="box_right d-flex flex-wrap align-items-center">
+                                    <div class="serach_field_2 me-2">
+                                        <div class="search_inner">
+                                            <div class="search_field">
+                                                <input type="text"
+                                                   placeholder="Search User..."
+                                                   id="search" />
+                                            </div>
+                                            <button type="submit">
+                                                <i class="ti-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="role-filter me-2 d-none">
+                                        <select class="form-control"
+                                            style="height: 40px; width: 130px;"
+                                            id="role-filter">
+                                            <option selected value="">Choose Role</option>
+                                            <option value="2">Staff</option>
+                                            <option value="3">Cleaner</option>
+                                        </select>
+                                    </div>
+                                    <div class="add_button">
+                                        <a href=""
+                                       class="btn btn-primary"
+                                       style="min-width: 100px;" id="btn-search">search</a>
+                                        <a href="@Url.Action("AddUser","User")"
+                                       class="btn btn-primary"
+                                       style="min-width: 120px; background-color: #05d34e; border: none;"><i class="fas fa-plus"></i> Add new</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="QA_table mb_30">
+                                <table class="table lms_table_active table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">Role</th>
+                                            @*<th scope="col">Status</th>*@
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @*                                        <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    abc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.com
+                                    </td>
+                                    <td><a href="#">Admin</a></td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    abc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.com
+                                    </td>
+                                    <td><a href="#">Admin</a></td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    abc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.com
+                                    </td>
+                                    <td><a href="#">Admin</a></td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    abc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.com
+                                    </td>
+                                    <td><a href="#">Admin</a></td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>
+
+                                    <tr>
+                                    <th scope="row">
+                                    <a href="#" class="question_content"> 1 </a>
+                                    </th>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    John Cena
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    0986788699
+                                    </td>
+                                    <td class="text-truncate" style="max-width: 100px">
+                                    abc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.comabc12345566@@gmail.com
+                                    </td>
+                                    <td><a href="#">Admin</a></td>
+                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td>
+                                    <div class="action_btns d-flex">
+                                    <a href="edit_admin.html" class="action_btn mr_10">
+                                    <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="action_btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteUserModal">
+                                    <i class="fas fa-trash"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+    <!--Permission Modal-->
+    <div class="modal fade"
+     id="PermissionModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="PermissionModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="PermissionModal">Staff Permission</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                   type="checkbox"
+                                   value=""
+                                   id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                   type="checkbox"
+                                   value=""
+                                   id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                   type="checkbox"
+                                   value=""
+                                   id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                   type="checkbox"
+                                   value=""
+                                   id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox Default checkboxDefault checkboxDefault
+                                    checkboxDefault checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                   type="checkbox"
+                                   value=""
+                                   id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Save Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Lock Modal-->
+    <div class="modal fade"
+     id="deleteUserModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="deleteUserModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModal">Delete This Account?</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Do you want to delete this Account?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        $(document).ready(function() {
+            var getUser = async (search, role) => {
+                if (!search || search == "") {
+                    search = "";
+                }
+                if (!role || role == "") {
+                    role = "2";
+                }
+                var searchEP = `/?searchString=${search}&role=${role}`;
+                getDataWithToken(BASE_API + "api/admin/all" + searchEP, USERTOKEN).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                width:"5px",
+                                "render": function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'fullName',width:"150px",
+                                title: 'Name',
+
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'phone', title: 'Phone', render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'username', title: 'username'
+                            },
+                            {
+                                data: 'role_Name', title: 'Role',
+                                 width:"10px",
+                                render: function(data) {
+                                    return `<td><a href="#">${data}</a></td>`
+                                }
+                            },
+                            { data: 'email', title: 'Email',width:"200px" },
+                            {
+                                data: 'userId', title: 'Permission', render: function(data) {
+                                    return `<td><a  href="#" data-bs-toggle="modal" data-bs-target="#PermissionModal" data-id="${data}">Change Permission</a></td>`
+                                },
+                                width:"150px"
+                            },
+                            {
+                                data: 'userId',
+                                title: 'Action',
+                                 width:"15px",
+                                render: function(data, type, row) {
+                                    let status = (row.status != undefined && row.status == 1) ? 1 : 0;
+                                    return `<div class="action_btns d-flex"> <a href="@Url.Action("EditUser","User")/${data}" class="action_btn mr_10"> <i class="far fa-edit"></i> </a> <a class="action_btn" data-bs-toggle="modal" data-id="${data}" data-status="${status}" data-bs-target="#deleteUserModal"><i class="fa fa-trash" aria-hidden="true"></i> </a> </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+
+            };
+            getUser();
+
+            //Search
+            $("#btn-search").on("click", function(e) {
+                e.preventDefault();
+                console.log($("#search").val())
+                getUser($("#search").val(), $("#role-filter").val());
+            })
+
+            $('#deleteUserModal').on('show.bs.modal', function(e) {
+
+                //get data-id attribute of the clicked element
+                var status = $(e.relatedTarget).data('status');
+                var userId = $(e.relatedTarget).data('id');
+                if (status == 1) {
+                    $('#deleteUserModal .modal-title').text("Delete User Account?");
+                    $('#deleteUserModal .modal-body p').text("Do you want to delete this Account?")
+                    $('#deleteUserModal .btn-primary').text("Delete Account");
+                    $('#deleteUserModal .btn-primary').off()
+                    $('#deleteUserModal .btn-primary').click(function() {
+                        console.log(userId, status)
+                        postDataWithToken(BASE_API + `api/Admin/ChangeStatus?id=${userId}&status=0`,USERTOKEN).then(
+                            res => {
+                                if (res?.success == true) {
+                                    getUser();
+                                    notify("success", "Delete Account Successfully!");
+                                    $("#deleteUserModal").modal("hide");
+                                }
+                                else {
+                                    notify("error", "There was an error when deleting User!");
+                                }
+
+                            })
+                    })
+                }
+            });
+            $('#PermissionModal').on('show.bs.modal', function(e) {
+                var userId = $(e.relatedTarget).data('id');
+                getData(BASE_API + "api/Permission/All").then(res => {
+                    let permission = res.data.map(item => {
+                        return `<div class="form-check mb-3">
+                                        <input class="form-check-input" id="cb-${item.permissionId}" type="checkbox" value="${item.permissionId}">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            ${item.title}
+                                        </label>
+                                    </div>`
+                    }).join("");
+                    $('#PermissionModal .form-group').html(permission)
+
+                    getDataWithToken(BASE_API+"api/Admin/Detail/"+userId,USERTOKEN).then(res=>{
+                        res.data.permission.split(",").forEach(item => {
+                            $(`#cb-${item}`).prop('checked', true);
+                        })
+                    })
+                });
+                $('#PermissionModal .btn-primary').off()
+                $('#PermissionModal .btn-primary').on("click", function() {
+                    let arr = [];
+                    let cb = $('.form-check-input:checkbox:checked').each(function(i, item) {
+                        arr.push($(item).val());
+                    })
+                    postDataWithToken(BASE_API+`api/Admin/ChangePermission/?id=${userId}&permission=${arr.join(",")}`,USERTOKEN).then(res=>{
+                        if(res?.success == true)
+                        {
+                            notify("success", "Update Permission Successfully!");
+                            $('#PermissionModal').modal("hide");
+                        }
+                    })
+                })
+            })
+        })
+
+    </script>
+}

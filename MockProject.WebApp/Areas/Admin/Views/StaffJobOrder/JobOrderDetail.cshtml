@@ -1,0 +1,377 @@
+﻿@{
+    ViewData["Title"] = "JobOrderDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .total__price-right {
+        float: right;
+    }
+
+    .title-box {
+        display: flex;
+        justify-content: space-between;
+        align-item: center;
+    }
+
+    @@media only screen and (max-width: 760px) {
+        .total__price-right {
+            float: unset;
+        }
+    }
+
+    @@media only screen and (max-width: 580px) {
+        .title-box {
+            display: unset;
+        }
+    }
+</style>
+<div class="white_card card_height_100 mb_30 p-4">
+    <div class="row clearfix">
+        <!-- check  -->
+        <div class="map-column col-lg-12 col-md-12 col-sm-12">
+            <div class="title-box">
+                <h3>Status:  <span id="JOState"></span></h3>
+                <div id="btn__holder">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Service</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price </th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="aircon__table">
+                    </tbody>
+                </table>
+            </div>
+
+            <hr />
+            <h4 class="total__price-right" style="">Total price: <span id="total__price"></span> USD</h4>
+            <h4 class="">Total hour needed: <span id="total__hour"></span>H</h4>
+            <h4 class="mt-4">Time: <span id="JOTime"></span></h4>
+            <h4 class="mt-4" style="color:#777777;">Customer Email: <span id="JOEmail"></span></h4>
+            <h4 class="mt-4" style="color:#777777;">Address: <span id="JOAddress"></span></h4>
+            <h4 class="mt-4" style="color:#777777;">Description: <span id="JODes"></span></h4>
+
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @*acknowlede*@
+    <div class="modal fade"
+     id="AcknowledgeJOFormModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">Acknowledge Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="AcknowledgeJOForm">
+                    <div class="modal-body">
+
+                        <p>Do you want to acknowledge this job order ?</p>
+                        <input id="AcknowledgeJOForm_JOId" hidden />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="AcknowledgeJOClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Acknowledge</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @*checkout*@
+    <div class="modal fade"
+     id="CheckOutJOFormModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">CheckOut Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="CheckOutJOForm">
+                    <div class="modal-body">
+
+                        <p>Do you want to check out this job order ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="CheckOutJOClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">CheckOut</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @*cancel*@
+    <div class="modal fade"
+     id="CancelJOFormModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">Cancel Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="CancelJOForm">
+                    <div class="modal-body">
+
+                        <p>Do you want to cancel this job order ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="CancelJOClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Cancel</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @*checkout*@
+    <div class="modal fade"
+     id="CheckInJOFormModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="AssignModal"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AssignModal">Check in Job Order</h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="CheckInJOForm">
+                    <div class="modal-body">
+
+                        <p>Do you want to check in this job order ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="CheckInJOClose"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Check in</button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script>
+        // show an modal if user not login or token is expired
+        let JobOrderId = @ViewBag.JOId
+            let CustomerId = ""
+        // Create And Invoke HUB notification
+        var createNotiCustomer = function(title, type, description, createBy, sendTo, link) {
+            let data = {
+                title,
+                type,
+                description,
+                createBy,
+                sendTo,
+                image: "",
+                link
+            };
+            postData(BASE_API + "api/notification/add", data).then(res => {
+                console.log(res);
+                if (res?.success == true) {
+                    // Invoke SignalR method
+                    clientconnection.invoke("SendNotification", sendTo).catch(function(err) {
+                        console.log("HUB:error")
+                    });
+                }
+            })
+
+
+        }
+
+        async function renderBookingDetail() {
+            var JobOrderData = await getData(`${BASE_API}api/JobOrder/Detail/${JobOrderId}`)
+            CustomerId = JobOrderData.data.customerId // Set customer id for notification
+            var JobOrderDetailData = await getData(`${BASE_API}api/JobOrderDetail/All?idJO=${JobOrderId}`)
+            let dataArrSort = JobOrderDetailData.data.sort((a, b) => a.option - b.option);
+            console.log(JobOrderData)
+
+            // loop through data to fetch single row and display into UI
+            const listOfPromises = Promise.all(dataArrSort.map(async function(element, index) {
+                let optionDetail = await getData(`${BASE_API}api/Option/Detail/${element.optionId}`)
+                let serviceDetail = await getData(`${BASE_API}api/Service/Detail/${element.serviceId}`)
+
+                // get total price and total duration of each service
+
+                return `
+                                                    <tr>
+                                                        <th scope="row">${index + 1}</th>
+                                                        <td>${serviceDetail.data.name}</td>
+                                                        <td>${element.quantily}</td>
+                                                        <td>${element.price}</td>
+                                                        <td>${element.optionId != 10 ? optionDetail.data.title : ''}</td>
+                                                        <td>${element.price * element.quantily}</td>
+                                                    </tr>
+                                                        `
+            }))
+            const allResults = await listOfPromises
+            let JOStateHTML = ``
+            if (JobOrderData.data.state == 1) JOStateHTML = '<span class="status_btn p-1" style="background-color: #ffc107; transform: translateY(-5px);" >Waiting</span>'
+            if (JobOrderData.data.state == 2) JOStateHTML = '<span class="status_btn p-1" style="transform: translateY(-5px);">Confirm</span>'
+            if (JobOrderData.data.state == 3) JOStateHTML = '<span class="status_btn  p-1" style="background-color: #dc3545; transform: translateY(-5px);">Cancel</span>'
+            if (JobOrderData.data.state == 4) JOStateHTML = '<span class="status_btn p-1" style="background-color: #007bff;transform: translateY(-5px);">Done</span>'
+            if (JobOrderData.data.state == 5) JOStateHTML = '<span class="status_btn p-1" style="background-color: #007bff;transform: translateY(-5px);">Check in</span>'
+
+            let userLogin = await getDataWithToken(`${BASE_API}api/Admin/getinfo`, USERTOKEN)
+
+            let JOBtnHTML = ''
+            if (userLogin.data.userId == JobOrderData.data.staffId && JobOrderData.data.state == 1) {
+                JOBtnHTML = ` <button data-id=${JobOrderData.data.joId} class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#CancelJOFormModal" style="background-color: #dc3545"> Cancel </button>
+                                                                  <button data-id=${JobOrderData.data.joId} class="btn btn-primary acknowledge-btn" data-bs-toggle="modal" data-bs-target="#AcknowledgeJOFormModal"> Acknowledge </button>`
+            }
+            else if (userLogin.data.userId == JobOrderData.data.staffId && JobOrderData.data.state == 2) {
+                JOBtnHTML = `<button data-id=${JobOrderData.data.joId} class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#CancelJOFormModal" style="background-color: #dc3545"> Cancel </button>
+                                                                 <button data-id=${JobOrderData.data.joId} class="btn btn-primary acknowledge-btn" data-bs-toggle="modal" data-bs-target="#CheckInJOFormModal"> Check in </button>
+                                                                    `
+            }
+            else if (userLogin.data.userId == JobOrderData.data.staffId && JobOrderData.data.state == 5) {
+                JOBtnHTML = ` <button data-id=${JobOrderData.data.joId} class="btn btn-primary checkout-btn" data-bs-toggle="modal" data-bs-target="#CheckOutJOFormModal"> Check out </button>
+                                                                    `
+            }
+            // show data in UI
+            $('#aircon__table').html(allResults)
+            $('#total__price').html(JobOrderData.data.totalPrice)
+            $('#total__hour').html(JobOrderData.data.duration)
+            $('#JODes').html(JobOrderData.data.description)
+            $('#JOAddress').html(JobOrderData.data.address)
+            $('#JOTime').html(moment(JobOrderData.data.startAt).format('llll'))
+            $('#JOState').html(JOStateHTML)
+            $('#JOEmail').html(JobOrderData.data.user_Email)
+            $('#btn__holder').html(JOBtnHTML)
+        }
+
+        renderBookingDetail()
+
+
+
+        async function handleJO(formName, url, btnClose, messageSuccess = 'your action is success', messageFail = 'Your action is fail') {
+            $(formName).submit(async function(event) {
+                event.preventDefault()
+                // fetch apit post add review
+                let JOId = $().val()
+                postData(`${BASE_API}${url}`)
+                    .then(response => {
+                        // case success: show totify and clear input text
+                        if (response.success == true) {
+                            // save new notification and signalr to client
+                            if (formName == "#AcknowledgeJOForm") {
+                                // ALERT HARDCODED ADMIN ROLE USER ID IS 2 ================================================================================================================================================================================================================================================================================================================
+                                createNotiCustomer("Job Order Assigned", 1, `Your job order with ID: ${JobOrderId} has been assigned to our staff. They will contact you soon`, 2, CustomerId, `/User/JobOrderDetail/${JobOrderId}`)
+                            }
+                            else if (formName == "#CheckOutJOForm") {
+                                createNotiCustomer("Job Order Completed", 1, `Your job order with ID: ${JobOrderId} has been completed`, 2, CustomerId, `/User/JobOrderDetail/${JobOrderId}`)
+                            }
+                            else if (formName == "#CancelJOForm") {
+                                createNotiCustomer("Job Order Canceled", 2, `Your job order with ID: ${JobOrderId} has been canceled`, 2, CustomerId, `/User/JobOrderDetail/${JobOrderId}`)
+                            }
+                            notify('success', messageSuccess)
+                            // clear form text
+                            $(btnClose).click()
+                            renderBookingDetail()
+                        }
+                        // case error by identity: show error
+                        else if (!response.ok && response.errors != null) {
+                            notify('error', messageFail)
+                        }
+                        // case error: show error
+                        else {
+                            notify('error', messageFail)
+                        }
+                    })
+            })
+        }
+        handleJO(formName = '#AcknowledgeJOForm',
+            url = `api/JobOrder/Confirm/${JobOrderId}`,
+            btnClose = '#AcknowledgeJOClose',
+            messageSuccess = 'acknowledge job order success',
+            messageFail = 'acknowledge job order fail')
+
+        handleJO(formName = '#CheckOutJOForm',
+            url = `api/JobOrder/Checkout/${JobOrderId}`,
+            btnClose = '#CheckOutJOClose',
+            messageSuccess = 'check out job order success',
+            messageFail = 'check out job order fail')
+
+        handleJO(formName = '#CancelJOForm',
+            url = `api/JobOrder/Cancel/${JobOrderId}`,
+            btnClose = '#CancelJOClose',
+            messageSuccess = 'cancel job order success',
+            messageFail = 'cancel job order fail')
+
+        handleJO(formName = '#CheckInJOForm',
+            url = `api/JobOrder/Checkin/${JobOrderId}`,
+            btnClose = '#CheckInJOClose',
+            messageSuccess = 'check in job order success',
+            messageFail = 'check in job order fail')
+
+
+
+    </script>
+}

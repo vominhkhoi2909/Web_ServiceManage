@@ -1,0 +1,579 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .white_box_tittle {
+        justify-content: space-between;
+    }
+
+    @@media (max-width: 575.98px) {
+        .white_box_tittle {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .rating-filter {
+            width: 100%;
+        }
+
+        #rating-filter {
+            width: 100% !important;
+            margin-top: 15px;
+        }
+
+        .add_button {
+            width: 100%;
+            padding-right: 8px;
+        }
+
+            .add_button a {
+                margin-top: 10px;
+                width: 100% !important;
+            }
+    }
+
+
+    .error-list {
+        padding-left: 26px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .error-item {
+        list-style-type: circle !important;
+        padding: 2px 12px 2px 0px !important;
+    }
+
+        .error-item:first-child {
+            padding-top: 8px;
+        }
+
+        .error-item:last-child {
+            padding-bottom: 8px;
+        }
+    /*Table border    */
+    .QA_section .QA_table .table thead th {
+        border-radius: 5px 5px 0 0 !important;
+        font-size: 15px;
+    }
+
+    .QA_section .QA_table .table tbody td {
+        border: 1px solid #e5ecff !important;
+        border-radius: 0;
+        color: black !important;
+        font-size: 13px;
+    }
+
+    .QA_section .QA_table .table tbody tr:last-child td:first-child {
+        border-radius: 0 0 0 5px;
+        border-left: 1px solid #e5ecff !important;
+    }
+
+    .QA_section .QA_table .table tbody tr:last-child td:last-child {
+        border-radius: 0 0 5px 0;
+        border-left: 1px solid #e5ecff !important;
+    }
+
+</style>
+<div class="main_content_iner overly_inner">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">
+                            Service Management
+                        </h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Service management</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                              <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                                <span class="datetime"><!--render By JS--></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header d-flex">
+                                <h4>Service List</h4>
+                                <div class="box_right d-flex flex-wrap align-items-center">
+                                    <div class="serach_field_2 me-2">
+                                        <div class="search_inner">
+                                            <div class="search_field">
+                                                <input type="text"
+                                                       placeholder="Search..."
+                                                       id="search" />
+                                            </div>
+                                            <button type="submit">
+                                                <i class="ti-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="rating-filter me-2">
+                                        <select class="form-control"
+                                                style="height: 40px;"
+                                                id="type-filter">
+                                            <option selected value="">All Servie Type</option>
+                                            <option value="1">Air Conditioner</option>
+                                            <option value="2">Mattress</option>
+                                            <option value="3">Miscellaneous</option>
+                                        </select>
+                                    </div>
+                                    <div class="add_button">
+                                        <a id="btn-search"
+                                           class="btn btn-primary"
+                                           style="min-width: 100px">search</a>
+
+                                        <a href="" class="btn btn-primary" style="
+                                              min-width: 120px;
+                                              background-color: #05d34e;
+                                              border: none;" data-bs-toggle="modal" data-bs-target="#addModal" data-id=2>
+                                            <i class="fas fa-plus"></i> Add new Service
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="QA_table mb_30">
+                                <table class="table lms_table_active table-hover" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Order</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col" width="45%">Description</th>
+                                            <th scope="col" width="5%">Duration</th>
+                                            <th scope="col" width="5%">Price</th>
+                                            <th scope="col" width="5%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <!--Delete Modal-->
+    <div class="modal fade serviceModal"
+     id="deleteModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModal">
+                        Delete this Service?
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you wanna delete this Service?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Delete Modal-->
+    <!--Add Modal-->
+    <div class="modal fade serviceModal"
+     id="addModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModal">
+                        Add Service
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" name="name" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-form-label">Price</label>
+                            <input type="number" class="form-control" name="price" min="1" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="duration" class="col-form-label">Duration</label>
+                            <input type="number" class="form-control" name="duration" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceType" class="col-form-label">Service Type</label>
+                            <select class="form-control" name="type" required>
+                                <option selected value="">Please choose one</option>
+                                <option value="1">Air Conditioner</option>
+                                <option value="2">Mattress</option>
+                                <option value="3">MISCELLANEOUS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-form-label">Description</label>
+                            <textarea class="form-control" required="" name="description" id="desc"></textarea>
+                        </div>
+                    </div>
+                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="error-list">
+                        <!--render by js-->
+                    </ul>
+                </form>
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Add Modal-->
+    <!--Edit Modal-->
+    <div class="modal fade serviceModal"
+     id="editModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModal">
+                        Edit Service
+                    </h5>
+                    <button type="button"
+                        class="close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="editForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" name="name" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-form-label">Price</label>
+                            <input type="number" class="form-control" name="price" min="1" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="duration" class="col-form-label">Duration</label>
+                            <input type="number" class="form-control" name="duration" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceType" class="col-form-label">Service Type</label>
+                            <select class="form-control" name="type" required>
+                                <option selected value="">Please choose one</option>
+                                <option value="1">Air Conditioner</option>
+                                <option value="2">Mattress</option>
+                                <option value="3">MISCELLANEOUS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-form-label">Description</label>
+                            <textarea class="form-control" required="" name="description" id="desc"></textarea>
+                        </div>
+                    </div>
+                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="error-list">
+                        <!--render by js-->
+                    </ul>
+                </form>
+
+                <div class="modal-footer">
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Edit Modal-->
+    <script>
+        // Load Ready
+        $(document).ready(function() {
+            //Load Datatable
+            var getService = async (search = "", type = "") => {
+                getData(BASE_API + `api/service/all?searchString=${search}&type=${type}`).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        "autoWidth": false,
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            {
+                                title: "Order",
+                                width: "10px",
+                                render: function(data, type, full, meta) {
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'name',
+                                title: 'Name',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'description',
+                                title: 'Description',
+                                render: function(data) {
+                                    return (data) ? data : "No Infomation";
+                                }
+                            },
+                            {
+                                data: 'duration',
+                                title: 'Duration(h)',
+                                render: function(data) {
+                                    return (data) ? `<h5>${data}</h5>` : "No Infomation"
+                                }
+                            },
+                            {
+                                data: 'price',
+                                title: 'Price($)',
+                                render: function(data) {
+                                    return (data) ? `<h5>${data}</h5>` : "No Infomation"
+
+                                }
+                            },
+                            {
+                                data: 'serviceId',
+                                title: 'Action',
+                                render: function(data, type, row) {
+                                    return `<div class="action_btns d-flex">
+                                                                                                                <a class="action_btn mr_10"
+                                                                                                                data-id="${data}"
+                                                                                                                data-bs-toggle="modal"
+                                                                                                                data-bs-target="#editModal">
+                                                                                                                    <i class="far fa-edit"></i>
+                                                                                                                </a>
+                                                                                                                <a class="action_btn mr_10"
+                                                                                                                data-id="${data}"
+                                                                                                                data-bs-toggle="modal"
+                                                                                                                data-bs-target="#deleteModal">
+                                                                                                                    <i class="fa fa-trash"></i>
+                                                                                                                </a>
+                                                                                                            </div>`;
+                                }
+                            }
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getService();
+
+            // render error list by array
+            function renderError(error) {
+                let html = error.map(item => {
+                    return `
+                                    <li class="error-item">${item}</li>
+                                `
+                }).join('')
+                $('.error-list').html(html);
+            }
+
+            // Add
+            $('#addModal').on('show.bs.modal', function(e) {
+                $('#addModal .btn-primary').off()
+                $('#addModal .btn-primary').click(function(event) {
+                    // fetch apit post add service
+                    const data = new FormData(document.querySelector('#addForm'));
+                    const formDataObject = Object.fromEntries(data.entries());
+                    console.log(formDataObject)
+                    if (formDataObject.description.trim() == '' ||
+                        formDataObject.duration.trim() == '' ||
+                        formDataObject.name.trim() == '' ||
+                        formDataObject.price.trim() == '' ||
+                        formDataObject.type.trim() == '' ) {
+                            notify('error', 'add service fail')
+                            renderError(Object.values(['All field is required']))
+                            return;
+                        }
+                    // fetch apit post add service
+                    postData(`${BASE_API}api/Service/Add`, formDataObject)
+                        .then(response => {
+                            // case success: show totify and clear input text
+                            if (response.success == true) {
+                                notify('success', 'add service success')
+                                getService()
+                                // clear form text
+                                $('#addForm')[0].reset();
+                                // clear err if have
+                                $('#addModal').modal("hide");
+                                $('.error-list').html('');
+                            }
+                            // case error by identity: show error
+                            else if (!response.ok && response.errors != null) {
+                                renderError(Object.values(response.errors))
+                                notify('error', 'add service fail')
+                            }
+                            // case error: show error
+                            else {
+                                renderError(Object.values([response.message]))
+                                notify('error', 'add service fail')
+                            }
+                        })
+                })
+            })
+
+            // Edit
+            $('#editModal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('id');
+                getData(BASE_API + "api/Service/Detail/" + id).then(res => {
+                    console.log(res);
+                    $("#editModal textarea[name='description']").val(res.data.description)
+                    $("#editModal input[name='duration']").val(res.data.duration)
+                    $("#editModal input[name='name']").val(res.data.name)
+                    $("#editModal input[name='price']").val(res.data.price)
+                    $("#editModal select[name='type']").val(res.data.type)
+                    if (res.success == false) {
+                        notify("error", "There was an error!");
+                    }
+                })
+                $('#editModal .btn-primary').off()
+                $('#editModal .btn-primary').click(function() {
+                    // fetch apit post add service
+                    const data = new FormData(document.querySelector('#editForm'));
+                    const formDataObject = Object.fromEntries(data.entries());
+                    console.log(formDataObject)
+                    // fetch apit post add service
+                    if (formDataObject.description.trim() == '' ||
+                        formDataObject.duration.trim() == '' ||
+                        formDataObject.name.trim() == '' ||
+                        formDataObject.price.trim() == '' ||
+                        formDataObject.type.trim() == '' ) {
+                            notify('error', 'update service fail')
+                            renderError(Object.values(['All field is required']))
+                            return;
+                        }
+                        console.log(typeof(+formDataObject.duration.trim()) )
+                    if (typeof(+formDataObject.duration.trim()) != 'number') {
+                         notify('error', 'update service fail')
+                        renderError(Object.values(['duration must be a number']))
+                        return;
+                    }
+                    putData(`${BASE_API}api/Service/Update/${id}`, formDataObject)
+                        .then(response => {
+                            // case success: show totify and clear input text
+                            if (response.success == true) {
+                                notify('success', 'update service success')
+                                getService()
+                                // clear form text
+                                $('#editForm')[0].reset();
+                                // clear err if have
+                                $('#editModal').modal("hide");
+                                $('.error-list').html('');
+                            }
+                            // case error by identity: show error
+                            else if (!response.ok && response.errors != null) {
+                                renderError(Object.values(response.errors))
+                                notify('error', 'update service fail')
+                            }
+                            // case error: show error
+                            else {
+                                renderError(Object.values([response.message]))
+                                notify('error', 'update service fail')
+                            }
+                        })
+                })
+
+            })
+
+            // Delete
+            $('#deleteModal').on('show.bs.modal', function(e) {
+                var id = $(e.relatedTarget).data('id');
+                $('#deleteModal .btn-primary').off()
+                $('#deleteModal .btn-primary').click(function() {
+                    deleteData(BASE_API + "api/Service/Delete/" + id).then(res => {
+                        if (res.success == true) {
+                            notify("success", "Deleted Servie Successfully!");
+                            $('#deleteModal').modal("hide");
+                            getService();
+                        }
+                        else {
+                            notify("error", "There was an error!");
+                        }
+                    })
+                })
+            })
+
+            // handle Hide modal
+            $('.serviceModal').on('hidden.bs.modal', function(e) {
+                $('.error-list').html('');
+                $('#addForm')[0].reset();
+                $('#editForm')[0].reset();
+            })
+
+            //Search Value
+            $("#btn-search").on("click", function() {
+                console.log($("#search").val())
+                console.log($("#type-filter").val())
+
+                getService($("#search").val(), $("#type-filter").val())
+
+            })
+        })
+    </script>
+}
+

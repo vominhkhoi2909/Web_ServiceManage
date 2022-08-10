@@ -1,0 +1,253 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main_content_iner overly_inner">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Edit Customer</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0);">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Customer</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="/assets/image/admin_base/icon/calender_icon.svg" alt="">
+                            <span class="datetime"><!--render By JS--></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title w-100 d-inline-flex justify-content-between align-items-center">
+                                <h3 class="m-0">Edit User</h3>
+                                <a href="@Url.Action("Index","Customer")" class="border-0">
+                                    <i class="fas fa-arrow-circle-left"></i> Back to
+                                    list
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <form id="editForm" method="post">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="common_input mb_15">
+                                                <label for="name" class="mb-3">Full Name(*)</label>
+                                                <input type="text" placeholder="Full Name" required name="name" />
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-6">
+                                          <div class="common_input mb_15">
+                                            <input type="text" placeholder="Password" />
+                                          </div>
+                                        </div> -->
+                                        <!-- <div class="col-lg-6">
+                                          <div class="common_input mb_15">
+                                            <input type="text" placeholder="Username" />
+                                          </div>
+                                        </div> -->
+                                        <!-- <div class="col-lg-6">
+                                          <div class="common_input mb_15">
+                                            <input type="text" placeholder="Confirm Password" />
+                                          </div>
+                                        </div> -->
+                                        <div class="col-lg-6">
+                                            <div class="common_input">
+                                                <label for="phone" class="mb-3">Phone(*)</label>
+                                                <input type="text" placeholder="Phone" required name="phone" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="common_input mb_15">
+                                                <label for="email" class="mb-3">Email Address(*)</label>
+                                                <input type="email" placeholder="Email Address" required name="email" />
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-12">
+                                          <select
+                                            class="nice_Select2 nice_Select_line wide mb-15"
+                                            style="display: none"
+                                          >
+                                            <option value="1">Select Role</option>
+                                            <option value="1">Admin</option>
+                                            <option value="1">Staff</option>
+                                            <option value="1">Cleaner</option>
+                                          </select>
+                                        </div> -->
+                                        <div class="col-lg-12">
+                                            <label for="address" class="mb-3">Address(*)</label>
+                                            <textarea class="w-100 bg-transparent"
+                                                      maxlength="250"
+                                                      rows="3"
+                                                      name="address"
+                                                      placeholder="Address"
+                                                      required
+                                                      style="
+                              height: 100px;
+                              border-radius: 10px;
+                              padding: 10px 25px;
+                              color: #81879f;
+                              font-weight: 400;
+                              margin-top: 15px;
+                              font-size: 14px;
+                              border: 1px solid #e5ecff;
+                            "></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div style="width: 200px; margin: 0 auto"
+                                         class="text-center">
+                                        <input type="file"
+                                               class="input-image filepond"
+                                               name="filepond"
+                                               accept="image/png, image/jpeg"
+                                               data-max-file-size="3MB"
+                                               style="height: 100px; width: 100px" />
+                                    </div>
+                                </div>
+                                <div class="row"></div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="create_report_btn mt_30">
+                                            <button type="submit"
+                                                    class="btn_1 radius_btn d-block text-center w-100">
+                                                Save change
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        // Select the file input and use create() to turn it into a pond
+        // in this example we pass properties along with the create method
+        // we could have also put these on the file input element itself
+        var filePond = FilePond.create(document.querySelector(".input-image"), {
+            labelIdle: `Update Profile Image<br>(Drag and drop)`,
+            imagePreviewHeight: 170,
+            imageCropAspectRatio: "1:1",
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            stylePanelLayout: "compact circle",
+            styleLoadIndicatorPosition: "center bottom",
+            styleButtonRemoveItemPosition: "center bottom",
+        });
+        filePond.setOptions({
+            server: {
+                process: '@Url.Action("Process","User")',
+                fetch: null,
+                revert: (uniqueFileId, load, error) => {
+                    $.ajax({
+                        url: '@Url.Action("Revert","User")',
+                        dataType: 'json',
+                        timeout: 3000,
+                        method: "POST",
+                        data: { fileName: uniqueFileId },
+                    }).done((data) => {
+                        console.log(data);
+                    })
+                },
+                load: {
+                    url: "@Url.Action("Load","User")?load=",
+                    method: 'GET',
+                }
+            },
+        });
+        // Get Data
+        getData(BASE_API + "api/customer/" + "@ViewBag.userId").then(res => {
+            console.log(res);
+            var name = $("input[name='name']");
+            var phone = $("input[name='phone']");
+            var email = $("input[name='email']");
+            var address = $("textarea[name='address']");
+            let n = (res.data.name) ? res.data.name : "";
+            let p = (res.data.phone) ? res.data.phone : "";
+            let e = (res.data.email) ? res.data.email : "";
+            let a = (res.data.address) ? res.data.address : "";
+
+            name.val(n);
+            phone.val(p);
+            email.val(e);
+            address.val(a);
+
+            filePond.files = [{
+                source: res.data.avatar,
+                options: {
+                    type: 'local',
+                    //file:{
+                    //    name:data.avatar
+                    //},
+                }
+            }];
+        })
+        // Phone Handler
+        $(function() {
+            $("input[name='phone']").on("input", function(e) {
+                if ($(this).length >= 12) e.preventDefault();
+                $(this).val(
+                    $(this)
+                        .val()
+                        .replace(/[^0-9]/g, "")
+                );
+            });
+        });
+        // Edit
+        $("#editForm").on("submit", function(e) {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            const formDataObject = Object.fromEntries(data.entries());
+            var file = formDataObject.filepond;
+            delete formDataObject.filepond;
+
+            if ($("input[name='filepond']").val() != "") {
+                formDataObject.avatar = $("input[name='filepond']").val();
+            }
+
+            formDataObject.userId = "@ViewBag.userId";
+            formDataObject.email = $("input[name='email']").val();;
+            console.log(formDataObject)
+            putData(BASE_API + "api/Customer/", formDataObject).then(
+                res => {
+                    console.log(res);
+                    if (res?.success == true) {
+                        notify("success", res.message)
+                    }
+                    else {
+                        if (res?.message != null) {
+                            notify("error", res?.message);
+                        }
+                        else {
+                            notify("error", Object.values(res.errors)[0]);
+                        }
+                    }
+                }
+            )
+        })
+    </script>
+}
+

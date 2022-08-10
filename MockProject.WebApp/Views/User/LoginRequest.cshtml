@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "LoginRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+</style>
+<div style="padding-top: 200px;">
+
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    Login Request</h2>
+                <div class="error-details" style="font-size: 18px;">
+                    You haven't login yet or your token in expired - 
+                    Please Login To Do This Action!
+                </div>
+                <div class="error-actions">
+                    <a href="@Url.Action("Index","Home")" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a><a href="@Url.Action("Login","User")" style="color:#000; background: #fecd1a;border-color: #fecd1a;" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Login </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

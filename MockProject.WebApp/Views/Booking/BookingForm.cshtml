@@ -1,0 +1,348 @@
+﻿@{
+    ViewData["Title"] = "BookingForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .booking__error-list {
+        padding-left: 26px;
+        margin-bottom: 8px;
+    }
+
+    .booking__error-item {
+        list-style-type: circle;
+        padding: 2px 12px 2px 0px;
+    }
+
+        .booking__error-item:first-child {
+            padding-top: 8px;
+        }
+
+        .booking__error-item:last-child {
+            padding-bottom: 8px;
+        }
+
+            .total__price-right{
+        float: right;
+    }
+
+    @@media only screen and (max-width: 760px){
+        .total__price-right{
+                float: unset;
+        }
+    }
+</style>
+<div data-elementor-type="wp-page" data-elementor-id="10" class="elementor elementor-10">
+    <section class="elementor-section elementor-top-section elementor-element elementor-element-c30a554 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
+             data-id="c30a554" data-element_type="section">
+        <div class="elementor-container elementor-column-gap-default">
+            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-ee8193c"
+                 data-id="ee8193c" data-element_type="column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                    <div class="elementor-element elementor-element-50ec34f elementor-widget elementor-widget-acrepair_get_in_touch"
+                         data-id="50ec34f" data-element_type="widget"
+                         data-widget_type="acrepair_get_in_touch.default">
+                        <div class="elementor-widget-container">
+
+                            <!-- Contact Section -->
+                            <section id="contact" class="contact-section " style="padding-top: 200px;">
+                                <div class="auto-container">
+                                    <!-- Sec Title / Centered -->
+                                    <div class="sec-title centered">
+                                        <h2>Confirm Book Service</h2>
+                                        <div class="separator"></div>
+                                    </div>
+                                    <div class="inner-container">
+                                        <div class="pattern-layer"
+                                             style="background-image:url(/assets/image/base/uploads/2022/05/pattern-2.png);">
+                                        </div>
+                                        <div class="row clearfix">
+                                            <!-- Form Column -->
+                                            <div class="form-column col-lg-6 col-md-12 col-sm-12">
+                                                <div class="inner-column">
+                                                    <!-- Contact Form -->
+                                                    <div class="contact-form">
+                                                        <div role="form" class="wpcf7" id="wpcf7-f216-p10-o1"
+                                                             lang="en-US" dir="ltr">
+                                                            <form action="" method="get" id="add-joborder-form">
+                                                                <!--service parent hold-->
+
+                                                                <div class="service__holder " id="service__holder-aircon">
+                                                                    <div class="row__holder" data-type="aircon">
+                                                                        <div class="title-box" style="display:flex; justify-content: space-between;align-items: center;">
+                                                                            <div class="text" style="margin-top: unset;">
+                                                                                Please check carefully the service that you want to book and fill the form to finish the proccess
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!--row value-->
+                                                                        <div class="row clearfix">
+                                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+                                                                                <span class="wpcf7-form-control-wrap text-118">
+                                                                                    <input type="text" name="address" id="address__input" required
+                                                                                           value="" size="40"
+                                                                                           placeholder="* Address" />
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end row value-->
+                                                                        <!--row value-->
+                                                                        <div class="row clearfix">
+                                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+                                                                                <span class="wpcf7-form-control-wrap text-118">
+                                                                                    <input type="datetime-local" name="startAt" required
+                                                                                           value="" size="40"
+                                                                                           placeholder="Choose Date" />
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end row value-->
+                                                                        <!--row value-->
+                                                                        <div class="row clearfix">
+                                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+                                                                                <span class="wpcf7-form-control-wrap text-118">
+                                                                                    <textarea name="description"
+                                                                                              value="" size="40"
+                                                                                              placeholder="Description" /></textarea>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end row value-->
+                                                                    </div>
+
+                                                                    <hr />
+                                                                </div>
+                                                                <!--end service parent hold-->
+
+                                                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                                    <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="booking__error-list">
+                                                                        <!--render by js-->
+                                                                    </ul>
+                                                                    <button class="theme-btn btn-style-one"
+                                                                            type="submit">
+                                                                        <span class="txt">
+                                                                            Submit Now
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- check  -->
+                                            <div class="map-column col-lg-6 col-md-12 col-sm-12">
+                                                <div class="title-box">
+                                                    <h3>Confirm</h3>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Service</th>
+                                                                <th scope="col">Type</th>
+                                                                <th scope="col">Dur </th>
+                                                                <th scope="col">Price </th>
+                                                                <th scope="col">Qty</th>
+                                                                <th scope="col">Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="aircon__table">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <hr />
+                                                <h4 class="total__price-right">Total price: <span id="total__price"></span> USD</h4>
+                                                <h4 class="">Total hour needed: <span id="total__hour"></span>H</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- End Contact Section -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        // Create And Invoke HUB notification
+        var createNotiCustomer = async function(title, type, description, createBy, sendTo, link = "") {
+            let data = {
+                title,
+                type,
+                description,
+                createBy,
+                sendTo,
+                image: "",
+                link
+            };
+            postData(BASE_API + "api/notification/add", data).then(res => {
+                console.log(res);
+                if (res?.success == true) {
+                    // Invoke SignalR method
+                    connection.invoke("SendAdminNotification", sendTo).catch(function(err) {
+                        console.log("HUB:error")
+                    });
+                }
+            })
+
+
+        }
+
+        // show an modal if user not login or token is expired
+        requestLogin()
+
+        // check if user have address in infomation -> show it in form
+        async function setFormValueDefaul() {
+            let userLoginNow = await getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN)
+            if (userLoginNow.data.address) {
+                $('#address__input').val(userLoginNow.data.address)
+            }
+        }
+        setFormValueDefaul()
+
+
+        // get data from Model c#
+        var dataArr = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+        let dataArrSort = dataArr.sort((a, b) => a.OptionId - b.OptionId);
+        console.log(dataArrSort)
+        let x = dataArrSort.map((element, index) =>{
+             return {
+                 OptionId: element.OptionId,
+                 ServiceId: element.ServiceId
+             }
+        })
+        console.log('x',x)
+
+        // render error list by array
+        function renderError(error) {
+            let html = error.map(item => {
+                return `
+                                    <li class="booking__error-item">${item}</li>
+                                `
+            }).join('')
+
+            $('.booking__error-list').html(html);
+        }
+
+
+        async function renderBookingDetail() {
+            // declare variable
+            let totalPrice = 0;
+            let airconDuration = 0;
+            let mattressDuration = 0;
+            let miscDuration = 0;
+            // loop through data to fetch single row and display into UI
+            const listOfPromises = Promise.all(dataArrSort.map(async function(element, index) {
+                let optionDetail = await getData(`${BASE_API}api/Option/Detail/${element.OptionId}`)
+                let serviceDetail = await getData(`${BASE_API}api/Service/Detail/${element.ServiceId}`)
+                // get total price and total duration of each service
+                totalPrice += serviceDetail.data.price * element.Quantity
+                if (optionDetail.data.type == 4) airconDuration += serviceDetail.data.duration * element.Quantity
+                if (optionDetail.data.type == 5) mattressDuration += serviceDetail.data.duration * element.Quantity
+                if (element.OptionId == 10) miscDuration += serviceDetail.data.duration * element.Quantity
+
+                return `
+                                <tr>
+                                    <th scope="row">${index + 1}</th>
+                                    <td>${serviceDetail.data.name}</td>
+                                    <td>${element.OptionId != 10 ? optionDetail.data.title : ''}</td>
+                                    <td>${serviceDetail.data.duration}</td>
+                                    <td>${serviceDetail.data.price}</td>
+                                    <td>${element.Quantity}</td>
+                                    <td>${serviceDetail.data.price * element.Quantity}</td>
+                                </tr>
+                                 `
+            }))
+            const allResults = await listOfPromises
+
+            // get total hour
+            let totalDuration = airconDuration > mattressDuration ? airconDuration : mattressDuration;
+            totalDuration += miscDuration + 0.5
+
+            // show data in UI
+            $('#aircon__table').html(allResults)
+            $('#total__price').html(totalPrice)
+            $('#total__hour').html(totalDuration)
+        }
+
+        renderBookingDetail()
+
+        $('#add-joborder-form').submit(async function(event) {
+            event.preventDefault()
+            const data = new FormData(event.target);
+            const formDataObject = Object.fromEntries(data.entries());
+            let objectData = {
+                ...formDataObject,
+                duration: $('#total__hour').html(),
+                state: 0,
+            }
+            // fetch apit post Job Order
+            let userLoginNow = await getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN)
+            let createBy = userLoginNow.data.userId
+            postData(`${BASE_API}api/JobOrder/Add?customerId=${createBy}`, objectData)
+                .then(response => {
+                    // case success: show totify and clear input text
+                    console.log(response)
+                    if (response.success == true) {
+                        notify('success', 'booking success, we will confirm soon')
+                        // clear form text
+                        $("#add-joborder-form")[0].reset();
+                        let jobOrderDetailDataArr = dataArrSort.map(element => {
+                            return {
+                                optionId: element.OptionId,
+                                quantily: element.Quantity,
+                                serviceId: element.ServiceId,
+                                image: " ",
+                                joId: response.data
+                            }
+                        })
+                        // Job Order Detail
+                        // fetch apit post Job Order Detail
+                        jobOrderDetailDataArr.forEach(element => {
+                            postData(`${BASE_API}api/JobOrderDetail/Add`, element)
+                                .then(async (response) => {
+                                    // case success: show totify and clear input text
+                                    if (response.success == true) {
+                                        await getDataWithToken(`${BASE_API}api/Account/getinfo`, USERTOKEN);
+                                        await createNotiCustomer(`${userLoginNow.data.name} has been ordered an Job`, 1, `Job Order No ${element.joId}`, 0, 29, `/Admin/JobOrder/Detail/${element.joId}`);
+                                    }
+                                    // case error by identity: show error
+                                    else if (!response.ok && response.errors != null) {
+                                        notify('error', 'send confim fail')
+                                    }
+                                    // case error: show error
+                                    else {
+                                        notify('error', 'send confim fail')
+                                    }
+                                })
+                        })
+                        // Job Order Detail
+
+                        setTimeout(async function() {
+                            window.location = '@Url.Action("Index","Home")';
+                        }, 1000)
+                    }
+                    // case error by identity: show error
+                    else if (!response.ok && response.errors != null) {
+                        notify('error', 'send confim fail')
+                    }
+
+                    // case error: show error
+                    else {
+                        notify('error', 'book service fail, please check the infomation!')
+                        console.log(response.message)
+                        renderError(Object.values([response.message]))
+                    }
+                })
+        })
+
+    </script>
+}

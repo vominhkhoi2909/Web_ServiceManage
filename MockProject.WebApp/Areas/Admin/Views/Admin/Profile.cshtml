@@ -1,0 +1,609 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+
+    <!--Filepond css-->
+    <link rel="stylesheet" href="~/assets/css/client_base/filepond-plugin-image-preview.min.css" />
+    <link rel="stylesheet" href="~/assets/css/client_base/filepond-plugin-image-edit.css" />
+    <link rel="stylesheet" href="~/assets/css/client_base/filepond.min.css" />
+    <!--End Filepond css-->
+
+   <!--Custom CSS-->
+    <link rel="stylesheet" href="/assets/css/client_base/profile.css">
+    <style>
+        .profile__container {
+            padding-top: 0px;
+        }
+
+        .progress {
+            transform: translateY(4px);
+            width: 100%;
+        }
+
+        /* #E87E04 #EFBF17 #42A72A*/
+        .progress-bar-success {
+            background-color: #42A72A;
+        }
+
+        .progress-bar-info {
+            background-color: #EFBF17;
+        }
+
+        .progress-bar-warning {
+            background-color: #E87E04;
+        }
+
+        .progress-bar-danger {
+            background-color: #EC644B;
+        }
+
+        #password-recommendation {
+            display: none;
+        }
+    </style>
+}
+    <div class="container light-style flex-grow-1 container-p-y profile__container">
+        <h4 class="font-weight-bold py-3 mb-4">My Profile</h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action  active" data-toggle="list" href="#account-general"><i class="fa-solid fa-user-pen mr-2" style="margin-right: 6px;"></i>Personal Information</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password"><i class="fa-solid fa-lock" style="margin-right: 12px;"></i>Change Password</a>
+                        @*                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">
+                    <i class="fa-solid fa-cash-register mr-2"></i> Job Orders History
+                    <i class="fa fa-circle ml-1 text-primary" style="font-size: 10px"></i>
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications"><i class="fa-solid fa-bell mr-2"></i>Notification Settings</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections"><i class="fa-solid fa-gear mr-2"></i>Advanced Settings</a>*@
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <form id="update-infor">
+                                <div class="card-body">
+                                    <div class="filepond--root filepond filepond--hopper" data-style-panel-layout="compact circle" data-style-button-remove-item-position="left bottom" data-style-button-process-item-position="right bottom" data-style-load-indicator-position="center bottom" data-style-progress-indicator-position="right bottom" data-style-button-remove-item-align="false" data-style-image-edit-button-edit-item-position="bottom center" style="height: 200px;">
+                                        <input class="filepond--browser" type="file" id="filepond--browser-bpn6fd9tv" aria-controls="filepond--assistant-bpn6fd9tv" aria-labelledby="filepond--drop-label-bpn6fd9tv" accept=""><a class="filepond--credits" aria-hidden="true" href="https://pqina.nl/" target="_blank" rel="noopener noreferrer" style="transform: translateY(200px);">Powered by PQINA</a><div class="filepond--drop-label" style="transform: translate3d(0px, 30px, 0px); opacity: 0; visibility: hidden; pointer-events: none;"><label for="filepond--browser-bpn6fd9tv" id="filepond--drop-label-bpn6fd9tv" aria-hidden="true">Drag &amp; Drop your picture or <span class="filepond--label-action" tabindex="0">Browse</span></label></div><div class="filepond--list-scroller" style="transform: translate3d(0px, 0px, 0px);">
+                                            <ul class="filepond--list" role="list">
+                                                <li class="filepond--item" id="filepond--item-g0vrxqhwh" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 1; height: 0px;" data-filepond-item-state="idle">
+                                                    <fieldset class="filepond--file-wrapper">
+                                                        <legend>joseph-gonzalez-iFgRcqHznqg-unsplash.jpg202240250733.jpg</legend>
+                                                        <div class="filepond--file">
+                                                            <button class="filepond--file-action-button filepond--action-abort-item-load" type="button" data-align="center bottom" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 0; visibility: hidden; pointer-events: none;" disabled="disabled"><span>Abort</span></button><button class="filepond--file-action-button filepond--action-retry-item-load" type="button" data-align="right bottom" disabled="disabled" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 0; visibility: hidden; pointer-events: none;"><svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path d="M10.81 9.185l-.038.02A4.997 4.997 0 0 0 8 13.683a5 5 0 0 0 5 5 5 5 0 0 0 5-5 1 1 0 0 1 2 0A7 7 0 1 1 9.722 7.496l-.842-.21a.999.999 0 1 1 .484-1.94l3.23.806c.535.133.86.675.73 1.21l-.804 3.233a.997.997 0 0 1-1.21.73.997.997 0 0 1-.73-1.21l.23-.928v-.002z" fill="currentColor" fill-rule="nonzero"></path></svg><span>Retry</span></button><button class="filepond--file-action-button filepond--action-remove-item" type="button" data-align="left bottom" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 1;"><svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path d="M11.586 13l-2.293 2.293a1 1 0 0 0 1.414 1.414L13 14.414l2.293 2.293a1 1 0 0 0 1.414-1.414L14.414 13l2.293-2.293a1 1 0 0 0-1.414-1.414L13 11.586l-2.293-2.293a1 1 0 0 0-1.414 1.414L11.586 13z" fill="currentColor" fill-rule="nonzero"></path></svg><span>Remove</span></button><button class="filepond--file-action-button filepond--action-process-item" type="button" data-align="right bottom" disabled="disabled" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 0; visibility: hidden; pointer-events: none;"><svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path d="M14 10.414v3.585a1 1 0 0 1-2 0v-3.585l-1.293 1.293a1 1 0 0 1-1.414-1.415l3-3a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1-1.414 1.415L14 10.414zM9 18a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2H9z" fill="currentColor" fill-rule="evenodd"></path></svg><span>Upload</span></button><button class="filepond--file-action-button filepond--action-abort-item-processing" type="button" data-align="right bottom" disabled="disabled" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 0; visibility: hidden; pointer-events: none;"><span>Cancel</span></button><button class="filepond--file-action-button filepond--action-retry-item-processing" type="button" data-align="right bottom" disabled="disabled" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 0; visibility: hidden; pointer-events: none;"><svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path d="M10.81 9.185l-.038.02A4.997 4.997 0 0 0 8 13.683a5 5 0 0 0 5 5 5 5 0 0 0 5-5 1 1 0 0 1 2 0A7 7 0 1 1 9.722 7.496l-.842-.21a.999.999 0 1 1 .484-1.94l3.23.806c.535.133.86.675.73 1.21l-.804 3.233a.997.997 0 0 1-1.21.73.997.997 0 0 1-.73-1.21l.23-.928v-.002z" fill="currentColor" fill-rule="nonzero"></path></svg><span>Retry</span></button><button class="filepond--file-action-button filepond--action-revert-item-processing" type="button" data-align="right bottom" disabled="disabled" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 0; visibility: hidden; pointer-events: none;"><svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path d="M11.586 13l-2.293 2.293a1 1 0 0 0 1.414 1.414L13 14.414l2.293 2.293a1 1 0 0 0 1.414-1.414L14.414 13l2.293-2.293a1 1 0 0 0-1.414-1.414L13 11.586l-2.293-2.293a1 1 0 0 0-1.414 1.414L11.586 13z" fill="currentColor" fill-rule="nonzero"></path></svg><span>Remove</span></button><div class="filepond--processing-complete-indicator" data-align="right bottom" style="transform: scale3d(0.75, 0.75, 1); opacity: 0; visibility: hidden; pointer-events: none;"><svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path d="M18.293 9.293a1 1 0 0 1 1.414 1.414l-7.002 7a1 1 0 0 1-1.414 0l-3.998-4a1 1 0 1 1 1.414-1.414L12 15.586l6.294-6.293z" fill="currentColor" fill-rule="nonzero"></path></svg></div><div class="filepond--file-info" style="transform: translate3d(78px, 0px, 0px);"><span class="filepond--file-info-main" aria-hidden="true">joseph-gonzalez-iFgRcqHznqg-unsplash.jpg202240250733.jpg</span><span class="filepond--file-info-sub">10 KB</span></div><div class="filepond--file-status" style="transform: translate3d(78px, 0px, 0px); opacity: 0; visibility: hidden; pointer-events: none;"><span class="filepond--file-status-main"></span><span class="filepond--file-status-sub"></span></div><div class="filepond--progress-indicator filepond--load-indicator" style="opacity: 0; visibility: hidden; pointer-events: none;" data-align="center bottom"><svg><path stroke-width="2" stroke-linecap="round" d="M 9.994973452084988 2.0000015791366526 A 8 8 0 1 0 10 2" stroke-opacity="1"></path></svg></div><div class="filepond--progress-indicator filepond--process-indicator" style="opacity: 0; visibility: hidden; pointer-events: none;"><svg><path stroke-width="2" stroke-linecap="round"></path></svg></div><div class="filepond--image-preview-wrapper">
+                                                                <div class="filepond--image-preview-overlay filepond--image-preview-overlay-idle" style="opacity: 1;">
+                                                                    <svg width="500" height="200" viewBox="0 0 500 200" preserveAspectRatio="none">
+                                                                        <defs>
+                                                                            <radialGradient id="gradient-1" cx=".5" cy="1.25" r="1.15">
+                                                                                <stop offset="50%" stop-color="#000000"></stop>
+                                                                                <stop offset="56%" stop-color="#0a0a0a"></stop>
+                                                                                <stop offset="63%" stop-color="#262626"></stop>
+                                                                                <stop offset="69%" stop-color="#4f4f4f"></stop>
+                                                                                <stop offset="75%" stop-color="#808080"></stop>
+                                                                                <stop offset="81%" stop-color="#b1b1b1"></stop>
+                                                                                <stop offset="88%" stop-color="#dadada"></stop>
+                                                                                <stop offset="94%" stop-color="#f6f6f6"></stop>
+                                                                                <stop offset="100%" stop-color="#ffffff"></stop>
+                                                                            </radialGradient>
+                                                                            <mask id="mask-1">
+                                                                                <rect x="0" y="0" width="500" height="200" fill="url(#gradient-1)"></rect>
+                                                                            </mask>
+                                                                        </defs>
+                                                                        <rect x="0" width="500" height="200" fill="currentColor" mask="url(#mask-1)"></rect>
+                                                                    </svg>
+                                                                </div><div class="filepond--image-preview-overlay filepond--image-preview-overlay-success" style="opacity: 0; visibility: hidden; pointer-events: none;">
+                                                                    <svg width="500" height="200" viewBox="0 0 500 200" preserveAspectRatio="none">
+                                                                        <defs>
+                                                                            <radialGradient id="gradient-2" cx=".5" cy="1.25" r="1.15">
+                                                                                <stop offset="50%" stop-color="#000000"></stop>
+                                                                                <stop offset="56%" stop-color="#0a0a0a"></stop>
+                                                                                <stop offset="63%" stop-color="#262626"></stop>
+                                                                                <stop offset="69%" stop-color="#4f4f4f"></stop>
+                                                                                <stop offset="75%" stop-color="#808080"></stop>
+                                                                                <stop offset="81%" stop-color="#b1b1b1"></stop>
+                                                                                <stop offset="88%" stop-color="#dadada"></stop>
+                                                                                <stop offset="94%" stop-color="#f6f6f6"></stop>
+                                                                                <stop offset="100%" stop-color="#ffffff"></stop>
+                                                                            </radialGradient>
+                                                                            <mask id="mask-2">
+                                                                                <rect x="0" y="0" width="500" height="200" fill="url(#gradient-2)"></rect>
+                                                                            </mask>
+                                                                        </defs>
+                                                                        <rect x="0" width="500" height="200" fill="currentColor" mask="url(#mask-2)"></rect>
+                                                                    </svg>
+                                                                </div><div class="filepond--image-preview-overlay filepond--image-preview-overlay-failure" style="opacity: 0; visibility: hidden; pointer-events: none;">
+                                                                    <svg width="500" height="200" viewBox="0 0 500 200" preserveAspectRatio="none">
+                                                                        <defs>
+                                                                            <radialGradient id="gradient-3" cx=".5" cy="1.25" r="1.15">
+                                                                                <stop offset="50%" stop-color="#000000"></stop>
+                                                                                <stop offset="56%" stop-color="#0a0a0a"></stop>
+                                                                                <stop offset="63%" stop-color="#262626"></stop>
+                                                                                <stop offset="69%" stop-color="#4f4f4f"></stop>
+                                                                                <stop offset="75%" stop-color="#808080"></stop>
+                                                                                <stop offset="81%" stop-color="#b1b1b1"></stop>
+                                                                                <stop offset="88%" stop-color="#dadada"></stop>
+                                                                                <stop offset="94%" stop-color="#f6f6f6"></stop>
+                                                                                <stop offset="100%" stop-color="#ffffff"></stop>
+                                                                            </radialGradient>
+                                                                            <mask id="mask-3">
+                                                                                <rect x="0" y="0" width="500" height="200" fill="url(#gradient-3)"></rect>
+                                                                            </mask>
+                                                                        </defs>
+                                                                        <rect x="0" width="500" height="200" fill="currentColor" mask="url(#mask-3)"></rect>
+                                                                    </svg>
+                                                                </div><div class="filepond--image-preview" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 1;"><div class="filepond--image-clip" style="opacity: 1; height: 200px; width: 200px;"><div class="filepond--image-canvas-wrapper" style="transform-origin: 100px 100px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateZ(6.28319rad); opacity: 1; height: 200px; width: 200px;"><div class="filepond--image-bitmap" style="transform: scale3d(1, 1, 1);"><canvas width="200" height="200"></canvas></div></div></div></div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset><div class="filepond--panel filepond--item-panel" data-scalable="true"><div class="filepond--panel-top filepond--item-panel"></div><div class="filepond--panel-center filepond--item-panel" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 2, 1);"></div><div class="filepond--panel-bottom filepond--item-panel" style="transform: translate3d(0px, 200px, 0px);"></div></div>
+                                                </li>
+                                            </ul>
+                                        </div><div class="filepond--panel filepond--panel-root" data-scalable="false"><div class="filepond--panel-top filepond--panel-root"></div><div class="filepond--panel-center filepond--panel-root" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 2, 1);"></div><div class="filepond--panel-bottom filepond--panel-root" style="transform: translate3d(0px, 200px, 0px);"></div></div><span class="filepond--assistant" id="filepond--assistant-bpn6fd9tv" role="status" aria-live="polite" aria-relevant="additions"></span><div class="filepond--drip"></div><fieldset class="filepond--data"><input type="hidden" name="filepond" value="joseph-gonzalez-iFgRcqHznqg-unsplash.jpg202240250733.jpg"></fieldset>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="text-light small mt-1">
+                                            Allowed JPG, GIF or PNG. Max size of 3MB.
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="border-light m-0">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="form-label">E-mail (*)</label>
+                                        <input type="email" class="form-control mb-1" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Phone (*)</label>
+                                        <input type="text" class="form-control" name="phone" maxlength="15" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Fullname (*)</label>
+                                        <input type="text" required="" class="form-control" name="fullname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Address</label>
+                                        <textarea name="address" class="form-control mb-1" style="min-height: 150px"></textarea>
+                                    </div>
+                                    <div class="text-right mt-4 mb-3">
+                                        <button type="submit" class="btn btn-primary" >
+                                            Save Change
+                                        </button>&nbsp;
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="account-change-password">
+                            <div class="card-body pb-2">
+                                <form id="change-password">
+                                    <div class="form-group">
+                                        <label class="form-label">Current password (*)</label>
+                                        <input type="password" name="oldPassword" class="form-control" required="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">New password (*)</label>
+                                        <input type="password" name="newPassword" id="newpass" class="form-control password-strength" required="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Repeat new password (*)</label>
+                                        <input type="password" name="confirmPassword" class="form-control" required="">
+                                    </div>
+                                    <div class="text-right mt-4 mb-3">
+                                        <button type="submit" class="btn btn-primary">
+                                            Change Password
+                                        </button>&nbsp;
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-2">
+                                <style>
+                                    .JOSort {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-end;
+                                    }
+
+                                        .JOSort p {
+                                            margin: unset;
+                                        }
+
+                                        .JOSort select {
+                                            padding: 0 2px;
+                                        }
+
+                                            .JOSort select option {
+                                                border: unset;
+                                            }
+                                </style>
+                                <div class="JOSort" style="margin-left: auto;">
+                                    <p>Sort By:</p>
+                                    <select id="JOSort__Select">
+                                        <option value="0">All Status</option>
+                                        <option value="1">Waiting</option>
+                                        <option value="2">Confirm</option>
+                                        <option value="3">Cancel</option>
+                                        <option value="4">Done</option>
+                                    </select>
+                                </div>
+
+                                <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                    <div class="bg-white card mb-4 order-list shadow-sm">
+                                        <div class="gold-members p-4">
+                                            <a href="#"> </a>
+                                            <div class="media">
+                                                <a href="#">
+                                                    <img class="mr-4" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_of_air_conditioner_for_brownout.png" alt="Generic placeholder image">
+                                                </a>
+                                                <div class="media-body">
+                                                    <a href="/User/JobOrderDetail/7">
+                                                        <span class="float-right text-info">
+                                                            <span class="text-warning"> waiting</span>
+                                                            <i class="icofont-check-circled text-success"></i>
+                                                        </span>
+                                                    </a>
+                                                    <h6 class="mb-2">
+                                                        <a href="/User/JobOrderDetail/7"></a>
+                                                        <a href="/User/JobOrderDetail/7" class="text-black">ORDER #1</a>
+                                                    </h6>
+                                                    <p class="text-gray mb-1">
+                                                        <i class="icofont-location-arrow"></i> Address: Thu Duc City
+                                                    </p>
+                                                    <p class="text-gray mb-3">
+                                                        Date: Wed, Jul 27, 2022 8:26 AM
+                                                    </p>
+                                                    <p class="text-dark">
+                                                        Description: Help Me clean faster
+                                                    </p>
+                                                    <hr>
+                                                    <div class="media-footer d-flex justify-content-between">
+                                                        <p class="mb-0 text-black text-primary pt-2">
+                                                            <span class="text-black font-weight-bold">
+                                                                Total Paid:
+                                                            </span>
+                                                            $220
+                                                        </p>
+                                                        <div class="btn-section">
+                                                            <button class="btn btn-sm btn-outline-danger btn-help cancel-btn" data-toggle="modal" data-target="#cancelJO" data-id="7">
+                                                                <i class="fa-solid fa-circle-question"></i>
+                                                                CANCEL
+                                                            </button>
+                                                            <button class="btn btn-sm btn-primary postpone-btn" data-toggle="modal" data-target="#postponeJO" data-id="7">
+                                                                <i class="fa-solid fa-arrow-rotate-right"></i>
+                                                                POSTPONE
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white card mb-4 order-list shadow-sm">
+                                        <div class="gold-members p-4">
+                                            <a href="#"> </a>
+                                            <div class="media">
+                                                <a href="#">
+                                                    <img class="mr-4" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_of_air_conditioner_for_brownout.png" alt="Generic placeholder image">
+                                                </a>
+                                                <div class="media-body">
+                                                    <a href="/User/JobOrderDetail/2">
+                                                        <span class="float-right text-info">
+                                                            <span class="text-success"> confirm</span>
+                                                            <i class="icofont-check-circled text-success"></i>
+                                                        </span>
+                                                    </a>
+                                                    <h6 class="mb-2">
+                                                        <a href="/User/JobOrderDetail/2"></a>
+                                                        <a href="/User/JobOrderDetail/2" class="text-black">ORDER #2</a>
+                                                    </h6>
+                                                    <p class="text-gray mb-1">
+                                                        <i class="icofont-location-arrow"></i> Address: Thủ đức
+                                                    </p>
+                                                    <p class="text-gray mb-3">
+                                                        Date: Tue, Jul 26, 2022 9:28 PM
+                                                    </p>
+                                                    <p class="text-dark">
+                                                        Description:
+                                                    </p>
+                                                    <hr>
+                                                    <div class="media-footer d-flex justify-content-between">
+                                                        <p class="mb-0 text-black text-primary pt-2">
+                                                            <span class="text-black font-weight-bold">
+                                                                Total Paid:
+                                                            </span>
+                                                            $50
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white card mb-4 order-list shadow-sm">
+                                        <div class="gold-members p-4">
+                                            <a href="#"> </a>
+                                            <div class="media">
+                                                <a href="#">
+                                                    <img class="mr-4" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_of_air_conditioner_for_brownout.png" alt="Generic placeholder image">
+                                                </a>
+                                                <div class="media-body">
+                                                    <a href="/User/JobOrderDetail/1">
+                                                        <span class="float-right text-info">
+                                                            <span class="text-warning"> waiting</span>
+                                                            <i class="icofont-check-circled text-success"></i>
+                                                        </span>
+                                                    </a>
+                                                    <h6 class="mb-2">
+                                                        <a href="/User/JobOrderDetail/1"></a>
+                                                        <a href="/User/JobOrderDetail/1" class="text-black">ORDER #3</a>
+                                                    </h6>
+                                                    <p class="text-gray mb-1">
+                                                        <i class="icofont-location-arrow"></i> Address: Thủ đức
+                                                    </p>
+                                                    <p class="text-gray mb-3">
+                                                        Date: Tue, Jul 26, 2022 9:26 PM
+                                                    </p>
+                                                    <p class="text-dark">
+                                                        Description:
+                                                    </p>
+                                                    <hr>
+                                                    <div class="media-footer d-flex justify-content-between">
+                                                        <p class="mb-0 text-black text-primary pt-2">
+                                                            <span class="text-black font-weight-bold">
+                                                                Total Paid:
+                                                            </span>
+                                                            $420
+                                                        </p>
+                                                        <div class="btn-section">
+                                                            <button class="btn btn-sm btn-outline-danger btn-help cancel-btn" data-toggle="modal" data-target="#cancelJO" data-id="1">
+                                                                <i class="fa-solid fa-circle-question"></i>
+                                                                CANCEL
+                                                            </button>
+                                                            <button class="btn btn-sm btn-primary postpone-btn" data-toggle="modal" data-target="#postponeJO" data-id="1">
+                                                                <i class="fa-solid fa-arrow-rotate-right"></i>
+                                                                POSTPONE
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                        </div>
+                        <div class="tab-pane fade" id="account-social-links">
+                            <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Twitter</label>
+                                    <input type="text" class="form-control" value="https://twitter.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Facebook</label>
+                                    <input type="text" class="form-control" value="https://www.facebook.com/user">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Google+</label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">LinkedIn</label>
+                                    <input type="text" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Instagram</label>
+                                    <input type="text" class="form-control" value="https://www.instagram.com/user">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-connections">
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <h5 class="mb-2">
+                                    <a href="javascript:void(0)" class="float-right text-muted text-tiny"><i class="ion ion-md-close"></i> Active</a>
+                                    <i class="ion ion-logo-google text-google"></i>
+                                    You are connected to Google:
+                                </h5>
+                                <p id="emailSetting">minh1122000@gmail.com</p>
+                            </div>
+                            <hr class="border-light m-0">
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fa-solid fa-ban mr-2"></i><strong>Deactive Account</strong>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-notifications">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Activity</h6>
+
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" id="receiveMail" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone confirm my job orders</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Application</h6>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" id="receiveNotification" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Recieve News, announcements, Product updates</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+     <!--Filepond JS-->
+    <script src="~/assets/js/client_base/filepond-plugin-file-validate-type.min.js"></script>
+    <script src="~/assets/js/client_base/filepond-plugin-file-encode.min.js"></script>
+    <script src="~/assets/js/client_base/filepond-plugin-image-preview.min.js"></script>
+    <script src="~/assets/js/client_base/filepond.min.js"></script>
+    <!--End Filepond JS-->
+
+    <!--Password strength-->
+    <script src="/assets/js/client_base/password-strength-custom.js"></script>
+    <script>
+        $('#newpass').passwordStrength();
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginImagePreview,
+        );
+        // Select the file input and use create() to turn it into a pond
+        // in this example we pass properties along with the create method
+        // we could have also put these on the file input element itself
+        var filePond = FilePond.create(
+            document.querySelector('.filepond'),
+            {
+                labelIdle: `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`,
+                imagePreviewHeight: 170,
+                imageCropAspectRatio: '1:1',
+                imageResizeTargetWidth: 200,
+                imageResizeTargetHeight: 200,
+                stylePanelLayout: 'compact circle',
+            }
+        );
+        filePond.setOptions({
+            server: {
+                process: '@Url.Action("Process","User",new { Area = "" })',
+                fetch: null,
+                revert: (uniqueFileId, load, error) => {
+                    $.ajax({
+                        url: '@Url.Action("Revert","User")',
+                        dataType: 'json',
+                        timeout: 3000,
+                        method: "POST",
+                        data: { fileName: uniqueFileId },
+                    }).done((data) => {
+                        console.log(data);
+                    })
+                },
+                load: {
+                    url: "@Url.Action("Load","User")?load=",
+                    method: 'GET',
+                }
+            },
+        });
+
+        $(function() {
+            $("input[name='phone']").on("input", function(e) {
+                if ($(this).length >= 12) e.preventDefault();
+                $(this).val(
+                    $(this)
+                        .val()
+                        .replace(/[^0-9]/g, "")
+                );
+            });
+        });
+        const email = $("input[name='email']");
+        const name = $("input[name='fullname']");
+        const phone = $("input[name='phone']");
+        const address = $("textarea[name='address']");
+        getDataWithToken(BASE_API + "api/admin/getinfo", USERTOKEN).then(res => {
+            email.val(res.data.email);
+            phone.val(res.data.phone);
+            name.val(res.data.fullName);
+            address.val(res.data.address);
+            filePond.files = [{
+                source: res.data.avatar,
+                options: {
+                    type: 'local',
+                    //file:{
+                    //    name:data.avatar
+                    //},
+                }
+            }];
+        })
+        // Update info
+        $("#update-infor").on("submit", function(e) {
+            e.preventDefault();
+            let avatar = $("input[name='filepond']").val();
+
+            postDataWithToken(`${BASE_API}api/Admin/updateinfo`, USERTOKEN, {
+                fullname: name.val(),
+                phone: phone.val(),
+                address: address.val(),
+                email: email.val(),
+                avatar: avatar
+            }).then(res => {
+                if (res.success == true) {
+                    notify("success", res.message);
+                    $(".profile_info img").prop("src", `/assets/image/profileImg/${avatar}`)
+                }
+                else {
+
+                }
+            }).catch(
+
+            )
+        })
+        // FilePond Upload Success
+        document.addEventListener('FilePond:processfile', (e) => {
+
+        });
+        //Change password
+        $("#change-password").on("submit", function(e) {
+            e.preventDefault();
+            var score = $('#password-strength-score').val();
+            var oldpass = $("input[name='oldPassword']").val();
+            var newpass = $("input[name='newPassword']").val();
+            var confirmpass = $("input[name='confirmPassword']").val();
+            console.log({
+                oldPassword: oldpass,
+                newPassword: newpass,
+                confirmPassword: confirmpass
+            })
+            if (oldpass == "" || newpass == "" || confirmpass == "") {
+                notify("error", "All field are required!");
+            }
+            else if (score <= 60) {
+                notify("error", "Your Password at least has 1 Upper, 1 Lower, 1 number, 1 special character!");
+            }
+            else {
+                postDataWithToken(BASE_API + "api/admin/changepassword", USERTOKEN, {
+                    oldPassword: oldpass,
+                    newPassword: newpass,
+                    confirmPassword: confirmpass
+                }).then(res => {
+                    console.log(res)
+                    if (res?.success == true) {
+                        notify("success", "Change password successfully!");
+                        $("input[name='oldPassword']").val("")
+                        $("input[name='newPassword']").val("")
+                        $("input[name='confirmPassword']").val("")
+                    }
+                    else {
+                        notify("error", res.message);
+                    }
+                })
+            }
+        })
+    </script>
+    }
+
+

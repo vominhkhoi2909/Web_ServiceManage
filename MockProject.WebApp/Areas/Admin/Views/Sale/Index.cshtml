@@ -1,0 +1,259 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="~/assets/css/admin_base/leaderboard.css" />
+}
+
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0">
+            <h3>Top Staff Monthly Sale</h3>
+            <br />
+            <div class="row top-three-container">
+            </div>
+
+            <h3>Staff Sale Statistics</h3>
+            <div class="p-4 d-flex align-items-center justify-content-center filter-section">
+                <div class="me-2 search">
+                    <input id="searchStr" class="form-control" type="text" placeholder="Search Staff..." />
+                </div>
+                <div id="reportrange" class="form-control me-2" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span>
+                    <i class="fa fa-caret-down"></i>
+                </div>
+                <button class="btn btn-primary" style="min-width: 100px;background:#884ffb;border:#884ffb;" id="btn-search">Search</button>
+            </div>
+
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Status</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Congratulate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @section Scripts {
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        var d = new Date();
+        var todayDate = '' + (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+        $(function() {
+            var start = moment();
+            var end = moment();
+            $('#reportrange span').html("All Time")
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+            }
+            $('#reportrange').daterangepicker({
+
+                //startDate: start,
+                //endDate: end,
+                opens: 'center',
+                ranges: {
+                    'Last Week': [moment().subtract(6, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'This Year': [moment().subtract(1, 'year').startOf('year'), moment().endOf('year')],
+                    'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+                }
+            }, cb);
+            $('#reportrange').attr("placeholder", "New placeholder text");
+            cb(start, end);
+        });
+        $(document).ready(function() {
+            // Top 3 staff
+            const startOfMonth = moment().startOf('month').format('YYYY-MM-DD hh:mm');
+            const endOfMonth = moment().endOf('month').format('YYYY-MM-DD hh:mm');
+            getDataWithToken(BASE_API + `api/admin/allstaffsale/?start=${startOfMonth}&end=${endOfMonth}`, USERTOKEN).then(res => {
+                var data = res.data;
+                data = (data == null) ? [] : data;
+                data = data.slice(0, 3);
+                console.log(data);
+                let first = `  <div class="col-lg-4">
+                                <div class="leaderboard-card leaderboard-card--first">
+                                    <div class="leaderboard-card__top">
+                                        <h3 class="text-center">$${data[0].totalOrder}</h3>
+                                    </div>
+                                    <div class="leaderboard-card__body">
+                                        <div class="text-center">
+                                            <img src="/assets/image/profileImg/${data[0].avatar}"
+                                             class="circle-img mb-2"
+                                             alt="User Img" />
+                                            <div class="w-100">
+                                                <img src="/assets/image/main/gold-medal.svg"
+                                                 style="width: 50px"
+                                                 alt="" />
+                                            </div>
+                                            <h5 class="mb-0">${data[0].fullName}</h5>
+                                            <p class="text-muted mb-0">${data[0].email}</p>
+                                            <hr />
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span><i class="fa-solid fa-location-dot"></i> ${data[0].address}</span>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+`;
+                let second = ` <div class="col-lg-4">
+                                <div class="leaderboard-card">
+                                    <div class="leaderboard-card__top">
+                                        <h3 class="text-center">$${data[1].totalOrder}</h3>
+                                    </div>
+                                    <div class="leaderboard-card__body">
+                                        <div class="text-center">
+                                            <img src="/assets/image/profileImg/${data[1].avatar}"
+                                             class="circle-img mb-2"
+                                             alt="User Img" />
+                                            <div class="w-100">
+                                                <img src="/assets/image/main/silver-medal.svg"
+                                                 style="width: 50px"
+                                                 alt="" />
+                                            </div>
+                                            <h5 class="mb-0">${data[1].fullName}</h5>
+                                            <p class="text-muted mb-0">${data[1].email}</p>
+                                            <hr />
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span><i class="fa-solid fa-location-dot"></i> ${data[1].address}</span>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+`;
+                let third = ` <div class="col-lg-4">
+                                <div class="leaderboard-card">
+                                    <div class="leaderboard-card__top">
+                                        <h3 class="text-center">$${data[2].totalOrder}</h3>
+                                    </div>
+                                    <div class="leaderboard-card__body">
+                                        <div class="text-center">
+                                            <img src="/assets/image/profileImg/${data[2].avatar}"
+                                             class="circle-img mb-2"
+                                             alt="User Img" />
+                                            <div class="w-100">
+                                                <img src="/assets/image/main/bronze-medal.svg"
+                                                 style="width: 50px"
+                                                 alt="" />
+                                            </div>
+                                            <h5 class="mb-0">${data[2].fullName}</h5>
+                                            <p class="text-muted mb-0">${data[2].email}</p>
+                                            <hr />
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span><i class="fa-solid fa-location-dot"></i> ${data[2].address}</span>
+                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+`;
+                $(".top-three-container").html(second + first + third);
+            })
+
+            // Load Staff Sale Function
+            var getStaffSale = async (start = "", end = "", search = "") => {
+                getDataWithToken(BASE_API + `api/admin/allstaffsale/?start=${start}&end=${end}&searchString=${search}`, USERTOKEN).then(res => {
+                    var data = res.data;
+                    data = (data == null) ? [] : data;
+                    console.log(data);
+                    var table = $('#myTable').DataTable({
+                        pageLength: 10,
+                        bLengthChange: false,
+                        "bDestroy": true,
+                        columnDefs: [
+                            { type: "html-num", targets: 1 }
+                        ],
+                        order: [[1, 'desc']],
+                        data: data,
+                        language: {
+                            paginate: {
+                                next: "<i class='ti-arrow-right'></i>",
+                                previous: "<i class='ti-arrow-left'></i>"
+                            },
+                        },
+                        columns: [
+                            //{
+                            //    title: "Order",
+                            //    width:"10px",
+                            //    "render": function(data, type, full, meta) {
+                            //        return meta.row + 1;
+                            //    }
+                            //},
+                            {
+                                data: 'fullName',
+                                title: 'Name',
+                                render: function(data, type, row) {
+                                    data = (!data || data == "") ? "No Information" : data;
+                                    let roleName = (!row.role_Name || row.role_Name == "") ? "No Information" : row.role_Name;
+                                    let avatar = (!row.avatar || row.avatar == "") ? "default.png" : row.avatar;
+                                    return `<div class="d-flex align-items-center">
+                                                                                                            <img src= "/assets/image/profileImg/${row.avatar}" class="circle-img circle-img--small mr-2" alt="User Img">
+                                                                                                            <div class="user-info__basic ms-2">
+                                                                                                                <h5 class="mb-0">${data}</h5>
+                                                                                                                <p class="text-muted mb-0">${roleName}</p>
+                                                                                                            </div>
+                                                                                                        </div>`
+                                }
+                            },
+                            {
+                                data: 'totalOrder', title: 'Total Sale', render: function(data) {
+                                    data = (!data || data == "") ? `$0` : `$${data}`;
+                                    return `<div class="d-flex align-items-baseline">
+                                                                        <h5 class="mr-1 text-success">${data}</h5>
+                                                                    </div>`
+                                },
+                            },
+                            {
+                                data: 'phone', title: 'Phone', render: function(data) {
+                                    return (data) ? `<span style="font-size:18px;">${data}</span>` : `<span style="font-size:18px;">No Infomation</span>`;
+                                },
+                            },
+                            {
+                                data: 'email', title: 'Email', render: function(data) {
+                                    return (data) ? `<span style="font-size:18px;">${data}</span>` : `<span style="font-size:18px;">No Infomation</span>`;
+                                },
+                            },
+
+                            {
+                                data: 'totalPoint', title: 'Staff Point', render: function(data) {
+                                    return `<h5 class="mr-1 text-success">${data}</h5>`
+                                }
+                            },
+                        ],
+                        columnDefs: [{
+                            visible: false
+                        }],
+                        responsive: true,
+                        searching: false,
+                    });
+                })
+            }
+            getStaffSale();
+
+
+
+            // Search Filter
+            $("#btn-search").on("click", function() {
+                let start = $('#reportrange').data('daterangepicker').startDate.format('YYYY/MM/DD');
+                let end = $('#reportrange').data('daterangepicker').endDate.format('YYYY/MM/DD');
+                getStaffSale(start, end, $("#searchStr").val());
+            })
+        })
+    </script>
+
+}
+

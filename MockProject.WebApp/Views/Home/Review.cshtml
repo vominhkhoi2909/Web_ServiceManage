@@ -1,0 +1,321 @@
+﻿@{
+    ViewData["Title"] = "Review";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .navbar-nav {
+        width: 100%;
+    }
+
+    @@media(min-width:568px) {
+        .end {
+            margin-left: auto;
+        }
+    }
+
+    @@media(max-width:768px) {
+        #post {
+            width: 100%;
+        }
+    }
+
+    #clicked {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        text-align: center;
+        width: 100%;
+        background-color: #ecb21f;
+        border-color: #a88734 #9c7e31 #846a29;
+        color: black;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 13px;
+    }
+
+    #profile {
+        background-color: unset;
+    }
+
+    #post {
+        margin: 10px;
+        padding: 6px;
+        text-align: center;
+        background-color: #ecb21f;
+        color: black;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 36px;
+        width: 50%;
+    }
+
+    #nav-items li a,
+    #profile {
+        text-decoration: none;
+        color: rgb(224, 219, 219);
+        background-color: black;
+    }
+
+
+    .comments {
+        margin-top: 5%;
+        margin-left: 20px;
+    }
+
+    .comment {
+        width: 100%;
+        position: relative;
+        border: 1px solid #174C97;
+        float: left;
+        border-radius: 8px;
+        padding-left: 40px;
+        padding-right: 30px;
+        padding-top: 16px;
+    }
+
+        .comment:nth-child(even) {
+            border: 1px solid #174C97;
+            background-color: #F7F7F7;
+            float: right;
+            border-radius: 5px;
+            padding-left: 40px;
+            padding-right: 30px;
+            padding-top: 10px;
+        }
+
+        .comment h4,
+        .comment span,
+        .darker h4,
+        .darker span {
+            display: inline;
+        }
+
+        .comment p {
+            color: #000;
+        }
+
+        .comment img {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+    .star__group {
+        position: absolute;
+        top: 32px;
+        right: 30px;
+    }
+
+    h1,
+    h4 {
+        font-weight: bold;
+    }
+
+    #align-form {
+        margin-top: 20px;
+    }
+
+    #checkbx {
+        background-color: black;
+    }
+
+    #darker img {
+        margin-right: 15px;
+        position: static;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        border: 1px solid #174C97;
+        border-radius: 12px;
+    }
+
+    form {
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    div.stars {
+        display: inline-block;
+    }
+
+    input.star {
+        display: none;
+    }
+
+    label.star {
+        float: right;
+        padding: 10px;
+        font-size: 36px;
+        color: #174C97;
+        transition: all .2s;
+    }
+
+        label.star:last-child {
+            padding-left: unset;
+        }
+
+    input.star:checked ~ label.star:before {
+        content: '\f005';
+        color: #FD4;
+        transition: all .25s;
+    }
+
+    input.star-5:checked ~ label.star:before {
+        color: #FE7;
+        text-shadow: 0 0 20px #952;
+    }
+
+    input.star-1:checked ~ label.star:before {
+        color: #F62;
+    }
+
+    label.star:hover {
+        transform: rotate(-15deg) scale(1.3);
+    }
+
+    label.star:before {
+        content: '\f006';
+        font-family: FontAwesome;
+    }
+
+    @@media(max-width:768px) {
+        .star__group {
+            position: relative;
+            top: unset;
+            right: unset;
+        }
+    }
+
+    .review__error-list {
+        padding-left: 26px;
+        margin-bottom: 8px;
+    }
+
+    .review__error-item {
+        list-style-type: circle;
+        padding: 2px 12px 2px 0px;
+    }
+
+        .review__error-item:first-child {
+            padding-top: 8px;
+        }
+
+        .review__error-item:last-child {
+            padding-bottom: 8px;
+        }
+
+    .styled-pagination{
+        position: unset;
+        transform: unset!important;
+    }
+
+    .pagination{
+        position: absolute;
+        top: 104%;
+    }
+</style>
+<!--End Main Header -->
+<section id="contact" class="contact-section style-two">
+    <div class="auto-container" style="padding-top: 120px;">
+        <!-- Sec Title / Centered -->
+        <div class="sec-title centered">
+            <h2>Our Reviews</h2>
+            <div class="separator"></div>
+        </div>
+        <div class="inner-container">
+            <div class="pattern-layer"
+                 style="background-image:url(https://wp1.efforttech.com/newwp/acrepair/wp-content/uploads/2022/05/pattern-2.png);">
+            </div>
+            <div class="row clearfix my__row-reverse">
+                <!-- Form Column -->
+
+                <div class="form-column col-lg-7 col-md-12 col-sm-12">
+                    <div class="comment__list">
+                        <!-- render by JS -->
+                    </div>
+
+                    <!-- pagination -->
+                   @* <div class="styled-pagination" style="transform: translateY(20px);">
+                        <ul class="pagination">
+                            <li>
+                                <a class="next page-numbers"
+                                   href="">
+                                    <span class="flaticon-left-arrow"></span>
+                                </a>
+                            </li>
+                            <li><span class="page-numbers current">1</span></li>
+                            <li>
+                                <a class="page-numbers"
+                                   href="">2</a>
+                            </li>
+                            <li>
+                                <a class="page-numbers"
+                                   href="">3</a>
+                            </li>
+                            <li>
+                                <a class="next page-numbers"
+                                   href="">
+                                    <span class="flaticon-right-arrow"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>*@
+                </div>
+
+                <!-- Map Column -->
+
+                <div class="map-column col-lg-5 col-md-12 col-sm-12">
+                    <form id="send-review-form">
+                        <div class="form-group">
+                            <h4>Leave a comment</h4>
+                            <div class="stars" style="margin-top: 16px;">
+                                <input class="star star-5" id="star-5" type="radio" value="5" name="star" />
+                                <label class="star star-5" for="star-5"></label>
+
+                                <input class="star star-4" id="star-4" type="radio" value="4" name="star" />
+                                <label class="star star-4" for="star-4"></label>
+
+                                <input class="star star-3" id="star-3" type="radio" value="3" name="star" />
+                                <label class="star star-3" for="star-3"></label>
+
+                                <input class="star star-2" id="star-2" type="radio" value="2" name="star" />
+                                <label class="star star-2" for="star-2"></label>
+
+                                <input class="star star-1" id="star-1" type="radio" value="1" name="star" />
+                                <label class="star star-1" for="star-1"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">* Message</label>
+                            <textarea name="msg" id="review-comment" required msg cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+
+
+                        <div class="form-group">
+                            <p class="text-secondary">
+                                Please give your feedback about <a href="#" class="alert-link">
+                                    our service
+                                </a> and we will improve our service.
+                            </p>
+                        </div>
+                        <ul style="background-color: #FBD9CE; color: #A32B41; border-radius: 6px;" class="review__error-list">
+                            <!--render by js-->
+                        </ul>
+                        <div class="form-group">
+                            <button type="submit" id="post" class="btn">Send Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" ></script>
+    <!--Moment JS-->
+    <script src="/assets/js/client_base/client-review.js"></script>
+}

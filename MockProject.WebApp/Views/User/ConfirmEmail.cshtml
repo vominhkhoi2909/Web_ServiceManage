@@ -1,0 +1,150 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>Confirm Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/css/client_base/login-flaticon.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/client_base/login-custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+
+</head>
+<body id="top">
+    <div class="page_loader"></div>
+
+    <!-- Login 23 start -->
+    <div class="login-23">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 bg-color-23">
+                    <div class="form-section">
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index">
+                                <img style="height: 80px;" src="https://ihome-solution.com.sg/wp-content/uploads/2017/05/ihome-favicon.png" alt="logo">
+                            </a>
+                        </div>
+                        <h3>Confirm Email</h3>
+                        <div class="login-inner-form">
+                            <form action="#" method="GET" id="sendEmail">
+                                <div class="form-group clearfix">
+                                    <label for="first_field" class="form-label">Email address</label>
+                                    <div class="form-box">
+                                        <input name="email" style="height: 50px;" type="email" required class="form-control" id="first_field" placeholder="Email Address" aria-label="Email Address">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group clearfix mb-0">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-theme">
+                                        <div class="spinner-border spinner-border-sm vert align-middle mr-2 d-none" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>Send Confirm
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                @*    <div class="col-xl-7 col-lg-6 col-md-12 bg-img">
+                <div class="info">
+                <div class="waviy">
+                <span style="--i:1">W</span>
+                <span style="--i:2">e</span>
+                <span style="--i:3">l</span>
+                <span style="--i:4">c</span>
+                <span style="--i:5">o</span>
+                <span style="--i:6">m</span>
+                <span style="--i:7">e</span>
+                <span class="color-yellow" style="--i:8">t</span>
+                <span class="color-yellow" style="--i:9">o</span>
+
+                <span style="--i:10">I</span>
+                <span style="--i:11">H</span>
+                <span style="--i:12">O</span>
+                <span style="--i:13">M</span>
+                <span style="--i:14">E</span>
+                </div>
+                <p>Our mission is to be one of the best air-con company in Singapore, by providing 100% prompt professional service and customer satisfaction through 100% quality installations.</p>
+                </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <!-- Login 23 end -->
+    <!-- External JS libraries -->
+    @*<script src="/assets/js/client_base/login-main.js"></script> <!-- custom place -->*@
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    @*<script src="/assets/js/client_base/defaul-validate-login.js"></script> <!-- custom place -->*@
+
+    <!-- Custom JS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script>
+        @{
+            string baseAPI = ViewBag.BaseAPI;
+        }
+        var BaseAPI = '@baseAPI';
+        // Post Data
+        async function postData(url = '') {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            return response.json();
+        }
+        //Form submit
+        $("#sendEmail").on("submit", function(e) {
+            e.preventDefault();
+            let emailElement = $("input[name='email']");
+            let button = $("button[type='submit']");
+            emailElement.prop('disabled', true);
+            button.prop('disabled', true);
+            $(".spinner-border").removeClass("d-none");
+            //=============================
+            let email = emailElement.val();
+            setTimeout(function() {
+                emailElement.prop('disabled', false);
+                $(".spinner-border").addClass("d-none");
+                button.prop('disabled', false);
+            }, 5000);
+
+            console.log(email);
+            postData(BaseAPI + "api/Account/resendconfirm" + `?email=${email}`)
+                .then(function(res) {
+                    if (res?.success == false) {
+                        new Notyf({
+                            position: { x: 'right', y: 'top' },
+                            duration: 3000
+                        }).error(res.message)
+                    }
+                    if (res?.success == true) {
+                        new Notyf({
+                            position: { x: 'right', y: 'top' },
+                            duration: 3000
+                        }).success("Confirmation Email has been sent. Please check your inbox!");
+                    }
+                });
+
+        })
+    </script>
+</body>
+
+</html>
