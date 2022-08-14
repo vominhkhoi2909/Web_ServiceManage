@@ -5,14 +5,14 @@ Mô tả dự án:
   + Website khách hàng để người dùng có thể lựa chọn đặt các dịch vụ sữa chữa liên quan đến 2 dịch vụ chính là sửa máy lạnh và nệm.
   + Website quản trị để người quản lý có thể cập nhật các thông tin về dịch vụ, đơn hàng, quản lý nhân viên, phân quyền, đánh giá, ...
  
- Dự án:
- - Nhóm 4 người:
+Dự án:
+- Nhóm 4 người:
   + Nguyễn Quang Minh (leader): Phụ trách front end của trang quản trị.
   + Nguyễn Hoàng Long: Phụ trách front end của trang người dùng.
   + Võ Minh Khôi: Phụ trách Model, quản lý các API nhân viên, khách hàng, service, option, order, ...
   + Nguyễn Thanh Tú: Phụ trách Model, quản lý các API về tài khoản và identity.
  
- Ngôn ngữ sử dụng:
+Ngôn ngữ sử dụng:
 - C#, HTML, LINQ, CSS, JS.
 
 Công nghệ sử dụng:
@@ -30,6 +30,7 @@ Quản lý csdl:
 
 Mô hình:
 - MVC.
+- Repository Pattern.
 
 Hướng dẫn chạy project:
 - Yêu cầu phải cài SQL Server tối thiếu 2007.
