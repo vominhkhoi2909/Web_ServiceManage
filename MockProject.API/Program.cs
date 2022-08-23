@@ -81,18 +81,6 @@ builder.Services.AddAuthentication(auth =>
 
 #endregion
 
-#region Test
-public static void AddCommandHandlers(this IServiceCollection services, params Assembly[] assemblies)
-{
-    var serviceType = typeof(ICommandHandler);
-
-    foreach (var implementationType in assemblies.SelectMany(assembly => assembly.GetTypes()).Where(type => serviceType.IsAssignableFrom(type) && !type.GetTypeInfo().IsAbstract))
-    {
-        services.AddSingleton(serviceType, implementationType);
-    }
-}
-#endregion
-
 #region Khai báo Repository
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
