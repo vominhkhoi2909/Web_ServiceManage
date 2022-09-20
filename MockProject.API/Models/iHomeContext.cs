@@ -41,7 +41,7 @@ namespace MockProject.API.Models
         //Link để Migration tìm đến để tạo db khi Update-Database.
         #region Connection String.
         //link khởi tạo db xài chung.
-        private const string connectionString = @"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DB_iHome;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False""";
+        //private const string connectionString = @"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DB_iHome;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False""";
         //link khởi tạo db xài cho sql server cá nhân. Lúc dùng nhớ đổi lại 'Server=cvpkhoivm1-2' bằng tên sql server của bản thân.
         //private const string connectionString = @"Server=cvpkhoivm1-2;Initial Catalog=DB_iHomeTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         #endregion
